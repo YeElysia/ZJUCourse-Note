@@ -1,0 +1,102 @@
+﻿
+
+[General Information]
+Function Name = hmhz
+Brief Description = 
+Function Source = N/A
+Number Of Parameters = 2
+Function Type = User-Defined
+Function Form = Expression
+Path = 
+Number Of Independent Variables = 1
+Number Of Dependent Variables = 1
+Category = Origin Basic Functions
+Function Model = Explicit
+
+
+[Fitting Parameters]
+Names = B0,R
+Initial Values = 700(V),0.1(F)
+Meanings = ?,?
+Lower Bounds = --(I, Off),0.1(I, On)
+Upper Bounds = --(I, Off),0.1(I, On)
+Naming Method = User-Defined
+Number Of Significant Digits = 0,0
+Unit = ,
+Format = --,--
+CustomDisplay = --,--
+
+
+[Independent Variables]
+x = 
+
+
+[Dependent Variables]
+y = 
+
+
+[Formula]
+B0 * R^3 / ( (R^2 + (x/100 - R/2)^2)^(3/2) ) + B0 * R^3 / ( (R^2 + (x/100 + R/2)^2)^(3/2) )
+
+
+[Constraints]
+
+
+[Initializations]
+
+
+[After Fitting]
+
+
+[Constants]
+
+
+[Controls]
+General Linear Constraints = 0
+Initialization Scripts = 0
+Scripts After Fitting = 0
+Number Of Duplicates = N/A
+Duplicate Offset = N/A
+Duplicate Unit = N/A
+Generate Curves After Fitting = 1
+Curve Point Spacing = Uniform on X-Axis Scale
+Generate Peaks After Fitting = 1
+Generate Peaks During Fitting = 1
+Generate Peaks with Baseline = 1
+Paste Parameters to Plot After Fitting = 1
+Paste Parameters to Notes Window After Fitting = 1
+Generate Residuals After Fitting = 0
+Keep Parameters = 0
+Compile On Param Change Script = 1
+Enable Parameters Initialization = 1
+Treat All Numbers As Double = 1
+Use Initial Formula = 1
+AllowInitializingFixedParameters = 1
+
+
+[Compile Function]
+Compile = 0
+Compile Parameters Initialization = 1
+OnParamChangeScriptsEnabled = 0
+
+
+[Parameters Initialization]
+B0 = XATYMAX YMIN;
+
+
+[Origin C Function Header]
+
+
+[Origin C Parameter Initialization Header]
+
+
+[Derived Parameter Settings]
+Unit = 
+Names = 
+Meanings = 
+
+
+[QuickCheck]
+x=1
+B0=700
+R=0.1
