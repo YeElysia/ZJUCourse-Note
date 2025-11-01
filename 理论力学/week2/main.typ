@@ -26,15 +26,15 @@
 
 == 5-8
 
-显然 $display(l_(O D) = a cos(k t ))$，于是 $ display(v_t = -a k sin(k t )) $方向由 $D$ 指向 $O$。
+显然 $display(l_(O D) = a cos(k t))$，于是 $ display(v_t = -a k sin(k t)) $方向由 $D$ 指向 $O$。
 
 又 $x = l_(O D) cos(k t), y = l_(O D) sin(k t)$，所以 $v_x = -a k sin(2 k t), v_y = a k cos(2 k t)$。即：
 $
-v = a k
+  v = a k
 $
 
 == 5-10
 
 切向加速度 $display(a_t = a cos(30 degree)) = 8.66 m\/s$
 
-法向加速度 $display(a_n = a sin(30 degree) = v^2 / rho)$。所以 $rho = 5m $
+法向加速度 $display(a_n = a sin(30 degree) = v^2 / rho)$。所以 $rho = 5m$

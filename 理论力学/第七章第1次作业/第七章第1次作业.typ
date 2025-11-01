@@ -39,9 +39,9 @@ $
 
 == 7-18
 $
-  y &= O_1 A times sin omega t = 0.1 sin 2 t\
-  v &= (upright(d) y)/(upright(d) t) = 0.2 cos 2 t\
-  a &= (upright(d) v)/(upright(d) t) = -0.4 sin 2 t\
+  y & = O_1 A times sin omega t = 0.1 sin 2 t \
+  v & = (upright(d) y)/(upright(d) t) = 0.2 cos 2 t \
+  a & = (upright(d) v)/(upright(d) t) = -0.4 sin 2 t \
 $
 
 $phi = 60 degree$时，
@@ -52,18 +52,17 @@ $
 
 == 7-27
 $
-  x_1 &= 40 m m  #h(2em) alpha = 2 upright(r a d) \/s^2  #h(2em) omega_1 = 2 upright(r a d) \/s\ 
-  a_e &= (upright(d)^2 x) / (upright(d)t^2) = 80 m m \/ s^2\
-  a_r^n &= omega_1^2 x_1 sin 60 degree = 138.564 m m \/ s^2 \
-  a_r^t &= alpha x_1 sin 60 degree = 69.282 m m \/ s^2\
-  a_c &= 2 omega_e times v_r =  2 omega_1 v_r sin 60 degree = 138.564 m m \/ s^2\ 
-
-  a_a &= 355.5 m m \/ s^2\
+    x_1 & = 40 m m #h(2em) alpha = 2 upright(r a d) \/s^2 #h(2em) omega_1 = 2 upright(r a d) \/s \
+    a_e & = (upright(d)^2 x) / (upright(d)t^2) = 80 m m \/ s^2 \
+  a_r^n & = omega_1^2 x_1 sin 60 degree = 138.564 m m \/ s^2 \
+  a_r^t & = alpha x_1 sin 60 degree = 69.282 m m \/ s^2 \
+    a_c & = 2 omega_e times v_r = 2 omega_1 v_r sin 60 degree = 138.564 m m \/ s^2 \
+    a_a & = 355.5 m m \/ s^2 \
 $
 
 == 7-31
 
 $
-  omega_(A B) &= v/r sin theta tan theta\
-  alpha_(A B) &= v^2/r^2 tan^3 theta(1 + cos^2 theta)
+  omega_(A B) & = v/r sin theta tan theta \
+  alpha_(A B) & = v^2/r^2 tan^3 theta(1 + cos^2 theta)
 $

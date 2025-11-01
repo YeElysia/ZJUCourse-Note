@@ -29,18 +29,19 @@
 设∠ $O C B$ 为 $phi$，∠ $B O C$ 为 $theta$, 则
 $
   tan theta = frac(r sin phi, h - r cos phi)
-  $
+$
 因此转动方程为
 $
   theta_(O A) = arctan(frac(r sin phi, h - r cos phi))
-$ 
+$
 
 == 6-17
 
 $
-  omega &= v_A / R = 2 bold(k) #h(5pt)upright(r a d)\/s\
-  alpha &= a_B^t / R = -1.5 bold(k) #h(5pt)upright(r a d)\/s^2 \ \
-  alpha_C^t &= alpha times r_C = -75 sqrt(2) bold(i) - 75 sqrt(2) bold(j) #h(5pt) m\/s^2 \
-  alpha_C^n &= omega times v_C = -200 sqrt(2) bold(i) + 200 sqrt(2) bold(j) #h(5pt) m\/s^2 \
-  alpha_C &= alpha_C^t + alpha_C^n = -388.9 bold(i) + 176.8 bold(j) #h(5pt) m\/s^2 \
+      omega & = v_A / R = 2 bold(k) #h(5pt)upright(r a d)\/s \
+      alpha & = a_B^t / R = -1.5 bold(k) #h(5pt)upright(r a d)\/s^2 \
+            \
+  alpha_C^t & = alpha times r_C = -75 sqrt(2) bold(i) - 75 sqrt(2) bold(j) #h(5pt) m\/s^2 \
+  alpha_C^n & = omega times v_C = -200 sqrt(2) bold(i) + 200 sqrt(2) bold(j) #h(5pt) m\/s^2 \
+    alpha_C & = alpha_C^t + alpha_C^n = -388.9 bold(i) + 176.8 bold(j) #h(5pt) m\/s^2 \
 $
