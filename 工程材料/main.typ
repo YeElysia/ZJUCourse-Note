@@ -279,20 +279,20 @@
 
 === 晶体的基本概念
 - #text(red)[晶体]： 原子按一定规律排列的固体材料。
-+ #text(blue)[晶格与晶胞]
+1. #text(blue)[晶格与晶胞]
   - #text(red)[晶格]： 用假想的直线将原子中心连接起来所形成的三维空间格架。直线的交点(原子中心)称*结点*。由结点形成的空间点的阵列称*空间点阵*。
   - #text(red)[晶胞]： 能代表晶格原子排列规律的最小几何单元。
   - #text(red)[晶粒]： 晶体中晶格方位相同的区域。
   - #text(red)[晶格常数]： 晶胞各边的尺寸a、b、c及其夹角α、β、γ。
-+ #text(blue)[晶系]
+2. #text(blue)[晶系]
   - 根据晶胞参数不同，将晶体分为七种晶系。
   - 90%以上的金属具有立方晶系和六方晶系。
   - *立方晶系*： $a=b=c,alpha = beta = gamma = 90 degree$
   - *六方晶系*： $a_1 = a_2 = a_3 eq.not c ,alpha = beta = 90 degree,gamma = 120 degree$（高不同）
-+ #text(blue)[原子半径]：晶胞中原子密度最大方向上相邻原子（$approx$最近原子）间距的一半。
-+ #text(blue)[晶胞原子数]:一个晶胞中所含的原子数。
-+ #text(blue)[配位数]：指晶格中任一原子距离最近且相等的原子数目。
-+ #text(blue)[致密度]：晶胞中原子本身所占的体积百分数。
+3. #text(blue)[原子半径]：晶胞中原子密度最大方向上相邻原子（$approx$最近原子）间距的一半。
+4. #text(blue)[晶胞原子数]:一个晶胞中所含的原子数。
+5. #text(blue)[配位数]：指晶格中任一原子距离最近且相等的原子数目。
+6. #text(blue)[致密度]：晶胞中原子本身所占的体积百分数。
 $
   "致密度" = frac("晶胞所含原子数" times "单个原子体积", "晶胞体积") #h(2em) K = frac(n dot v, V)
 $
@@ -338,14 +338,14 @@ $
 - #text(red)[晶面]：由一系列原子所组成的平面。
 - #text(red)[晶向]：任意两个原子之间的连线成为#text(red)[原子列]，其所指方向。
 
-+ #text(blue)[晶面指数]
+1. #text(blue)[晶面指数]
   - 表示晶面的符号称为#text(red)[晶面指数]。
   - 其确定步骤为
     #set enum(numbering: "(1)", start: 1)
-    + 选坐标，以晶格中某一原子为原点(注意不要把原点放在所求的晶面上)，以晶胞的三个棱边作为三维坐标的坐标轴。
-    + 以相应的晶格常数为单位，求出待定晶面在三个轴上的截距。
-    + 求三个截距的倒数。
-    + 将所得数值化为最小整数，加圆括弧，形式为(hkl)。
+    1. 选坐标，以晶格中某一原子为原点(注意不要把原点放在所求的晶面上)，以晶胞的三个棱边作为三维坐标的坐标轴。
+    2. 以相应的晶格常数为单位，求出待定晶面在三个轴上的截距。
+    3. 求三个截距的倒数。
+    4. 将所得数值化为最小整数，加圆括弧，形式为(hkl)。
   #figure(
     image("./pic/1.1.3-1.png"),
     caption: [
@@ -357,7 +357,6 @@ $
     line((0, 0), (x: 8), stroke: (red), mark: (end: "straight"))
     line((0, 0), (y: 6), stroke: (green), mark: (end: "straight"))
     line((0, 0), (z: 6), stroke: (blue), mark: (end: "straight"))
-
     line(
       (0, 0),
       (5, 0, 0),
@@ -366,19 +365,12 @@ $
     )
     line((0, 0), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"))
     line((0, 0), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"))
-
     line((0, 5, 5), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-
     line((0, 5, 5), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-
     line((5, 0, 5), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "CD")
     line((5, 0, 5), (5, 0, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-
-
     line((5, 5, 0), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "EF")
     line((5, 5, 0), (5, 0, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-
-
     content("AB.start", [A(0,0,0)], anchor: "east")
     content("AB.end", [B(5,0,0)], anchor: "west")
     content("CD.start", [C(5,0,5)], anchor: "north")
@@ -386,7 +378,6 @@ $
     content("EF.start", [F(5,5,0)], anchor: "west")
     content("EF.end", [F(0,5,0)], anchor: "east")
     line("AB.end", "CD.end", "EF.end", close: true, fill: blue.transparentize(70%))
-
     line((5, 0, 5), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
     line((0, 5, 5), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "GH")
     line((5, 5, 0), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
@@ -397,14 +388,14 @@ $
   以图中晶面 BDF 为例，显然截距为 $1, 1, 1$, 故晶面指数为(111)。
 
 
-+ #text(blue)[晶向指数]
+2. #text(blue)[晶向指数]
   - 表示晶向的符号称为#text(red)[晶向指数]。其确定步骤为
     #set enum(numbering: "(1)", start: 1)
-    + 确定原点，建立坐标系，过原点作所求晶向的平行线。
-    + 求直线上任一点的坐标值。
-    + 按比例化为最小整数，加方括弧，形式为[hkl]#text(red)[（负号写在数字的正上方，如[$overline(1)01$]）]。
+    1. 确定原点，建立坐标系，过原点作所求晶向的平行线。
+    2. 求直线上任一点的坐标值。
+    3. 按比例化为最小整数，加方括弧，形式为[hkl]#text(red)[（负号写在数字的正上方，如[$overline(1)01$]）]。
   - 在立方晶系中，指数相同的晶面与晶向相互垂直，即(hkl)面垂直于[hkl]向。
-+ 晶面族和晶向族
+3. 晶面族和晶向族
   - (hkl)和[uvw]分别表示的是一组平行的晶面和晶向
   - 指数虽然不同，但原子排列完全相同的晶向和晶面称作晶向族或晶面族。
   - 在立方晶系中，指数相同的晶面与晶向相互垂直。
@@ -417,7 +408,7 @@ $
 - 晶粒越细小，晶界面积越大。
 - 在实际金属中，由于原子热振动的作用或其他原因，#text(red)[有少数原子偏离正常位置，或余、缺原子，或局部原子错排]。这种现象称为晶体结构的不完整性，或称#text(red)[晶体缺陷]。
 
-+ #text(blue)[点缺陷]
+1. #text(blue)[点缺陷]
   - 空间三维尺寸都很小的缺陷,包括：
     - 空位
     - 间隙原子
@@ -431,7 +422,7 @@ $
       P = C_0 = exp(-frac(E_V, k_B dot T))
     $
     其中$k_B$为Boltzmann常数，$T$为热力学温度(K)。
-+ #text(blue)[线缺陷]
+2. #text(blue)[线缺陷]
   - 线缺陷主要指#text(red)[位错]，位错是一种#text(red)[非平衡态缺陷]，由于晶体生长条件偏离平衡态、机械加工或异质外延等过程引入。
   - 位错及其#text(red)[易动性]使实际晶体的屈服强度大大低于完美晶体的屈服强度。
   - Taylor、Orowan和Polanyi等指出，位错使滑移所需的#text(red)[切应力]大大下降。
@@ -455,7 +446,7 @@ $
   )
   - #text(blue)[位错密度] 单位体积内所包含的位错线总长度。
 
-+ #text(blue)[面缺陷]
+3. #text(blue)[面缺陷]
   - #text(red)[晶界]是不同位向晶粒的过渡部位，宽度为5～10个原子间距，位向差一般为$20~ 40degree$。
   - #text(red)[亚晶界]是晶粒内部由于位错的堆积而使一部分晶体的晶格位向与另一部分的晶体的晶格位向产生小角度偏差而形成的界面。
   - 亚晶粒直接的交界面称#text(red)[亚晶界]。亚晶界也可看作#text(red)[位错壁]。
@@ -477,7 +468,7 @@ $
       )]]
 #pagebreak()
 === 纯金属的结晶
-+ #text(blue)[纯金属结晶的条件]
+1. #text(blue)[纯金属结晶的条件]
   - 纯金属都有一个理论结晶温度$T_0$（熔点或平衡结晶温度）。处于该温度时, 液体和晶体处于#text(red)[动平衡状态]。（类比水结冰的过程，0℃时为冰水混合物）
   - 结晶只有在$T_0$以下的实际结晶温度下才能进行。
   - 液态金属在理论结晶温度以下开始结晶的现象称#text(red)[过冷]。
@@ -489,15 +480,15 @@ $
 
   #text(blue)[【古地明莲小课堂】]根据热力学第二定律，物质系统总是自发地从自由能较高的状态向自由能较低的状态转变。当温度低于$T_0$时，液体的自由能大于固体的自由能，液体自发向固体转变，此时才能结晶。过冷度越大，固体和液体的自由能相差越大，相变的驱动力越大，因此冷却速度越大。
 
-+ #text(blue)[纯金属的结晶过程]
+2. #text(blue)[纯金属的结晶过程]
   - 金属的结晶是原子从#text(red)[无序]排列的液态转变为#text(red)[有序]排列的固态（结晶态）的过程。
   #set enum(numbering: "(1)", start: 1)
-  + #text(blue)[晶核的形成]
+  1. #text(blue)[晶核的形成]
     - 晶核有两种形成方式：\
       #text(red)[自发形核]：由液体中排列规则的原子团形成晶核。\
       #text(red)[非自发形核]：以液体中存在的固态杂质为核心形核。\
       非自发形核比自发形核更重要。#text(gray)[#strike[（韩援强于国内【ac01】）]]
-  + #text(blue)[晶核的长大方式]\
+  2. #text(blue)[晶核的长大方式]\
     长大方式分为#text(red)[均匀长大]和#text(red)[树枝状长大]。
     - #text(red)[连续生长]：
       固-液界面在原子尺度上是“粗糙的”，原子可以连续、无序地向界面添加，使界面迅速向液相推移从而使晶体生长。
@@ -506,13 +497,13 @@ $
     - #text(red)[二维晶核台阶生长]：
       原子主要借助光滑界面上形成的台阶侧面堆砌、增厚，从而使界面向前推进；台阶的来源可以是界面上的二维形核，也可以是界面上的晶体缺陷。
 
-    #box()[
-      #figure(
-        image("./pic/1.1.5-2.png", width: 50%),
-        caption: [
-          均匀长大
-        ],
-      )]
+      #box()[
+        #figure(
+          image("./pic/1.1.5-2.png", width: 50%),
+          caption: [
+            均匀长大
+          ],
+        )]
     #box()[
       #figure(
         image("./pic/1.1.5-3.png", width: 40%),
@@ -526,9 +517,9 @@ $
     - N/G比值越大，晶粒越细小。因此，凡是促进形核、抑制长大的因素，都能细化晶粒。
 
     - 细化铸态金属晶粒的措施
-      + #text(blue)[增加过冷度]：
+      1. #text(blue)[增加过冷度]：
         随过冷度增加，N/G值增加，晶粒变细。
-      + #text(blue)[变质处理]：
+      2. #text(blue)[变质处理]：
         又称孕育处理。即有意向液态金属内加入非均匀形核物质从而细化晶粒的方法。所加入的非均匀形核物质叫变质剂(或称孕育剂)。
 
 == 合金的相结构
@@ -545,7 +536,7 @@ $
 === #text(blue)[固溶体]
 - 合金在固态下、组元间仍能互相溶解而形成的均匀相称为#text(red)[固溶体]。习惯以#text(red)[$alpha,beta,gamma$]等表示。
 
-+ #text(blue)[固溶体的分类]
+1. #text(blue)[固溶体的分类]
   - 按溶质原子所处位置分为#text(red)[置换固溶体]和#text(red)[间隙固溶体]。
     #figure(
       image("./pic/1.2.1-1.png", width: 70%),
@@ -556,22 +547,22 @@ $
   - 按溶解度可分为#text(red)[有限固溶体]和#text(red)[无限固溶体]。
   - 溶质原子呈无序分布的称#text(red)[无序固溶体]，呈有序分布的称#text(red)[有序固溶体]。
 
-+ #text(blue)[固溶体的性能]
+2. #text(blue)[固溶体的性能]
   - 随溶质含量增加，固溶体的强度、硬度增加，塑性、韧性下降#text(red)[(固溶强化)] 。
   - 产生固溶强化的原因是溶质原子使#text(red)[晶格发生畸变及对位错的钉扎作用]。
   - 与纯金属相比，固溶体的强度、硬度高，塑性、韧性低。但与化合物相比，其硬度要低得多，而塑性和韧性则要高得多。
 
 === #text(blue)[金属化合物]
 - 合金组元相互作用形成的晶格类型和特性完全不同于任一组元的新相称#text(red)[金属化合物]。金属化合物具有#text(red)[较高的熔点、硬度和脆性，并可用分子式表示]其组成。
-+ #text(red)[正常价化合物]——符合正常原子价规律。如Mg2Si。
-+ #text(red)[电子化合物]——符合电子浓度规律。如Cu3Sn。\ #text(gray)[电子浓度为价电子数与原子数的比值]。
-+ #text(red)[间隙化合物]——由过渡族元素与C、N、B、H等小原子半径的非金属元素组成。
+1. #text(red)[正常价化合物]——符合正常原子价规律。如Mg2Si。
+2. #text(red)[电子化合物]——符合电子浓度规律。如Cu3Sn。\ #text(gray)[电子浓度为价电子数与原子数的比值]。
+3. #text(red)[间隙化合物]——由过渡族元素与C、N、B、H等小原子半径的非金属元素组成。
   #set enum(numbering: "(1)", start: 1)
-  + #text(red)[间隙相]：
+  1. #text(red)[间隙相]：
     $r_非 / r_金 lt 0.59$时形成的具有简单晶格结构的间隙化合物。
     - 间隙相具有金属特征和极高的硬度及熔点，非常稳定。
     - 部分碳化物和所有氮化物属于间隙相。
-  + #text(red)[具有复杂结构的间隙化合物]：
+  2. #text(red)[具有复杂结构的间隙化合物]：
     - $r_非 / r_金 gt 0.59$时形成复杂结构间隙化合物。
     - 如$F e B、F e_3 C、C r_(23)C_6$等。
     $$
@@ -771,7 +762,17 @@ $
 一个滑移面和其上的一个滑移方向构成一个滑移系。
 
 - 滑移系越多，金属发生滑移的可能性越大，塑性越好，其中滑移方向对塑性的贡献比滑移面更大。
-- 因此，金属的塑性，面心立方晶格好于体心立方晶格，体心立方晶格好于密排六方晶格。
+- 因此，金属的塑性，面心立方晶格>体心立方晶格>密排六方晶格。
+  #line(length: 100%, stroke: (paint: green, thickness: 1pt, dash: "dashed"))
+  #v(-0.5em)
+  #text(green)[
+    【例】（课本思考题 2-9 第 5 问改）]#text(blue)[比较 Al、Fe、Mg 的塑性。]
+
+  #text(green)[【解】] Al > Fe > Mg。
+  Al 是面心立方晶格，Fe 是体心立方晶格，Mg 是密排六方晶格。
+  #v(-0.5em)
+
+  #line(length: 100%, stroke: (paint: green, thickness: 1pt, dash: "dashed"))
 
 #text(blue)[塑性变形的实质]
 滑移是通过滑移面上位错的运动来实现的。
@@ -782,58 +783,58 @@ $
   gray,
 )[密排六方晶格金属滑移系少，常以孪生方式变形。体心立方晶格金属只有在低温或冲击作用下才发生孪生变形。面心立方晶格金属，一般不发生孪生变形，但常发现有孪晶存在，这是由于相变过程中原子重新排列时发生错排而产生的，称退火孪晶。
 ]
-#figure(
-  image("./pic/2.1.2-1.png", width: 100%),
-  caption: [
-  ],
-)
-#box()[
-  #cetz.canvas({
-    import cetz.draw: *
-    line((0, 0), (x: 8), stroke: (blue), mark: (end: "straight"))
-    line((0, 0), (y: 8), stroke: (blue), mark: (end: "straight"))
-    line((0, 0), (z: 8), stroke: (blue), mark: (end: "straight"))
+// #figure(
+//   image("./pic/2.1.2-1.png", width: 100%),
+//   caption: [
+//   ],
+// )
+// #box()[
+//   #cetz.canvas({
+//     import cetz.draw: *
+//     line((0, 0), (x: 8), stroke: (blue), mark: (end: "straight"))
+//     line((0, 0), (y: 8), stroke: (blue), mark: (end: "straight"))
+//     line((0, 0), (z: 8), stroke: (blue), mark: (end: "straight"))
 
-    line((0, 0, 5), (0, -0.75, 5.75), stroke: (paint: red, thickness: 2pt), mark: (end: "straight"))
-    line((0, 5, 0), (-0.75, 5.75, 0), stroke: (paint: red, thickness: 2pt), mark: (end: "straight"))
-    line((5, 0, 0), (5.75, 0, -0.75), stroke: (paint: red, thickness: 2pt), mark: (end: "straight"))
+//     line((0, 0, 5), (0, -0.75, 5.75), stroke: (paint: red, thickness: 2pt), mark: (end: "straight"))
+//     line((0, 5, 0), (-0.75, 5.75, 0), stroke: (paint: red, thickness: 2pt), mark: (end: "straight"))
+//     line((5, 0, 0), (5.75, 0, -0.75), stroke: (paint: red, thickness: 2pt), mark: (end: "straight"))
 
-    line(
-      (0, 0),
-      (5, 0, 0),
-      stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"),
-      name: "AB",
-    )
-    line((0, 0), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"))
-    line((0, 0), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"))
+//     line(
+//       (0, 0),
+//       (5, 0, 0),
+//       stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"),
+//       name: "AB",
+//     )
+//     line((0, 0), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"))
+//     line((0, 0), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt, dash: "dashed"))
 
-    line((0, 5, 5), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
+//     line((0, 5, 5), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
 
-    line((0, 5, 5), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
+//     line((0, 5, 5), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
 
-    line((5, 0, 5), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "CD")
-    line((5, 0, 5), (5, 0, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-
-
-    line((5, 5, 0), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "EF")
-    line((5, 5, 0), (5, 0, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
+//     line((5, 0, 5), (0, 0, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "CD")
+//     line((5, 0, 5), (5, 0, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
 
 
-    content("AB.start", [A(0,0,0)], anchor: "east")
-    content("AB.end", [B(5,0,0)], anchor: "west")
-    content("CD.start", [C(5,0,5)], anchor: "north")
-    content("CD.end", [D(0,0,5)], anchor: "east")
-    content("EF.start", [F(5,5,0)], anchor: "west")
-    content("EF.end", [F(0,5,0)], anchor: "east")
-    line("AB.end", "CD.end", "EF.end", close: true, fill: blue.transparentize(70%))
+//     line((5, 5, 0), (0, 5, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "EF")
+//     line((5, 5, 0), (5, 0, 0), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
 
-    line((5, 0, 5), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-    line((0, 5, 5), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "GH")
-    line((5, 5, 0), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
-    content("GH.start", [G(0,5,5)], anchor: "east")
-    content("GH.end", [H(5,5,5)], anchor: "west")
-  })
-]
+
+//     content("AB.start", [A(0,0,0)], anchor: "east")
+//     content("AB.end", [B(5,0,0)], anchor: "west")
+//     content("CD.start", [C(5,0,5)], anchor: "north")
+//     content("CD.end", [D(0,0,5)], anchor: "east")
+//     content("EF.start", [F(5,5,0)], anchor: "west")
+//     content("EF.end", [F(0,5,0)], anchor: "east")
+//     line("AB.end", "CD.end", "EF.end", close: true, fill: blue.transparentize(70%))
+
+//     line((5, 0, 5), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
+//     line((0, 5, 5), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt), name: "GH")
+//     line((5, 5, 0), (5, 5, 5), stroke: (paint: color.mix((red, 70%), (blue, 30%)), thickness: 2pt))
+//     content("GH.start", [G(0,5,5)], anchor: "east")
+//     content("GH.end", [H(5,5,5)], anchor: "west")
+//   })
+// ]
 
 如上图，当蓝色的晶面作为滑移面时，其上可以有三个滑移方向（图中红色箭头标出），每个滑移方向都能与该滑移面构成一个滑移系，共3个。因为有4个滑移面，所以有12个滑移面。
 
