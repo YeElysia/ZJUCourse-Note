@@ -1,0 +1,5 @@
+2025/06/05/19:50:51 [ Logger.py ]  27行 | [ DEBUG ] | [debug_log_test]
+2025/06/05/19:50:51 [ Logger.py ]  28行 | [ INFO ] | [info_log_test]
+2025/06/05/19:50:51 [ Logger.py ]  29行 | [ WARNING ] | [warning_log_test]
+2025/06/05/19:50:51 [ Logger.py ]  30行 | [ ERROR ] | [error_log_test]
+2025/06/05/19:50:51 [ Logger.py ]  31行 | [ CRITICAL ] | [critical_log_test]
