@@ -29,8 +29,7 @@
     //"{2}.{3}",
     "（{3}）",
   ))
-  set par(spacing: 1.24em,leading: 0.85em)
-
+  // set par(spacing: 1.24em, leading: 0.85em)
   let _set_figure(body) = {
     // 设置前景
     show figure.where(kind: image): set figure(supplement: [图])
@@ -43,7 +42,7 @@
     show figure.caption: set text()
     set figure.caption(separator: "　")
 
-set math.equation(numbering: "(1)", supplement: [方程])
+    set math.equation(numbering: "(1)", supplement: [方程])
 
     body
   }
