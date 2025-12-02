@@ -1,3 +1,5 @@
 {
-    "tinymist.onPaste": "$root/$dir/assets"
+  "tinymist.onPaste": "$root/$dir/assets",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
