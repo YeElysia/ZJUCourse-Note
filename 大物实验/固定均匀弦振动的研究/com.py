@@ -27,7 +27,7 @@ for row in data_1:
     print(
         f'({f}, "{L1:.2f}", "{L2:.2f}", "{L3:.2f}", {L_overline}, {_f2:.2e}, {_lambda2_mg:.4f}),'
     )
-
+f = 80  # Hz
 data_2 = [
     (45.271, "37.89", "37.65", "37.80", 28.02, 0.3923),
     (54.868, "41.20", "41.10", "41.20", 38.90, 0.1962),
@@ -41,10 +41,10 @@ for row in data_2:
     L_overline = (float(L1) + float(L2) + float(L3)) / 3
 
     lambda_ = 2 * float(L_overline) / 100  # m
-    _m_g = m * g
+    _m_g = m * g / 1000  # kg·m/s²
     _lambda2 = lambda_**2 * f**2
     print(
-        f'({m:.3f}, "{L1}", "{L2}", "{L3}", {L_overline:.2f}, {_m_g:.4}, {_lambda2:.2f}),'
+        f'({m:.3f}, "{L1}", "{L2}", "{L3}", {L_overline:.2f}, {_m_g:.4}, {_lambda2:.2f},{_m_g/_lambda2:.4}),'
     )
 
 
