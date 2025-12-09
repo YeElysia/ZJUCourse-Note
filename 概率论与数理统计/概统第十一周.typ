@@ -97,9 +97,73 @@ $
   overline(X) - X_1 = -15/16 X_1 + 1/16 sum_(i=2)^16 X_i ~ N(0,15^2/16^2+15/16^2) = N(0,15/16) \
 $
 = B1
+(1)
+可知
+$
+  (overline(X)-mu)/(sigma/5) ~ N(0,1) \
+  P{|overline(X)-mu|<0.2 sigma} = P{(|overline(X)-mu|)/(sigma/5) < 1} = 2Phi(1) -1 = 0.6826 \
+$
+(2)
+$
+  P{|overline(X) > mu - c sigma} = P{(overline(X)-mu)/(sigma/5) gt.eq -5c} =1- Phi(-5c)= Phi(5c) = 0.95 \
+$
+解得$c = 0.33$
+= B2
+(7)
+$
+  (2(X_1-X_2)^2)/((X_3-X_4)^2 + (X_5-X_6)^2) &= display((2(X_1-X_2)^2)/(2sigma^2))/display(((X_3-X_4)^2 + (X_5-X_6)^2)/(2 sigma^2))\
+  &= display(((X_1-X_2)^2)/(2sigma^2))/display(1/2 ((X_3-X_4)^2 + (X_5-X_6)^2)/(2 sigma^2)) \
+  &~ F(1,2) \
+$
 
-= B2(7,8)
+(8)
 
+令
+$
+  S_1^2 = 1/2 [(X_1-Y_1)^2 + (X_2-Y_1)^2 + (X_3 -Y_1)^2] \
+  S_2^2 = 1/2 [(X_4-Y_2)^2 + (X_5-Y_2)^2 + (X_6 -Y_2)^2] \
+$
+则
+$
+  (2S_1^2)/(sigma^2) ~ chi^2(2) \
+  (2S_2^2)/(sigma^2) ~ chi^2(2) \
+$
+所以
+$
+  ((X_1 - Y_1)^2 + (X_2 - Y_1)^2 + (X_3 - Y_1)^2)/((X_4 - Y_2)^2 + (X_5 - Y_2)^2 + (X_6 - Y_2)^2) = S_1^2/S_2^2 = (display((2S_1^2)/sigma^2 dot 1/2) )/(display((2S_2^2)/sigma^2 dot 1/2)) ~ F(2,2) \
+$
 = B4
+已知$X_i ~ N(a, 2.5^2)$
+所以
+$
+  overline(X) & ~ N(a, 2.5^2/n) \
+  (overline(X)-a)/(display(2.5/sqrt(n))) & ~ N(0,1) \
+  P{|overline(X)-a| lt.eq 0.5} & = P{(|overline(X)-a|)/(display(2.5/sqrt(n))) lt.eq (0.5sqrt(n))/2.5} = 2 Phi((sqrt(n))/5) -1 \
+$
 
+#v(10em)
+(1)
+$
+  2 Phi ((sqrt(n))/5) -1 gt.eq 0.9 \
+$
+解得 $n> 67.65$,所以至少68次
+
+(2)
+$
+  2 Phi ((sqrt(n))/5) -1 gt.eq 0.95 \
+$
+解得 $n> 96.04$,所以至少97次
 = B10
+(1)
+$
+              overline(X)- overline(Y) & ~ N(0, sigma^2/5 + sigma^2/9) \
+  (a(overline(X) - overline(B)))/sigma & ~ N(0,(14a^2)/45) = N(0,1) \
+$
+解得$display(a = plus.minus sqrt(45/14))$
+
+(2)
+显然有
+$
+  display(a(overline(X)-overline(B))/sigma)/display(sqrt((4S_1^2+8S_2^2)/(12 sigma^2))) = (sqrt(3)a(overline(X)-overline(B)))/display(sqrt(S_1^2+2S_2^2)) ~ t(12) \
+$
+于是$sqrt(3)a = b$, $b = display(plus.minus sqrt(135/14))$
