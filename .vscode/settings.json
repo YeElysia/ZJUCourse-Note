@@ -1,5 +1,7 @@
 {
   "tinymist.onPaste": "$root/$dir/assets",
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "fonted.font": "LXGW Wenkai Mono",
+  "python.analysis.autoImportCompletions": true
 }
