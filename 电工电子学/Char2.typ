@@ -1,5 +1,7 @@
 #import "utils.typ": Red, eq, three_line_table
-#import "models.typ": arrow, constSourceH, constSourceV, controlledSourceV, loop, node, resistorH, resistorV
+#import "models.typ": (
+  arrow_I, constSourceH, constSourceV, controlledSourceH, controlledSourceV, loop, node, resistorH, resistorV,
+)
 #import "Callouts.typ" as callouts
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.3"
@@ -23,7 +25,7 @@
       line((0, 1.6), (0, 0), (2, 0), (2, 1.6))
       line((2, 2.4), (2, 4), (0, 4), (0, 2.4))
       constSourceH((0, 2))
-      arrow((0, 2.4), (0, 3.2))
+      arrow_I((0, 2.4), (0, 3.2))
       resistorV((2, 2))
 
       line((2, 0), (6, 0), (6, 1.6))
@@ -110,11 +112,11 @@
       content((1, 4.4), [$R_1$])
       content((1, 3.6), [$2k Omega$])
       line((1.4, 4), (2, 4))
-      arrow((1.4, 4), (2, 4))
+      arrow_I((1.4, 4), (2, 4))
       content((1.7, 4.4), [I])
 
       line((2, 0), (2, 0.8))
-      arrow((2, 0.8), (2, 0.2))
+      arrow_I((2, 0.8), (2, 0.2))
       content((2.4, 0.4), [I])
       constSourceV((2, 1.2))
       content((1.5, 1.6), [-])
@@ -165,7 +167,7 @@
       content((0.8, 2.4), [$U_(s 1)$])
       content((0.8, 1.7), [6V])
       line((0, 2.4), (0, 4))
-      arrow((0, 2.8), (0, 3.6))
+      arrow_I((0, 2.8), (0, 3.6))
       content((-0.4, 3.2), [$I_1$])
 
 
@@ -184,7 +186,7 @@
 
 
       line((4, 4), (4, 2.4))
-      arrow((4, 3.8), (4, 3))
+      arrow_I((4, 3.8), (4, 3))
       content((3.6, 3.4), [$I_3$])
       resistorV((4, 2))
       content((3.6, 2.4), [$R_3$])
@@ -196,10 +198,10 @@
       content((5.1, 4.4), [-])
       content((5.9, 4.4), [+])
       content((5.5, 4.8), [$U$])
-      arrow((5.1, 4), (4.5, 4))
+      arrow_I((5.1, 4), (4.5, 4))
       content((4.8, 3.6), [$beta I_1$])
       line((5.9, 4), (6.5, 4))
-      arrow((6.5, 3.2), (6.5, 3.9))
+      arrow_I((6.5, 3.2), (6.5, 3.9))
       content((6.9, 3.6), [$I_2$])
       line((6.5, 4), (6.5, 3.2))
       resistorV((6.5, 2.8))
@@ -251,7 +253,7 @@
       line((0, 0), (0, 1.6))
       constSourceH((0, 2))
       content((0.4, 2.8), [$I_S$])
-      arrow((0, 2.4), (0, 3.2))
+      arrow_I((0, 2.4), (0, 3.2))
       line((0, 2.4), (0, 4))
       line((0, 0), (3, 0))
       line((1.5, 0), (1.5, 0.8))
@@ -263,13 +265,13 @@
       resistorV((1.5, 2.8))
       content((1.1, 2.8), [$R_1$])
       line((1.5, 3.2), (1.5, 4))
-      arrow((1.5, 3.2), (1.5, 3.8))
+      arrow_I((1.5, 3.2), (1.5, 3.8))
       content((1.1, 3.6), [$I_1$])
       line((3, 0), (3, 1.6))
       resistorV((3, 2))
       content((2.6, 2), [$R_2$])
       line((3, 2.4), (3, 4))
-      arrow((3, 3.4), (3, 2.6))
+      arrow_I((3, 3.4), (3, 2.6))
       content((2.6, 3), [$I_2$])
       line((0, 4), (3, 4))
     }),
@@ -293,13 +295,13 @@
       resistorV((1.5, 2.8))
       content((1.1, 2.8), [$R_1$])
       line((1.5, 3.2), (1.5, 4))
-      arrow((1.5, 3.2), (1.5, 3.8))
+      arrow_I((1.5, 3.2), (1.5, 3.8))
       content((1.1, 3.6), [$I_11$])
       line((3, 0), (3, 1.6))
       resistorV((3, 2))
       content((2.6, 2), [$R_2$])
       line((3, 2.4), (3, 4))
-      arrow((3, 3.4), (3, 2.6))
+      arrow_I((3, 3.4), (3, 2.6))
       content((2.6, 3), [$I_21$])
       line((0, 4), (3, 4))
     }),
@@ -309,7 +311,7 @@
       line((0, 0), (0, 1.6))
       constSourceH((0, 2))
       content((0.4, 2.8), [$I_S$])
-      arrow((0, 2.4), (0, 3.2))
+      arrow_I((0, 2.4), (0, 3.2))
       line((0, 2.4), (0, 4))
       line((0, 0), (3, 0))
       line((1.5, 0), (1.5, 0.7))
@@ -324,13 +326,13 @@
       resistorV((1.5, 2.8))
       content((1.1, 2.8), [$R_1$])
       line((1.5, 3.2), (1.5, 4))
-      arrow((1.5, 3.2), (1.5, 3.8))
+      arrow_I((1.5, 3.2), (1.5, 3.8))
       content((1.1, 3.6), [$I_12$])
       line((3, 0), (3, 1.6))
       resistorV((3, 2))
       content((2.6, 2), [$R_2$])
       line((3, 2.4), (3, 4))
-      arrow((3, 3.4), (3, 2.6))
+      arrow_I((3, 3.4), (3, 2.6))
       content((2.6, 3), [$I_22$])
       line((0, 4), (3, 4))
     }),
@@ -369,7 +371,7 @@
 
         line((1.3, 2.2), (1.3, 3.2), (1.7, 3.2))
         constSourceV((2.1, 3.2))
-        arrow((2.5, 3.2), (3.3, 3.2))
+        arrow_I((2.5, 3.2), (3.3, 3.2))
         content((2.9, 2.8), [$I_(s 2)$])
         line((3.3, 3.2), (3.7, 3.2))
         line((3.7, 3.2), (3.7, 2.2))
@@ -457,7 +459,7 @@
       line((4, 0), (4, 0.3))
       constSourceH((4, 0.7))
       content((3.6, 1.5), [$I_S$])
-      arrow((4, 1.1), (4, 1.9))
+      arrow_I((4, 1.1), (4, 1.9))
       line((4, 1.6), (4, 3))
       resistorH((3.3, 3))
       content((3.3, 2.5), [$R_3$])
@@ -481,69 +483,576 @@
 凡是具有两个接线端的部分电路, 就称为二端网络。在计算分析中, 我们可以用一个最简单的等效电路来代替一个复杂的二端网络, 使计算简化。
 
 显然的，无源二端网络可以用一个电阻来等效。
-==== 戴维南定理
+==== 戴维宁定理
 对外电路来说, 一个线性有源二端网络可用一个电压源和电阻的串联电路来等效, 该电压源的电压等于此有源二端网络的开路电压$U_(O C)$, 串联电阻等于此有源二端网络将独立电源置零后在其端口处的等效电阻$R_0$。
 ==== 诺顿定理
 对外电路来说, 一个线性有源二端网络可用一个电流源和电阻的并联电路来等效, 该电流源的电流等于此有源二端网络的短路电流$I_(S C)$, 并联电阻等于此有源二端网络将独立电源置零后在其端口处的等效电阻$R_0$。
 
+#align(center)[
+  #grid(
+    columns: 5,
+    gutter: 1em,
+    align: horizon,
+    cetz.canvas({
+      import cetz.draw: *
+      rect((1, 0), (2, 4))
+      content((1.5, 2.6), [外
 
+        电
+
+        路])
+      line((0.4, 0.2), (-2, 0.2), (-2, 1.6))
+      constSourceV((-2, 2))
+      content((-1.5, 1.6), [-])
+      content((-1.5, 2.4), [+])
+      content((-1, 2), [$U_(O C)$])
+      line((-2, 2.4), (-2, 3.8), (-1.4, 3.8))
+      resistorH((-1, 3.8))
+      content((-1, 3.3), [$R_0$])
+      line((-0.6, 3.8), (0.4, 3.8))
+      circle((0.5, 3.8), radius: 0.1)
+      line((0.6, 3.8), (1, 3.8))
+      circle((0.5, 0.2), radius: 0.1)
+      line((0.6, 0.2), (1, 0.2))
+      rect((-2.6, 4.5), (0, -0.5), stroke: (dash: "dashed"))
+    }),
+    cetz.canvas({
+      import cetz.draw: *
+      line(
+        (0, 0),
+        (1, 0),
+        (1, -0.2),
+        (1.3, 0.1),
+        (1, 0.4),
+        (1, 0.2),
+        (0, 0.2),
+        (0, 0.4),
+        (-0.3, 0.1),
+        (0, -0.2),
+        (0, 0),
+      )
+      content((0.5, 0.7), [戴维宁])
+      //line((0, 0.2), (1, 0.2))
+    }),
+    cetz.canvas({
+      import cetz.draw: *
+      rect((0, 0), (1, 4))
+      content((0.5, 2.6), [外
+
+        电
+
+        路])
+      rect((-2, 0), (-1, 4))
+      content((-1.5, 2), [$N_A$])
+      line((0, 0.2), (-1, 0.2))
+      line((0, 3.8), (-1, 3.8))
+    }),
+    cetz.canvas({
+      import cetz.draw: *
+      line(
+        (0, 0),
+        (1, 0),
+        (1, -0.2),
+        (1.3, 0.1),
+        (1, 0.4),
+        (1, 0.2),
+        (0, 0.2),
+        (0, 0.4),
+        (-0.3, 0.1),
+        (0, -0.2),
+        (0, 0),
+      )
+      content((0.5, 0.7), [诺顿])
+      //line((0, 0.2), (1, 0.2))
+    }),
+    cetz.canvas({
+      import cetz.draw: *
+      rect((1, 0), (2, 4))
+      content((1.5, 2.6), [外
+
+        电
+
+        路])
+      line((0.4, 0.2), (-2, 0.2), (-2, 1.6))
+      constSourceH((-2, 2))
+      arrow_I((-2, 2.4), (-2, 3.2))
+      content((-1.5, 2.8), [$I_(S C)$])
+      line((-2, 2.4), (-2, 3.8), (0, 3.8))
+      line((-1, 3.8), (-1, 2.4))
+      resistorV((-1, 2))
+      content((-0.5, 2), [$R_0$])
+      line((-1, 1.6), (-1, 0.2))
+      line((-0.6, 3.8), (0.4, 3.8))
+      circle((0.5, 3.8), radius: 0.1)
+      line((0.6, 3.8), (1, 3.8))
+      circle((0.5, 0.2), radius: 0.1)
+      line((0.6, 0.2), (1, 0.2))
+      rect((-2.6, 4.5), (0, -0.5), stroke: (dash: "dashed"))
+    }),
+  )
+]
+#callouts.Tip(title: [等效电阻求解(例2.2.3)])[
+  1. 电阻串并联(无受控源)
+  2. 开路电压除以短路电流
+  #grid(
+    columns: 2,
+    gutter: 1em,
+    cetz.canvas({
+      import cetz.draw: *
+
+      line((0, 0), (0, 0.8))
+      constSourceV((0, 1.2))
+      content((0.5, 0.8), [-])
+      content((0.5, 1.6), [+])
+      content((-1, 1.2), [$1.5 V$])
+      content((0.8, 1.2), [$U_S$])
+      line((0, 1.6), (0, 2.4))
+      resistorV((0, 2.8))
+      content((0.5, 3.2), [$R_1$])
+      content((0.8, 2.4), [$1200 Omega$])
+      line((0, 3.2), (0, 4))
+
+      line((2, 0), (2, 1.6))
+      controlledSourceH((2, 2))
+      arrow_I((2, 2.4), (2, 3.2))
+      content((2.5, 2.8), [$beta I_1$])
+      line((2, 2.4), (2, 4))
+
+      line((3, 0), (3, 1.6))
+      resistorV((3, 2))
+      content((3.5, 2.2), [$R_2$])
+      content((3.8, 1.4), [$2000 Omega$])
+
+      line((3, 2.4), (3, 4))
+      arrow_I((3, 3.6), (3, 2.8))
+      content((3.4, 3), [$I_2$])
+
+      line((0, 0), (4.9, 0))
+      line((0, 4), (4.9, 4))
+      arrow_I((0.5, 4), (1.3, 4))
+      content((1.3, 3.6), [$I_1$])
+      circle((5, 0), radius: 0.1)
+      content((5, 0.4), [-])
+      content((5, -0.4), [b])
+      circle((5, 4), radius: 0.1)
+      content((5, 4.4), [a])
+      content((5, 3.6), [+])
+      content((5, 2), [$U_(O C)$])
+    }),
+    [
+      $
+                       & U_S = I_1 R_1 + (1 + beta) I_1 R_2 \
+        arrow.r.double & U_(O C) = I_2 R_2 = ((1+beta)R_2)/(R_1 + (1+beta)R_2) U_S = 1.48 V \
+                       & I_(S C) = (1+beta) I_1 = (1+beta) U_S/R_1 = 63.75 m A \
+                       & R_0 = U_(O C)/I_(S C) = 23.22 Omega
+      $
+    ],
+  )
+  3. 外加电源法(除去原有独立源)
+  #grid(
+    columns: 2,
+    gutter: 1em,
+    cetz.canvas({
+      import cetz.draw: *
+
+      line((0, 0), (0, 0.7))
+      // constSourceV((0, 1.2))
+      // content((0.5, 0.8), [-])
+      // content((0.5, 1.6), [+])
+      // content((-1, 1.2), [$1.5 V$])
+      // content((0.8, 1.2), [$U_S$])
+      circle((0, 0.8), radius: 0.1)
+      line((0, 0.9), (0, 1.5))
+      circle((0, 1.6), radius: 0.1)
+      line((0, 1.7), (0, 2.4))
+      resistorV((0, 2.8))
+      content((0.5, 3.2), [$R_1$])
+      content((0.8, 2.4), [$1200 Omega$])
+      line((0, 3.2), (0, 4))
+
+      line((2, 0), (2, 1.6))
+      controlledSourceH((2, 2))
+      arrow_I((2, 2.4), (2, 3.2))
+      content((2.5, 2.8), [$beta I_1$])
+      line((2, 2.4), (2, 4))
+
+      line((3, 0), (3, 1.6))
+      resistorV((3, 2))
+      content((3.5, 2.2), [$R_2$])
+      content((3.8, 1.4), [$2000 Omega$])
+
+      line((3, 2.4), (3, 4))
+      arrow_I((3, 3.6), (3, 2.8))
+      content((3.4, 3), [$I_2$])
+
+      line((0, 0), (4.9, 0))
+      line((0, 4), (4.9, 4))
+      arrow_I((0.5, 4), (1.3, 4))
+      content((1.3, 3.6), [$I_1$])
+      circle((5, 0), radius: 0.1)
+      // content((5, 0.4), [-])
+      // content((5, -0.4), [b])
+      circle((5, 4), radius: 0.1)
+      // content((5, 4.4), [a])
+      // content((5, 3.6), [+])
+      // content((5, 2), [$U_(O C)$])
+      line((5, 0.1), (5, 1.6))
+      constSourceV((5, 2))
+      content((5.5, 1.6), [-])
+      content((5.5, 2.4), [+])
+      content((4.2, 2), [$U$])
+      line((5, 2.4), (5, 3.9))
+      arrow_I((4.8, 4), (4, 4))
+      content((4.4, 3.6), [$I$])
+    }),
+    [
+      $U_(O C)$解法同上
+      $
+                       & I= I_2 - (1+beta) I_1 = U/R_2 - (1+beta) (- U/R_1) \
+        arrow.r.double & R_0 = U/I = 1/(1/R_2 + (1+beta)/R_1) = (R_1 R_2)/(R_1 + (1+beta)R_2) = 23.26 Omega
+      $
+    ],
+  )
+]
+
+=== 额外习题插入
+#Red[【声明】本部分选题来自SAVIA]
+
+==== (叠加定理)
+如图所示所有电阻均为R, 求I
+#align(center)[
+  #cetz.canvas({
+    import cetz.draw: *
+    line((0, 0), (0, 1))
+    line((0, 0), (2.4, 0))
+    constSourceV((2.8, 0))
+    line((3.2, 0), (5.6, 0))
+    arrow_I((2, 0), (1.2, 0))
+    content((1.2, 0.4), [1A])
+
+    line((0, 1), (0.8, 1))
+    resistorH((1.2, 1))
+    line((1.6, 1), (2.4, 1))
+    resistorH((2.8, 1))
+    line((3.2, 1), (4, 1))
+    resistorH((4.4, 1))
+    line((4.8, 1), (5.6, 1))
+
+    line((0, 1), (0, 2.6))
+    resistorV((0, 3))
+    line((0, 3.4), (0, 5), (2.4, 5))
+    resistorH((2.8, 5))
+    line((3.2, 5), (5.6, 5), (5.6, 3.4))
+    resistorV((5.6, 3))
+    line((5.6, 2.6), (5.6, 0))
+
+    line((0, 5), (3.6, 1))
+    line((5.6, 5), (2, 1))
+    circle((2.8, 1.888888), radius: 0.1, fill: white)
+    line((1.98, 2.625), (2.88, 1.625), stroke: (thickness: 0.2, paint: white))
+    line((5.6, 5), (2, 1))
+    circle((1.8, 3), radius: 0.4, fill: white)
+    line((1.5, 2.73), (2.1, 3.27))
+    circle((3.8, 3), radius: 0.4, fill: white)
+    line((4.1, 2.73), (3.5, 3.27))
+    arrow_I((2.25, 2.5), (2.61, 2.1))
+    content((2, 2.2), [1A])
+    arrow_I((3.35, 2.5), (2.99, 2.1))
+    content((3.6, 2.2), [3A])
+
+    arrow_I((3.5, 5), (4.3, 5))
+    content((4.2, 5.4), [I])
+  })
+  // #image("assets/image.png", width: 90%)
+]
 #grid(
-  columns: 5,
+  columns: 3,
+  gutter: 4em,
+  // align: horizon,
+  cetz.canvas({
+    import cetz.draw: *
+    line((0, 0), (0, 1))
+    line((0, 0), (2.4, 0))
+    constSourceV((2.8, 0))
+    line((3.2, 0), (5.6, 0))
+    arrow_I((2, 0), (1.2, 0))
+    content((1.2, 0.4), [1A])
+
+    line((0, 1), (0.8, 1))
+    resistorH((1.2, 1))
+    line((1.6, 1), (2.4, 1))
+    resistorH((2.8, 1))
+    line((3.2, 1), (4, 1))
+    resistorH((4.4, 1))
+    line((4.8, 1), (5.6, 1))
+
+    line((0, 1), (0, 2.1))
+    resistorV((0, 2.5))
+    line((0, 2.9), (0, 4), (2.4, 4))
+    resistorH((2.8, 4))
+    line((3.2, 4), (5.6, 4), (5.6, 2.9))
+    resistorV((5.6, 2.5))
+    line((5.6, 2.1), (5.6, 0))
+    arrow_I((3.5, 4), (4.3, 4))
+    content((4.2, 4.4), [$I_1$])
+  }),
+  cetz.canvas({
+    import cetz.draw: *
+    // line((0, 0), (0, 1))
+    // line((0, 0), (2.4, 0))
+    // constSourceV((2.8, 0))
+    // line((3.2, 0), (5.6, 0))
+    // arrow_I((2, 0), (1.2, 0))
+    // content((1.2, 0.4), [1A])
+
+    line((0, 1), (0.8, 1))
+    resistorH((1.2, 1))
+    line((1.6, 1), (2.4, 1))
+    resistorH((2.8, 1))
+    line((3.2, 1), (4, 1))
+    resistorH((4.4, 1))
+    line((4.8, 1), (5.6, 1))
+
+    line((0, 1), (0, 2.6))
+    resistorV((0, 3))
+    line((0, 3.4), (0, 5), (2.4, 5))
+    resistorH((2.8, 5))
+    line((3.2, 5), (5.6, 5), (5.6, 3.4))
+    resistorV((5.6, 3))
+    line((5.6, 2.6), (5.6, 1))
+
+    line((0, 5), (3.6, 1))
+    // line((5.6, 5), (2, 1))
+    // circle((2.8, 1.888888), radius: 0.1, fill: white)
+    // line((1.98, 2.625), (2.88, 1.625), stroke: (thickness: 0.2, paint: white))
+    // line((5.6, 5), (2, 1))
+    circle((1.8, 3), radius: 0.4, fill: white)
+    line((1.5, 2.73), (2.1, 3.27))
+    // circle((3.8, 3), radius: 0.4, fill: white)
+    // line((4.1, 2.73), (3.5, 3.27))
+    arrow_I((2.25, 2.5), (2.61, 2.1))
+    content((2, 2.2), [1A])
+    // arrow_I((3.35, 2.5), (2.99, 2.1))
+    // content((3.6, 2.2), [3A])
+
+    arrow_I((3.5, 5), (4.3, 5))
+    content((4.2, 5.4), [$I_2$])
+  }),
+  cetz.canvas({
+    import cetz.draw: *
+    // line((0, 0), (0, 1))
+    // line((0, 0), (2.4, 0))
+    // constSourceV((2.8, 0))
+    // line((3.2, 0), (5.6, 0))
+    // arrow_I((2, 0), (1.2, 0))
+    // content((1.2, 0.4), [1A])
+
+    line((0, 1), (0.8, 1))
+    resistorH((1.2, 1))
+    line((1.6, 1), (2.4, 1))
+    resistorH((2.8, 1))
+    line((3.2, 1), (4, 1))
+    resistorH((4.4, 1))
+    line((4.8, 1), (5.6, 1))
+
+    line((0, 1), (0, 2.6))
+    resistorV((0, 3))
+    line((0, 3.4), (0, 5), (2.4, 5))
+    resistorH((2.8, 5))
+    line((3.2, 5), (5.6, 5), (5.6, 3.4))
+    resistorV((5.6, 3))
+    line((5.6, 2.6), (5.6, 1))
+
+    // line((0, 5), (3.6, 1))
+    line((5.6, 5), (2, 1))
+    // circle((2.8, 1.888888), radius: 0.1, fill: white)
+    // line((1.98, 2.625), (2.88, 1.625), stroke: (thickness: 0.2, paint: white))
+    line((5.6, 5), (2, 1))
+    // circle((1.8, 3), radius: 0.4, fill: white)
+    // line((1.5, 2.73), (2.1, 3.27))
+    circle((3.8, 3), radius: 0.4, fill: white)
+    line((4.1, 2.73), (3.5, 3.27))
+    // arrow_I((2.25, 2.5), (2.61, 2.1))
+    // content((2, 2.2), [1A])
+    arrow_I((3.35, 2.5), (2.99, 2.1))
+    content((3.6, 2.2), [3A])
+
+    arrow_I((3.5, 5), (4.3, 5))
+    content((4.2, 5.4), [$I_3$])
+  }),
+)
+$
+  I & = I_1 + I_2 + I_3 \
+    & = 0.5 A + (-0.5 A) + 1.5 A = 1.5 A
+$
+==== (等效电源1)
+如图(a)所示直流电路, 求电流I
+#align(center)[#grid(
+  columns: 2,
+  rows: 2,
   gutter: 1em,
   align: center + horizon,
   cetz.canvas({
     import cetz.draw: *
-    rect((1, 0), (2, 4))
-    content((1.5, 2.6), [外
+    line((0, 0), (1.5, 0))
+    line((0, 0), (0, 0.3))
+    constSourceV((0, 0.7))
+    content((-0.5, 0.3), [-])
+    content((-0.5, 1.1), [+])
+    content((-0.8, 0.7), [$U_S$])
+    content((0.8, 0.7), [12V])
+    line((0, 1.1), (0, 1.9))
+    resistorV((0, 2.3))
+    line((0, 2.7), (0, 3), (1.5, 3))
 
-      电
+    line((1.5, 0), (1.5, 1.1))
+    resistorV((1.5, 1.5))
+    line((1.5, 1.9), (1.5, 4.5), (2.6, 4.5))
+    resistorH((3, 4.5))
+    line((3.4, 4.5), (4.5, 4.5), (4.5, 3))
+    line((1.5, 3), (2.6, 3))
+    controlledSourceV((3, 3))
+    line((3.4, 3), (5, 3), (5, 1.9))
+    resistorV((5, 1.5))
+    line((5, 1.1), (5, 0), (1.5, 0))
 
-      路])
-    line((0.4, 0.2), (-2, 0.2), (-2, 1.6))
-    constSourceV((-2, 2))
-    content((-1.5, 1.6), [-])
-    content((-1.5, 2.4), [+])
-    content((-1, 2), [$U_(O C)$])
-    line((-2, 2.4), (-2, 3.8), (-1.4, 3.8))
-    resistorH((-1, 3.8))
-    content((-1, 3.3), [$R_0$])
-    line((-0.6, 3.8), (0.4, 3.8))
-    circle((0.5, 3.8), radius: 0.1)
-    line((0.6, 3.8), (1, 3.8))
-    circle((0.5, 0.2), radius: 0.1)
-    line((0.6, 0.2), (1, 0.2))
+    arrow_I((3.4, 3), (4.2, 3))
+    content((4.1, 3.4), [$2 I_1$])
+    content((3, 4.1), [$1 Omega$])
+    content((4.6, 1.5), [$5 Omega$])
+    content((0.5, 2.3), [$2 Omega$])
+    content((2, 1.5), [$4 Omega$])
+    arrow_I((1.5, 3), (1.5, 2.3))
+    content((1.9, 2.3), [$I_1$])
+
+    node((4.5, 3), fill: white)
+    content((4.5, 2.6), [a])
+    node((4.5, 0), fill: white)
+    content((4.5, 0.4), [b])
+
+    node((1.5, 3))
+
+    arrow_I((0, 3), (1, 3))
+    content((1, 3.4), [$I_2$])
+    arrow_I((1.5, 4.5), (1.5, 3.5))
+    content((1.9, 3.5), [$I_3$])
   }),
   cetz.canvas({
     import cetz.draw: *
-    rect((0, 0), (1, 4))
-    content((0.5, 2.6), [外
+    line((0, 0), (1.5, 0))
+    line((0, 0), (0, 0.3))
+    constSourceV((0, 0.7))
+    content((-0.5, 0.3), [-])
+    content((-0.5, 1.1), [+])
+    content((-0.8, 0.7), [$U_S$])
+    content((0.8, 0.7), [12V])
+    line((0, 1.1), (0, 1.9))
+    resistorV((0, 2.3))
+    line((0, 2.7), (0, 3), (1.5, 3))
 
-      电
+    line((1.5, 0), (1.5, 1.1))
+    resistorV((1.5, 1.5))
+    line((1.5, 1.9), (1.5, 4.5), (2.6, 4.5))
+    resistorH((3, 4.5))
+    line((3.4, 4.5), (4.5, 4.5), (4.5, 3))
+    line((1.5, 3), (2.6, 3))
+    controlledSourceV((3, 3))
+    line((3.4, 3), (4.5, 3))
+    //line((3.4, 3), (5, 3), (5, 1.9))
+    //resistorV((5, 1.5))
+    //line((5, 1.1), (5, 0), (1.5, 0))
 
-      路])
-    rect((-3, 0), (-2, 4))
-    content((0.5, 2.6), [外
+    arrow_I((3.4, 3), (4.2, 3))
+    content((4.1, 3.4), [$2 I_1$])
+    content((3, 4.1), [$1 Omega$])
+    // content((4.6, 1.5), [$5 Omega$])
+    content((0.5, 2.3), [$2 Omega$])
+    content((2, 1.5), [$4 Omega$])
+    arrow_I((1.5, 3), (1.5, 2.3))
+    content((1.9, 2.3), [$I_1$])
 
-      电
+    node((4.5, 3), fill: white)
+    content((4.5, 2.6), [a])
+    node((1.5, 0), fill: white)
+    content((1.9, 0), [b])
 
-      路])
+    node((1.5, 3))
+
+    arrow_I((0, 3), (1, 3))
+    content((1, 3.4), [$I_2$])
+    arrow_I((1.5, 4.5), (1.5, 3.5))
+    content((1.9, 3.5), [$I_3$])
   }),
-  cetz.canvas({
+
+  [(a)], [(b)],
+)]
+断开ab(如图(b)所示), 显然$I_2 = I_1$, $I_3 = 2 I_1$, $display(I_1 = (U_s)/(2 Omega +4 Omega) = 2A)$, 则$U_(O C) = I_1 dot 4 Omega + I_3 dot 1 Omega = 12 V$
+
+短路ab, 将电压源$U_s$等效为电流源, 如下图:
+#align(center)[
+  #cetz.canvas({
     import cetz.draw: *
-    rect((0.5, 0), (1.5, 4))
-    content((1, 2.6), [外
+    line((0, 0), (0, 1.1))
+    constSourceH((0, 1.5))
+    arrow_I((0, 1.9), (0, 2.7))
+    content((-0.5, 2.7), [$I_S$])
+    content((-0.5, 2.1), [$6A$])
+    line((0, 1.9), (0, 3), (1.5, 3), (1.5, 1.9))
+    resistorV((1.5, 1.5))
+    content((1, 1.5), [$2 Omega$])
+    line((1.5, 1.1), (1.5, 0))
+    arrow_I((1.5, 3), (1.5, 2.2))
+    content((1.9, 2.2), [$I_2$])
 
-      电
+    line((1.5, 3), (3, 3), (3, 1.9))
+    resistorV((3, 1.5))
+    content((2.5, 1.5), [$4 Omega$])
+    line((3, 1.1), (3, 0))
+    arrow_I((3, 3), (3, 2.2))
+    content((3.4, 2.2), [$I_1$])
 
-      路])
-    line((0, 0.2), (-2, 0.2), (-2, 1.6))
-    constSourceH((-2, 2))
-    arrow((-2, 2.4), (-2, 3.2))
-    content((-1.5, 2.8), [$I_(S C)$])
-    line((-2, 2.4), (-2, 3.8), (0, 3.8))
-    line((-1, 3.8), (-1, 2.4))
-    resistorV((-1, 2))
-    content((-0.5, 2), [$R_0$])
-    line((-1, 1.6), (-1, 0.2))
-  }),
-)
+    line((3, 3), (4.5, 3), (4.5, 1.9))
+    controlledSourceH((4.5, 1.5))
+    line((4.5, 1.1), (4.5, 0))
+    arrow_I((4.5, 3), (4.5, 2.2))
+    content((5, 2.2), [$2 I_1$])
+
+    line((4.5, 3), (6, 3), (6, 1.9))
+    resistorV((6, 1.5))
+    content((5.5, 1.5), [$1 Omega$])
+    line((6, 1.1), (6, 0))
+    arrow_I((6, 3), (6, 2.2))
+    content((6.4, 2.2), [$I_3$])
+
+    line((0, 0), (6, 0))
+    arrow_I((4.5, 0), (3.5, 0))
+    content((3.7, 0.4), [$I_(S C)$])
+  })
+]
+由
+$
+  I_2 dot 2 Omega = I_1 dot 4 Omega = I_3 dot 1 Omega \
+  I_S = I_2 + I_1 + 2I_2 + I_3 = 9 I_1 = 6A \
+$
+解得$ I_(S C) = 2I_1 + I_3 = 6 I_1 = 4A $
+所以$R_0 = display(U_(O C)/I_(S C)) = 3 Omega$, 因此化简原电路为下图
+#align(center)[
+  #cetz.canvas({
+    import cetz.draw: *
+    line((0, 0), (0, 0.5))
+    constSourceV((0, 0.9))
+    content((0.5, 1.3), [+])
+    content((0.5, 0.5), [-])
+    content((-1, 0.9), [$12V$])
+    line((0, 1.3), (0, 1.8), (1, 1.8))
+    resistorH((1.4, 1.8))
+    content((1.4, 2.2), [$3 Omega$])
+    line((1.8, 1.8), (2.8, 1.8), (2.8, 1.3))
+    resistorV((2.8, 0.9))
+    content((3.3, 0.9), [$5 Omega$])
+    line((2.8, 0.5), (2.8, 0), (0, 0))
+  })
+]
+易知电流$I = display((12V)/(8 Omega)) = 1.5 A$
+== 正弦交流电路
+=== 正弦量的三要素

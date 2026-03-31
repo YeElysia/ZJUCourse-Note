@@ -46,20 +46,20 @@
   rect((points.at(0) - 0.1, points.at(1) - 0.4), (points.at(0) + 0.1, points.at(1) + 0.4))
 }
 // 箭头
-#let arrow(points, direction, color: black) = {
+#let arrow_I(points, direction, color: black) = {
   line(points, direction, stroke: color, mark: (end: ">", fill: color, stroke: 1.2pt))
 }
 
 // 节点
-#let node(points, fill: black) = {
-  circle(points, radius: 0.1, fill: fill, stroke: fill)
+#let node(points, fill: black, color: black) = {
+  circle(points, radius: 0.1, fill: fill, stroke: color)
 }
 
 // 回路
 #let loop(points1, points2, caption, color: blue) = {
   rect(points1, points2, stroke: color)
   content(((points1.at(0) + points2.at(0)) / 2, (points1.at(1) + points2.at(1)) / 2), text(color)[#caption])
-  arrow(
+  arrow_I(
     (points1.at(0), (points1.at(1) + points2.at(1)) / 2 - 0.4),
     (points1.at(0), (points1.at(1) + points2.at(1)) / 2 + 0.4),
     color: color,
