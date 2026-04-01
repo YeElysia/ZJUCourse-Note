@@ -1,6 +1,6 @@
 #import "utils.typ": Red, eq, three_line_table
 #import "models.typ": (
-  arrow_I, constSourceH, constSourceV, controlledSourceH, controlledSourceV, loop, node, resistorH, resistorV,
+  arrow_I, constSourceH, constSourceV, controlledSourceH, controlledSourceV, loop, node, ph, resistorH, resistorV,
 )
 #import "Callouts.typ" as callouts
 #import "@preview/cetz:0.4.2"
@@ -1056,3 +1056,117 @@ $
 易知电流$I = display((12V)/(8 Omega)) = 1.5 A$
 == 正弦交流电路
 === 正弦量的三要素
+#grid(
+  columns: (1fr, 1fr),
+  [正弦交流电可以表示为
+    $
+      u = U_m sin(omega t + phi_u) \
+      i = I_m sin(omega t + psi_i) \
+    $
+  ],
+  [
+    #v(-2em)
+    #cetz.canvas({
+      import cetz-plot: *
+      import cetz.draw: *
+
+      plot.plot(
+        size: (8, 3),
+        x-tick-step: none,
+        y-tick-step: none,
+        x-label: [$omega t$],
+        y-label: [$u$],
+        x-min: -0.6,
+        x-max: 10,
+        y-min: -1.2,
+        y-max: 1.2,
+        axis-style: "school-book",
+        name: "plot",
+        {
+          // let diff = 3.14
+          plot.add(
+            domain: (-0.5, 10),
+            style: (stroke: (paint: blue, thickness: 1.5pt)),
+            x => calc.sin(x + 0.5),
+          )
+
+          // 添加关键点标注：U_GS(off)
+          //plot.add-anchor("cutoff", (diff, 0))
+
+          // plot.add(domain: (0, 4 * calc.pi), calc.sin)
+          plot.add-vline(-0.5, calc.pi, 2 * calc.pi, min: 0, max: 0.15, style: (stroke: (paint: black)))
+          plot.add-hline(1, min: 0, max: 0.15, style: (stroke: (paint: black)))
+          plot.add-vline(2, 8.28, style: (stroke: (paint: black, dash: "dashed")))
+          // plot.add-hline(1, min: 2, max: 8.28, style: (stroke: (paint: black)))
+          plot.add-anchor("pt1", (2, 1.2))
+          plot.add-anchor("pt2", (8.28, 1.2))
+          plot.add-anchor("pt3", (2, -1.2))
+          plot.add-anchor("pt4", (8.28, -1.2))
+          // line(((1, 1.5), (1, 8)))
+        },
+      )
+      line((0.5, 2.75), (1.07, 2.75), stroke: (dash: "dashed"))
+      content((-0.1, 3), [$U_m$])
+      line("plot.pt1", "plot.pt2", mark: (start: ">", end: ">"), fill: black)
+      line("plot.pt3", "plot.pt4", mark: (start: ">", end: ">"), fill: black)
+      content((4.4, 3.5), [T])
+      content((4.4, -0.5), [$2 pi$])
+      content((-0.3, 1.8), [$phi_u$])
+      content((2.9, 2.2), [$pi$])
+      content((5.5, 1.2), [$2 pi$])
+      content((8.5, 2), [t])
+
+      // 在 plot 外部手动添加文字标注，对齐更精准
+      // content("plot.cutoff", [ $U_(G S (o f f))$ ], anchor: "north", padding: .2)
+    })],
+)
+
+
+==== 周期、频率和角频率
+#grid(
+  columns: (1.6fr, 1fr),
+  [
+    - 周期 $T$: 正弦交流电重复变化一次所需的时间。
+    - 频率 $f$: 正弦交流电每秒内变化的周期数。
+    - 角频率 $omega$: 正弦交流电相位每秒内变化的角度。
+  ],
+  $
+    T = 1/f \
+    omega = 2 pi f
+  $,
+)
+==== 相位、初相位和相位差
+#grid(
+  columns: (1.4fr, 1fr),
+  [
+    - 相位: $omega t + phi_u$, $omega t + phi_i$
+    - 初相位 $phi_0$: 正弦交流电在时间 $t=0$ 时的相位。
+    - 相位差 $phi$: 两个同频率正弦量的相位之差。
+  ],
+  [
+    $phi_u > phi_i$时称$u$超前于$i$,或$i$滞后于$u$
+
+    $phi_u = phi_i$时称$u$与$i$同相，
+
+    $|phi_u - phi_i| = 180degree$ 时称$u$与$i$反相。
+
+    $|phi_u - phi_i| = 90 degree$时称$u$与$i$正交。
+
+  ],
+)
+==== 瞬时值、最大值和有效值
+
+- 瞬时值($i、u$): 正弦交流电在某一瞬时的量值。
+- 最大值($I_m、U_m$): 正弦交流电在变化过程中出现的最大瞬时值。
+- 有效值($I、U$): 正弦交流电在一个周期内的平均功率等效的直流值。
+由有效值定义,
+$
+                 & i = I_m sin(omega t + phi_i) \
+                 & R I^2 T = integral_0^T R i^2 "d" t \
+  arrow.r.double & I = I_m sqrt(1/T integral_0^T sin^2(omega t + phi_i) "d"t) = I_m/sqrt(2) \
+$
+同理$U = display(U_m/sqrt(2))$
+
+=== 正弦量的相量表示法
+相量法的实质是用复数来表述正弦量。
+假设正弦电压$u = sqrt(2) U sin(omega t + phi_u)$, 则其相量表示为$dot(U) = U ph(phi_u)$, 其中$U$是一个复数, $U_m$是复数的模, $phi_u$是复数的辐角。
