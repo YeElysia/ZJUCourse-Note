@@ -65,3 +65,15 @@
     color: color,
   )
 }
+
+// 相量
+#let ph(angle) = {
+  box(baseline: 0.2em, inset: (x: 0.1em, y: 0em), outset: -5em)[
+    #cetz.canvas({
+      import cetz.draw: *
+      content((0, 0), text(0.8em, [#h(1em) #angle]), name: "txt", padding: (x: 0.3em, y: 0.2em))
+      line("txt.south-west", "txt.south-east", stroke: 0.08em)
+      line("txt.south-west", (rel: (0.7em, 1em)), stroke: 0.08em)
+    })
+  ]
+}
