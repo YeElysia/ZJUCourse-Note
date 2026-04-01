@@ -6,6 +6,7 @@
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.3"
 
+
 = 电路分析基础
 == 基尔霍夫定律
 === 基尔霍夫定律
@@ -1169,4 +1170,113 @@ $
 
 === 正弦量的相量表示法
 相量法的实质是用复数来表述正弦量。
-假设正弦电压$u = sqrt(2) U sin(omega t + phi_u)$, 则其相量表示为$dot(U) = U ph(phi_u)$, 其中$U$是一个复数, $U_m$是复数的模, $phi_u$是复数的辐角。
+
+假设正弦电压$u = sqrt(2) U sin(omega t + phi_u)$, 则其相量表示为$dot(U) = U ph(phi_u)$, 其中$dot(U)$是一个复数, 复数的模$U$是电路的有效值,辐角$phi_u$是初相位。转换成代数表达式为$dot(U) = U (cos phi_u + j sin phi_u)$, 其中$j$是虚数单位。从而我们把复杂的相量运算转换成了简单的复数运算。
+
+#callouts.Question(title: [例 2.3.1])[
+  已知正弦电流$i_1= 2 sqrt(2) sin(100 pi t + 60 degree)A$, $i_2 = 3 sqrt(2) sin(100 pi t + 30 degree)A$, 试用相量法求$i_1 + i_2$, 并画出相量图。
+
+  【解】
+  #grid(
+    columns: 2,
+    gutter: 5em,
+    [
+      $
+        dot(I) & = dot(I)_1 + dot(I)_2 =(1 + j 1.732) + (2.598 + j 1.5) A \
+               & = 3.598 + j 3.232 A \
+               & = 4.836 ph(41.9 degree) A \
+      $
+    ],
+    [
+      #v(-3em)
+      #cetz.canvas({
+        import cetz.draw: *
+        line((0, 0), (rel: (60deg, 2)), mark: (end: ">"), fill: black)
+        line((), (rel: (30deg, 3)), stroke: (dash: "dashed"), fill: black)
+        line((0, 0), (rel: (30deg, 3)), mark: (end: ">"), fill: black)
+        line((), (rel: (60deg, 2)), stroke: (dash: "dashed"), fill: black)
+        line((0, 0), (rel: (41.9deg, 4.836)), mark: (end: ">"), fill: black)
+        line((0, 0), (5, 0), mark: (end: ">"), fill: black)
+        arc((0.5, 0), start: 0deg, stop: 60deg, radius: 0.5)
+        content((1.25, 1.4), [#text(8pt)[$60 degree$]])
+        content((0.85, 2), [#text(8pt)[$I_1$]])
+        arc((1, 0), start: 0deg, stop: 41.9deg, radius: 1)
+        content((2.15, 1.5), [#text(8pt)[$41.9 degree$]])
+        content((3.75, 2.8), [#text(8pt)[$I$]])
+        arc((1.5, 0), start: 0deg, stop: 30deg, radius: 1.5)
+        content((1.95, 0.4), [#text(8pt)[$30 degree$]])
+        content((2.8, 1.3), [#text(8pt)[$I_2$]])
+
+        content((4.8, -0.3), [#text(8pt)[$+1$]])
+      })],
+  )
+]
+=== 电阻、电感、电容元件上电压与电流关系的相量形式
+#figure()[
+  #three_line_table(table(
+    columns: 5,
+    inset: 0.8em,
+    table.header([元件名称], [相量关系], [电抗], [有效值关系], [相位关系]),
+    [电阻], [$dot(U) = R dot(I)$], [], [$U = R I$], [$phi = 0$],
+    [电感], [$dot(U) = j X_L dot(I)$], [$X_L = omega L$], [$U = X_L I$], [$phi_u - phi_i = 90 degree$],
+    [电容], [$dot(U) = - j X_C dot(I)$], [$X_C = 1/(omega C)$], [$I = X_C U$], [$phi_i - phi_u = 90 degree$],
+  ))
+]
+==== 电阻
+显然
+==== 电感
+设流过电感的电流为$i = sqrt(2) I sin(omega t + phi_i)$,
+则电感两端的电压为
+$
+  u & = L display(("d"i)/("d"t)) =sqrt(2) I omega L cos(omega t + phi_i) \
+    & = sqrt(2) I omega L sin(omega t + phi_i + 90 degree) \
+    & = sqrt(2) U sin(omega t + phi_u) \
+$
+从而$dot(I) = I ph(phi_i)$, $dot(U) = U ph(phi_u)= omega L I ph(phi_i + 90 degree) = omega L ph(90 degree) I ph(phi_i) = j omega L dot(I) = j X_L dot(I)$
+#callouts.Info[
+  感抗是表征电感对正弦电流所呈现的“阻碍”能力大小的一个参数。对L一定的电感来说, $X_L = omega L = 2 pi f L$, 频率越高, 感抗越大。故当频率为0即直流时, 感抗为0, 电感表现为短路。
+]
+==== 电容
+设电容两端的电压为$u = sqrt(2) U sin(omega t + phi_u)$, 则流过电容的电流为
+$
+  i & = C display(("d"u)/("d"t)) = sqrt(2) U omega C cos(omega t + phi_u) \
+    & = sqrt(2) U omega C sin(omega t + phi_u + 90 degree) \
+    & = sqrt(2) I sin(omega t + phi_i) \
+$
+从而$dot(U) = U ph(phi_u)$, $dot(I) = I ph(phi_i) = omega C U ph(phi_u + 90 degree) = omega C ph(90 degree) U ph(phi_u) = j omega C dot(U) =- display((dot(U))/( j X_C ))$
+(注意$1= -j^2$ 即 $display(1/(j)) = -j$)
+
+=== 简单正弦交流电路的计算
+==== 基尔霍夫定律
+对于正弦交流电路, 基尔霍夫定律同样适用
+$
+  sum dot(I) = 0 \
+  sum dot(U) = 0 \
+$
+==== 阻抗(复阻抗)
+对于一个RCL电路, 其电压与电流的相量关系为
+$
+  dot(U) & = dot(U)_R + dot(U)_L + dot(U)_C \
+         & = R dot(I) + j X_L dot(I) - j X_C dot(I) = [ R + j(X_L - X_C)] dot(I) \
+         & = (R + j X) dot(I) = Z dot(I) \
+$
+其中$Z = R + j X$被称为电路的阻抗, $X = X_L - X_C$被称为电路的电抗。
+
+阻抗是复数，有模长 |z| = $sqrt(R^2 + (X_L-X_C)^2)$ 和幅角$phi = arctan((X_L-X_C)/R)$，不是相量。其复数形式为:
+$
+  Z & = (dot(U))/(dot(I)) = (U ph(phi_u))/(I ph(phi_i)) = (U/I) ph(phi_u - phi_i) \
+    & = |Z| ph(phi) \
+$
+可见电压与电流的有效值之比等于阻抗, 电压与电流之间的相位差等于阻抗角。
+
+当辐角$phi$为0时, 电压与电流同相, 电路表现为纯电阻性, 形成串联谐振；当$phi$为正时, 电压超前于电流, 电路表现为感性；当$phi$为负时, 电压滞后于电流, 电路表现为容性。
+
+
+
+
+#callouts.Tip(title: [正弦交流电路的基本计算方法(Savia)])[
+  基本目标：由已知的元件参数、电压、电流等，求出未知的电压、电流（包括有效值和相位）
+
+  - 首先要选择参考相量，建议选择与其它相量联系紧密的相量(如串联电路中的总电流，并联电路中的总电压，混联电路中并联部分的电压等)。
+  - 然后根据电路中的元件关系以及基尔霍夫定律、题给条件等，建立各相量间的关系，画出相量图借助相量图可以较为轻松地解题。
+]
