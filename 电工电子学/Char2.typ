@@ -1,6 +1,7 @@
 #import "utils.typ": Red, eq, three_line_table
 #import "models.typ": (
-  arrow_I, constSourceH, constSourceV, controlledSourceH, controlledSourceV, loop, node, ph, resistorH, resistorV,
+  arrow_I, capacitorH, capacitorV, constSourceH, constSourceV, controlledSourceH, controlledSourceV, inductorH, loop,
+  node, ph, resistorH, resistorV,
 )
 #import "Callouts.typ" as callouts
 #import "@preview/cetz:0.4.2"
@@ -1271,8 +1272,7 @@ $
 
 当辐角$phi$为0时, 电压与电流同相, 电路表现为纯电阻性, 形成串联谐振；当$phi$为正时, 电压超前于电流, 电路表现为感性；当$phi$为负时, 电压滞后于电流, 电路表现为容性。
 
-
-
+所有RCL元件都可以视为阻抗, 从而将其像电阻一样进行串并联计算。
 
 #callouts.Tip(title: [正弦交流电路的基本计算方法(Savia)])[
   基本目标：由已知的元件参数、电压、电流等，求出未知的电压、电流（包括有效值和相位）
@@ -1280,3 +1280,126 @@ $
   - 首先要选择参考相量，建议选择与其它相量联系紧密的相量(如串联电路中的总电流，并联电路中的总电压，混联电路中并联部分的电压等)。
   - 然后根据电路中的元件关系以及基尔霍夫定律、题给条件等，建立各相量间的关系，画出相量图借助相量图可以较为轻松地解题。
 ]
+
+#callouts.Question[
+
+  #grid(
+    columns: 2,
+    gutter: 4em,
+    [
+      如图所示电路中, $I_C = 6 A$, $I_R = 8 A$, $X_L = 10 Omega$, $dot(U) 与 dot(I)$同相。求$R、X_C$。
+    ],
+    [#v(-2.5em)
+      #cetz.canvas({
+        import cetz.draw: *
+        circle((0, 0.8), radius: 0.1)
+        line((0.1, 0.8), (4.8, 0.8))
+        circle((0, 3), radius: 0.1)
+        line((0.1, 3), (1.2, 3))
+        inductorH((1.8, 3))
+        line((2.4, 3), (3.2, 3))
+        line((), (3.2, 1.9))
+        capacitorV((3.2, 1.5))
+        line((3.2, 1.1), (3.2, 0.8))
+        line((3.2, 3), (4.8, 3), (4.8, 1.9))
+        resistorV((4.8, 1.5))
+        line((4.8, 1.1), (4.8, 0.8))
+
+        arrow_I((0.2, 3), (0.8, 3))
+        content((0.6, 2.5), [$dot(I)$])
+
+        arrow_I((3.2, 3), (3.2, 2.2))
+        content((2.8, 2.4), [$dot(I)_C$])
+
+        arrow_I((4.8, 3), (4.8, 2.2))
+        content((4.4, 2.4), [$dot(I)_R$])
+
+        content((0, 2.6), [+])
+        content((0, 1.2), [-])
+        content((0, 1.9), [$dot(U)$])
+        content((1.2, 2.8), [+])
+        content((2.4, 2.8), [-])
+        content((1.8, 2.5), [$dot(U)_L$])
+
+        content((2.6, 1.5), [C])
+        content((4.4, 1.5), [R])
+        content((3.2, 3.3), [a])
+        content((3.2, 0.5), [b])
+      })],
+  )
+  【解】
+  选$dot(U)_(a b)$为参考相量, 则有
+  $
+    dot(I)_C = j dot(U)_(a b)/X_C = I_C ph(90 degree) \
+    dot(I)_R = dot(U)_(a b)/R = I_R ph(0 degree)
+  $
+  由节点A处KCL, $dot(I) - dot(I)_C - dot(I)_R = 0$, $dot(I) = 10A ph(37 degree)$, $dot(U)_L = j X_L dot(I) = 100 V ph(127 degree)$
+
+  #grid(
+    columns: 2,
+    gutter: 2em,
+    align: horizon,
+    [#h(2em)由KVL, $dot(U) = dot(U)_L + dot(U)_(a b)$, $dot(U)和 dot(I)$同相, 画出相量图:],
+    align(center)[
+      // #set text(8pt)
+      #cetz.canvas({
+        import cetz.draw: *
+        line((0, 0), (rel: (0deg, 5 / 3 * 1.5)), mark: (end: ">"), fill: black)
+        line((), (rel: (127deg, 1 * 1.5)), mark: (end: ">"), stroke: gray, fill: gray)
+        line((0, 0), (rel: (127deg, 1 * 1.5)), mark: (end: ">"), fill: black)
+        line((0, 0), (rel: (0deg, 0.8 * 1.5)), mark: (end: ">"), stroke: green, fill: green)
+        line((), (rel: (90deg, 0.6 * 1.5)), mark: (end: ">"), stroke: green, fill: green)
+        line((0, 0), (rel: (37deg, 4 / 3 * 1.5)), mark: (end: ">"), stroke: black, fill: black)
+        line((0, 0), (rel: (37deg, 1 * 1.5)), mark: (end: ">"), stroke: red, fill: red)
+
+        content((1, -0.5), [$dot(I)_R$])
+        content((1.6, 0.3), [$dot(I)_C$])
+        content((0.5, 0.8), [$dot(I)$])
+        content((1.5, 1.4), [$dot(U)$])
+        content((2.4, 0.8), [$dot(U)_L$])
+        content((-1, 0.6), [$dot(U)_L$])
+        content((2.5, -0.5), [$dot(U)_(a b)$])
+      })],
+  )
+  因此解得$dot(U)_(a b) = 500/3 V ph(0 degree)$, $R = U_(a b)/I_R = 500/24approx 20.83 Omega$, $X_C = U_(a b)/I_C = 500/18 approx 27.78 Omega$。
+]
+
+=== 交流电路的功率
+==== 瞬时功率 p
+电路某一时刻吸收或放出的功率。即: (不能用相量计算)
+$
+  p = u i
+$
+#callouts.Info[
+  当$p>0$时, 电路吸收功率; 当$p<0$时, 电路放出功率。
+
+  假设电源$i = sqrt(2) I sin(omega t)$, $u = sqrt(2) U sin(omega t + phi)$, 则:
+  #eq("(2.3.1)", $ p = u i = U I cos phi (1 - cos 2 omega t) + U I sin phi sin 2 omega t $)
+  当电路为纯电阻电路时, $phi = 0$, $p = U I (1 - cos 2 omega t) > 0$, 电路始终吸收功率；
+
+  当电路为纯电感或纯电容电路时, $|phi| = 90 degree$, $p = plus.minus U I sin 2 omega t$, 电路在一个周期内既吸收功率又放出功率，平均功率为0。
+
+  对于一般电路, 由于带有电阻, 负载吸收功率总是大于放出功率。
+
+]
+==== 有功功率、无功功率与视在功率
+
+1. #Red[有功功率(平均功率) P]: 电路在电流变化一个周期内负载吸收功率的平均值。
+
+  例如式(2.3.1),
+  $
+    P = 1/T integral_0^T p "d"t = U I cos phi
+  $
+  其中,$cos phi$称为功率因数($lambda$), $phi$称为功率因数角。由上已知电感和电容元件不消耗功率, 因此#Red[$P$等于电路中电阻元件的功率]。
+2. #Red[无功功率 Q]: 储能元件与电源进行能量交换的瞬时功率最大值。单位为乏(var)。
+  $
+    Q = U I sin phi
+  $
+3. #Red[视在功率 S]: 电路两端的电压有效值与电流有效值的乘积。单位为伏·安(V·A)
+  $
+    S = U I
+  $
+由此我们将式(2.3.1)改写为以下形式
+$
+  p = P (1 - cos 2 omega t) + Q sin 2 omega t \
+$

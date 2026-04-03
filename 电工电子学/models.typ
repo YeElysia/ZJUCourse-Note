@@ -77,3 +77,26 @@
     })
   ]
 }
+
+// 电容
+#let capacitorH(points) = {
+  line((points.at(0) - 0.4, points.at(1)), (points.at(0) - 0.1, points.at(1)))
+  line((points.at(0) + 0.1, points.at(1)), (points.at(0) + 0.4, points.at(1)))
+  line((points.at(0) - 0.1, points.at(1) - 0.3), (points.at(0) - 0.1, points.at(1) + 0.3))
+  line((points.at(0) + 0.1, points.at(1) - 0.3), (points.at(0) + 0.1, points.at(1) + 0.3))
+}
+
+#let capacitorV(points) = {
+  line((points.at(0), points.at(1) - 0.4), (points.at(0), points.at(1) - 0.1))
+  line((points.at(0), points.at(1) + 0.1), (points.at(0), points.at(1) + 0.4))
+  line((points.at(0) - 0.3, points.at(1) - 0.1), (points.at(0) + 0.3, points.at(1) - 0.1))
+  line((points.at(0) - 0.3, points.at(1) + 0.1), (points.at(0) + 0.3, points.at(1) + 0.1))
+}
+
+// 电感
+#let inductorH(points) = {
+  arc((points.at(0) - 0.3, points.at(1)), radius: 0.15, start: 0deg, stop: 180deg)
+  arc((points), radius: 0.15, start: 0deg, stop: 180deg)
+  arc((points.at(0) + 0.3, points.at(1)), radius: 0.15, start: 0deg, stop: 180deg)
+  arc((points.at(0) + 0.6, points.at(1)), radius: 0.15, start: 0deg, stop: 180deg)
+}
