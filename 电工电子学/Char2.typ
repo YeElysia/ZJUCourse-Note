@@ -1,7 +1,7 @@
 #import "utils.typ": Red, eq, three_line_table
 #import "models.typ": (
-  arrow_I, capacitorH, capacitorV, constSourceH, constSourceV, controlledSourceH, controlledSourceV, inductorH, loop,
-  node, ph, resistorH, resistorV,
+  arrow_I, capacitorH, capacitorV, constSourceH, constSourceV, controlledSourceH, controlledSourceV, inductorH,
+  inductorV, loop, node, ph, resistorH, resistorV,
 )
 #import "Callouts.typ" as callouts
 #import "@preview/cetz:0.4.2"
@@ -1384,18 +1384,18 @@ $
 ]
 ==== 有功功率、无功功率与视在功率
 
-1. #Red[有功功率(平均功率) P]: 电路在电流变化一个周期内负载吸收功率的平均值。
+1. #Red[有功功率(平均功率) P]: 电路在电流变化一个周期内负载吸收功率的平均值。#Red[功率表显示电路的有功功率]。
 
   例如式(2.3.1),
   $
     P = 1/T integral_0^T p "d"t = U I cos phi
   $
-  其中,$cos phi$称为功率因数($lambda$), $phi$称为功率因数角。由上已知电感和电容元件不消耗功率, 因此#Red[$P$等于电路中电阻元件的功率]。
-2. #Red[无功功率 Q]: 储能元件与电源进行能量交换的瞬时功率最大值。单位为乏(var)。
+  其中,$cos phi$称为功率因数($lambda$), $phi$称为功率因数角。由上已知电感和电容元件不消耗功率, 因此#Red[$P$等于电路中电阻元件的功率($I^2R$)]。
+2. #Red[无功功率 Q]: 储能元件与电源进行能量交换的瞬时功率最大值($I^2 X$), 单位为乏(var)。感性无功功率和容性无功功率可以相互补偿, 即可以代数相加。
   $
     Q = U I sin phi
   $
-3. #Red[视在功率 S]: 电路两端的电压有效值与电流有效值的乘积。单位为伏·安(V·A)。
+3. #Red[视在功率 S]: 电路两端的电压有效值与电流有效值的乘积。单位为伏·安(V·A)。表示电源设备的容量。
   $
     S = U I
   $
@@ -1403,4 +1403,299 @@ $
 $
   p = P (1 - cos 2 omega t) + Q sin 2 omega t \
 $
-第一项反映了电路实际消耗的功率, 第二项反映了电路中储能元件与电源进行能量交换的情况。
+显然在电源容量一定的情况下, 功率因数越大, 电路的有功功率越大, 电路的效率越高, 且损耗越小。因此在实际电路中, 常常通过并联电容等方式来提高功率因数。
+
+#callouts.Tip[
+  #grid(
+    columns: 2,
+    gutter: 4em,
+    [
+      P、Q、S三者的关系可以用一个直角三角形来表示。
+    ],
+    [#v(-3em)
+      #cetz.canvas({
+        import cetz.draw: *
+        line((0, 0), (3, 0))
+        line((3, 0), (3, 1.5))
+        line((0, 0), (3, 1.5))
+        content((2, 0.3), [P])
+        content((3.3, 0.6), [Q])
+        content((1.5, 1.2), [S])
+      })],
+  )
+]
+
+#callouts.Question[
+  电流$dot(I) = 5 ph(20 degree) A$, 求提供给阻抗$X= 8 - j 11 Omega$的平均功率。
+
+  【解】将阻抗看成一个电阻和电容的串联, 因此平均功率$P = I^2 R = 200 W$
+]
+#callouts.Question[
+  一台接在工频电源($220V, 50H z$)上的单相异步电动机, $P=700W$, $lambda_1 = cos phi_1 = 0.7$(电感性)。要求并联一电容器，使得$lambda_2 = cos phi_2 = 0.9$, 求所需电容量。
+
+  #grid(
+    columns: 2,
+    gutter: 1em,
+    [
+      【解1】
+
+      并联电容不影响有功功率,因此$Q_1 = P tan phi_1$, $Q_2 = P tan phi_2$,
+
+      $Q_C = Q_1 - Q_2 = U^2/X_C = 2 pi f C U^2$
+
+      解得 $C = 2.47 times 10^(-5) F$
+
+
+    ],
+    cetz.canvas({
+      import cetz.draw: *
+      line((0.1, 0), (2.4, 0))
+      line((2.4, 0), (4, 0), (4, 1.4), stroke: (dash: "dashed"))
+      line((2.4, 0), (2.4, 1), (1.6, 1), (1.6, 2.6), (3.2, 2.6), (3.2, 1), (2.4, 1))
+      content((2.4, 1.8), [700W])
+      line((2.4, 2.6), (2.4, 3.6))
+      line((0.1, 3.6), (2.4, 3.6))
+      line((2.4, 3.6), (4, 3.6), (4, 2.2), stroke: (dash: "dashed"))
+      capacitorV((4, 1.8))
+      content((4.4, 1.4), [C])
+
+      arrow_I((4, 3), (4, 2.6))
+      content((4.4, 2.6), [$dot(I)_C$])
+      arrow_I((2.4, 3.6), (2.4, 2.8))
+      content((2.8, 3), [$dot(I)_1$])
+
+      circle((0, 0), radius: 0.1)
+      circle((0, 3.6), radius: 0.1)
+      content((0, 0.4), [-])
+      content((0, 3.2), [+])
+      content((0, 1.8), [$220 ph(0 degree) V$])
+    }),
+  )
+  #grid(
+    columns: (25em, auto),
+    gutter: 1em,
+    [
+      【解2】(相量法) // ,我没搞懂,  解出$dot(I)_2 -dot(I)_1$吗?
+
+      // 那我为什么不直接用$1/X_2= 1/Xe_1 + 1/X_C$?
+    ],
+    cetz.canvas({
+      import cetz.draw: *
+      line((0, 0), (4.4, 0), mark: (end: ">"), fill: black)
+      line((0, 0), (rel: (-45.57deg, 4.55)), mark: (end: ">"), fill: black)
+      line((), (rel: (0, 1.71)), mark: (end: ">"), fill: black)
+      line((0, 0), (rel: (-25.84deg, 3.54)), mark: (end: ">"), fill: black)
+
+      content((2, -3), [$dot(I)_1$])
+      content((3, -1), [$dot(I)_2$])
+      content((3.6, -2.5), [$dot(I)_C$])
+      content((4.2, -0.5), [$dot(U)$])
+    }),
+  )
+]
+
+=== RCL串联电路的谐振
+==== 串联谐振(电压谐振)
+
+#grid(
+  columns: 2,
+  gutter: 2em,
+  [
+    在RCL串联电路中, 当$X_L = X_C$时, $dot(U)和 dot(I)$同相, 整个电路呈电阻性, 电路的这种工作状态称为串联谐振。此时:$f_0 = display(1/(2 pi sqrt(L C)))$, $Z = R$取到最小, $I = U/R$取到最大, $P = I^2 R$取到最大。
+    - 谐振时的感抗或容抗(特性阻抗): $rho = omega L = 1/(omega C) = sqrt(L/C)$
+    - 品质因数: $Q = U_L / U = 1/ (2 pi f_0 C R) = rho/R$
+  ],
+  [#v(-2em)
+    #cetz.canvas({
+      import cetz.draw: *
+      line((0, 0), (3, 0), mark: (end: ">"), fill: black)
+      content((3.4, 0), [$dot(I)$])
+      line((0, 0), (0, 2), mark: (end: ">"), fill: black)
+      content((0.4, 1.8), [$dot(U)_L$])
+      line((0, 0), (0, -2), mark: (end: ">"), fill: black)
+      content((0.4, -1.8), [$dot(U)_C$])
+      line((0, 0), (1.5, 0), mark: (end: ">"), fill: black)
+      content((1.4, 0.4), [$dot(U)_R = dot(U)$])
+    })],
+)
+#grid(
+  columns: 2,
+  gutter: 2em,
+  [如右图, 频率离$f_0$越远, 对应的电流越小。假如外电源由两个不同频率的正弦交流电串联组成, 则总电流应该是两个频率分别的电流的叠加。电源的有效值相同, 但是电流的幅度不同。显然的, 频率离$f_0$越远, 就越容易被削弱, 由此呈现出滤波的效果。
+
+    定义一个半功率点$I = I_0/sqrt(2)$, 认为电路通频带$f_(B W) = f_H - f_L$, 可以证明$f_(B W) = f_0/Q$。因此$Q$越大, 电路的通频带越窄, 电路对频率的选择性越好。
+  ],
+  align(center)[#cetz.canvas({
+      import cetz-plot: *
+      import cetz.draw: *
+
+      plot.plot(
+        size: (4, 3),
+        x-tick-step: none,
+        y-tick-step: none,
+        x-label: [$f$],
+        y-label: [$I$],
+        x-min: 0,
+        x-max: 3,
+        y-min: 0,
+        y-max: 1,
+        axis-style: "school-book",
+        name: "plot",
+        {
+          // let diff = 3.14
+          let I = 1
+          let Q = 2
+          let F_0 = 1 / (2 * calc.pi * calc.sqrt(0.1 * 0.1))
+          plot.add(
+            domain: (0.00001, 5),
+            style: (stroke: (paint: blue, thickness: 1.5pt)),
+            x => I / calc.sqrt(1 + Q * Q * calc.pow(x / F_0 - F_0 / x, 2)),
+          )
+
+          // 添加关键点标注：U_GS(off)
+          //plot.add-anchor("cutoff", (diff, 0))
+
+          // plot.add(domain: (0, 4 * calc.pi), calc.sin)
+          plot.add-vline(1.2426, 2.0384, min: 0, max: 0.707, style: (stroke: (paint: red, dash: "dashed")))
+          plot.add-vline(1.5914, min: 0, max: 1, style: (stroke: (dash: "dashed", paint: black)))
+          plot.add-hline(0.707, min: 0, max: 2.0384, style: (stroke: (dash: "dashed", paint: black)))
+          plot.add-hline(1, min: 0, max: 1.5914, style: (stroke: (dash: "dashed", paint: black)))
+          // plot.add-vline(2, 8.28, style: (stroke: (paint: black, dash: "dashed")))
+          // // plot.add-hline(1, min: 2, max: 8.28, style: (stroke: (paint: black)))
+          plot.add-anchor("pt1", (1.2426, -0.1))
+          plot.add-anchor("pt2", (1.5914, -0.1))
+          plot.add-anchor("pt3", (2.0384, -0.1))
+          plot.add-anchor("pt4", (-0.2, 0.707))
+          plot.add-anchor("pt5", (-0.2, 1))
+          // line(((1, 1.5), (1, 8)))
+        },
+      )
+      content("plot.pt1", text(size: 10pt)[$f_L$])
+      content("plot.pt2", text(size: 10pt)[$f_0$])
+      content("plot.pt3", text(size: 10pt)[$f_H$])
+      content("plot.pt4", text(size: 10pt)[$I_0/sqrt(2)$])
+      content("plot.pt5", text(size: 10pt)[$I_0$])
+    })
+    电流谐振曲线
+  ],
+)
+
+==== 并联谐振(电流谐振)
+
+#grid(
+  columns: 3,
+  gutter: 2em,
+  [
+    在RCL并联电路中, 总电流$dot(I)$和端电压$dot(U)$同相, 电路的这种工作状态称为并联谐振。
+    - 阻抗较大, $Z_0 = R_0 = (R^2 + (2 pi f L)^2)/R = L/(R C)$
+    - 总电流很小。
+    - R=0, $f_0$时$dot(I) = 0$, $I_(R L)$和$I_C$大小相等方向相反。
+  ],
+  cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.1)
+    line((0.1, 0), (4, 0))
+    circle((0, 4), radius: 0.1)
+    line((0.1, 4), (4, 4))
+
+    line((2, 4), (2, 2.8))
+    inductorV((2, 2.2))
+    line((2, 1.6), (2, 1))
+    resistorV((2, 0.6))
+    line((2, 0.2), (2, 0))
+    arrow_I((2, 4), (2, 3.2))
+    content((2.4, 3.4), [$I_(R L)$])
+    content((2.6, 2.2), [$j omega L$])
+    content((2.4, 0.6), [$R$])
+
+    line((4, 4), (4, 2.4))
+    capacitorV((4, 2))
+    line((4, 1.6), (4, 0))
+    arrow_I((4, 4), (4, 3.2))
+    content((4.4, 3.4), [$I_C$])
+    content((4.8, 2), [$display(1/(j omega C))$])
+
+    content((0, 3.6), [+])
+    content((0, 0.4), [-])
+    content((0, 2), [$dot(U)$])
+    arrow_I((0.5, 4), (1.3, 4))
+    content((1, 3.4), [$dot(I)$])
+  }),
+  cetz.canvas({
+    import cetz.draw: *
+    line((0, 0), (2, 0), mark: (end: ">"), fill: black)
+    content((2.4, 0), [$dot(U)$])
+    line((0, 0), (0, 2), mark: (end: ">"), fill: black)
+    content((0.4, 1.8), [$dot(I)_C$])
+    line((0, 0), (1, -2), mark: (end: ">"), fill: black)
+    content((0.4, -1.8), [$dot(I)_(R L)$])
+    line((0, 0), (1, 0), mark: (end: ">"), fill: black)
+    content((1.4, 0.4), [$dot(I)$])
+    line((0, 2), (1, 0), (1, -2), stroke: (dash: "dashed"))
+  }),
+)
+由电路图:
+$
+  dot(I) & = dot(I)_(R L) + dot(I)_C \
+         & =dot(U) / (R + j 2pi f L) + j 2 pi f C dot(U) \
+         & = (R/(R^2 + (2 pi f L)^2) + j (2 pi f C - 2 pi f L/(R^2 + (2 pi f L)^2))) dot(U) \
+$
+设并联谐振频率为$f_0$, 则有
+$
+  f_0 = 1/(2 pi sqrt(L C)) sqrt(1- C/L R^2)
+$
+当$R lt.double 2 pi f_0 L 时$, 可以近似认为$f_0 = 1/(2 pi sqrt(L C))$。
+
+#callouts.Question(title: [2.3.16])[
+
+  #grid(
+    columns: 2,
+    gutter: 1em,
+    [
+      如图所示电路接于$U=10V$的信号源上, $C = 1 mu F$, 当信号源的$omega = 1000 r a d \/ s$时, $U_R =0$, 当$omega = 2000 r a d \/ s$时, $U_R = 10 V$, 求$L_1、L_2$。
+    ],
+    [#v(-2.5em)
+      #cetz.canvas({
+        import cetz.draw: *
+        circle((0, 0), radius: 0.1)
+        line((0.1, 0), (0.8, 0))
+        resistorH((1.2, 0))
+        content((1.2, 0.4), [R])
+        content((0.6, -0.4), [-])
+        content((1.8, -0.4), [+])
+        content((1.3, -0.6), [$dot(U)_R$])
+
+        line((1.6, 0), (4.8, 0))
+        arrow_I((3.2, 0), (2.2, 0))
+        content((2.6, 0.4), [$dot(I)_R$])
+
+        circle((0, 3), radius: 0.1)
+        line((0.1, 3), (1.2, 3))
+        inductorH((1.8, 3))
+        line((2.4, 3), (3.2, 3))
+        line((), (3.2, 1.9))
+        capacitorV((3.2, 1.5))
+        line((3.2, 1.1), (3.2, 0))
+
+        line((3.2, 3), (4.8, 3), (4.8, 2.1))
+        inductorV((4.8, 1.5))
+        line((4.8, 0.9), (4.8, 0))
+
+        content((0, 2.6), [+])
+        content((0, 1.2), [-])
+        content((0, 1.9), [$dot(U)$])
+
+        content((1.8, 3.6), [$j omega L_1$])
+        content((2.4, 1.35), [$display(1/(j omega C))$])
+        content((4.3, 1.5), [$display(j omega L_2)$])
+      })],
+  )
+  【解】$U_R= 0 arrow.double I_R= 0$, 说明C和$L_2$谐振并联谐振。由$omega/(2 pi) = 1/(2 pi sqrt(L_2 C))$得$L_2 = 1 H$。
+
+  $U_R = 10V = U$说明$j omega L_1 + 1/(j omega C) \/\/ j omega L_2 = 0$, 解得$L_1 = 0.33 H$。
+
+  (或将C和$L_2$视作$0.75 mu F$的电容$C_2$, 由串联谐振$omega = 1/sqrt(L_1 C_2)$, 解得$L_1 = 0.33 H$)
+
+]
+
+== 三相交流电路
