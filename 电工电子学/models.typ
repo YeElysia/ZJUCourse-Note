@@ -100,3 +100,10 @@
   arc((points.at(0) + 0.3, points.at(1)), radius: 0.15, start: 0deg, stop: 180deg)
   arc((points.at(0) + 0.6, points.at(1)), radius: 0.15, start: 0deg, stop: 180deg)
 }
+
+#let inductorV(points) = {
+  arc((points.at(0), points.at(1) - 0.6), radius: 0.15, start: -90deg, stop: 90deg)
+  arc((points.at(0), points.at(1) - 0.3), radius: 0.15, start: -90deg, stop: 90deg)
+  arc((points.at(0), points.at(1)), radius: 0.15, start: -90deg, stop: 90deg)
+  arc((points.at(0), points.at(1) + 0.3), radius: 0.15, start: -90deg, stop: 90deg)
+}
