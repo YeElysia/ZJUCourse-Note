@@ -1698,4 +1698,561 @@ $
 
 ]
 
+#pagebreak()
 == 三相交流电路
+=== 三相交流电源
+三相电源来自变压器二次侧的三个绕组
+
+三个绕组的三个始端引出的线称为相线或端线, 又称#Red[火线]。中性点(连接点)引出的线称为中性线, 又称#Red[零线]。
+
+相线与中性线之间的电压称为相电压, 相线与相线之间的电压称为线电压。
+#align(center)[
+  #cetz.canvas({
+    import cetz.draw: *
+
+    node((0, 0))
+    line((0, 0), (0, 0.9))
+    inductorV((0, 1.5))
+    content((0.4, 2.1), [+])
+    content((0.4, 0.9), [-])
+    content((0.6, 1.4), [$dot(U)_U$])
+    line((0, 2.1), (0, 2.9))
+    circle((0, 3), radius: 0.1)
+    line((rel: (0.1, 0)), (5.9, 3))
+    circle((rel: (0.1, 0)), radius: 0.1)
+    content((rel: (0.6, 0)), [$L 1$])
+    content((-0.4, 3), [$U 1$])
+    content((0.4, 0.4), [$U 2$])
+
+    line((0, 0), (-30deg, 0.9))
+    arc((-30deg, 0.9), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.2), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.5), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.8), radius: 0.15, start: 150deg, stop: 330deg)
+    line((-30deg, 2.1), (-30deg, 2.9))
+    circle((-30deg, 3), radius: 0.1)
+    line((rel: (0.1, 0)), (5.9, -1.5))
+    circle((rel: (0.1, 0)), radius: 0.1)
+    content((rel: (0.6, 0)), [$L 2$])
+    content((-3.1, -1.5), [$W 1$])
+    content((-0.4, 0.4), [$W 2$])
+    content((-1.6, -0.2), [$dot(U)_W$])
+    content((-2, -0.65), [+])
+    content((-1, -0.2), [-])
+
+    line((0, 0), (-150deg, 0.9))
+    arc((-150deg, 0.9), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.2), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.5), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.8), radius: 0.15, start: 30deg, stop: 210deg)
+    line((-150deg, 2.1), (-150deg, 2.9))
+    circle((-150deg, 3), radius: 0.1)
+    line((rel: (0, -0.1)), (rel: (0, -1.4)))
+    line((), (5.9, -3))
+    circle((rel: (0.1, 0)), radius: 0.1)
+    content((rel: (0.6, 0)), [$L 3$])
+    content((2.7, -1.9), [$V 1$])
+    content((0, -0.4), [$V 2$])
+    content((1.1, -1.3), [$dot(U)_V$])
+    content((1.7, -1.35), [+])
+    content((0.6, -0.6), [-])
+
+    line((0, 0), (5.9, 0))
+    circle((rel: (0.1, 0)), radius: 0.1)
+    content((rel: (0.6, 0)), [$N$])
+
+    content((3.4, 2.8), text(red)[+])
+    content((3.4, -1.3), text(red)[-])
+    content((3.4, 0.75), text(red)[$dot(U)_(U V)$])
+
+    content((3.4, -1.7), text(blue)[+])
+    content((3.4, -2.8), text(blue)[-])
+    content((3.4, -2.25), text(blue)[$dot(U)_(V W)$])
+
+    content((5, 2.8), text(purple)[-])
+    content((5, -2.8), text(purple)[+])
+    content((5, -0.75), text(purple)[$dot(U)_(W U)$])
+  })
+]
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 2em,
+  [
+    三相电源相电压可以表示为
+    $
+      dot(U)_U & = U_P ph(0 degree) \
+      dot(U)_V & = U_P ph(-120 degree) \
+      dot(U)_W & = U_P ph(-240 degree) \
+    $],
+  [
+    由此可以得到线电压
+    $
+      dot(U)_(U V) & = dot(U)_U - dot(U)_V = sqrt(3) U_P ph(30 degree) \
+      dot(U)_(V W) & = dot(U)_V - dot(U)_W = sqrt(3) U_P ph(-90 degree) \
+      dot(U)_(W U) & = dot(U)_W - dot(U)_U = sqrt(3) U_P ph(-210 degree) \
+    $],
+)
+=== 三相电路的计算
+==== 负载星形联结
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    node((0, 0))
+    line((0, 0), (0, 0.9))
+    inductorV((0, 1.5))
+
+    line((0, 2.1), (0, 3))
+    //circle((0, 3), radius: 0.1)
+    line((rel: (0, 0)), (6.5, 3))
+
+    line((0, 0), (-30deg, 0.9))
+    arc((-30deg, 0.9), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.2), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.5), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.8), radius: 0.15, start: 150deg, stop: 330deg)
+    line((-30deg, 2.1), (-30deg, 3))
+    line((), (rel: (0, -0.5)))
+    line((), (6.5, -2))
+
+    line((0, 0), (-150deg, 0.9))
+    arc((-150deg, 0.9), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.2), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.5), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.8), radius: 0.15, start: 30deg, stop: 210deg)
+    line((-150deg, 2.1), (-150deg, 3))
+    // circle((-150deg, 3), radius: 0.1)
+    line((rel: (0, 0)), (rel: (0, -1.5)))
+    line((), (0, -3))
+
+
+    line((0, 0), (6.5, 0))
+
+    content((0.4, 2.1), [+])
+    content((0.4, 0.9), [-])
+    content((0.6, 1.4), [$dot(U)_U$])
+    content((1.1, -1.3), [$dot(U)_V$])
+    content((1.7, -1.35), [+])
+    content((0.6, -0.6), [-])
+    content((-1.6, -0.2), [$dot(U)_W$])
+    content((-2, -0.65), [+])
+    content((-1, -0.2), [-])
+    content((0, -0.4), [N])
+
+    node((6.5, 0))
+    line((6.5, 0), (rel: (-150deg, 1.1)))
+    line((), (rel: (120deg, 0.1)))
+    line((), (rel: (-150deg, 0.8)))
+    line((), (rel: (-60deg, 0.2)))
+    line((6.5, 0), (rel: (-150deg, 1.1)))
+    line((), (rel: (-60deg, 0.1)))
+    line((), (rel: (-150deg, 0.8)))
+    line((), (rel: (120deg, 0.1)))
+    line((), (rel: (-150deg, 1.1)))
+    line((), (rel: (0, -1.5)))
+    line((), (0, -3))
+
+    line((6.5, 0), (rel: (-30deg, 1.1)))
+    line((), (rel: (60deg, 0.1)))
+    line((), (rel: (-30deg, 0.8)))
+    line((), (rel: (-120deg, 0.2)))
+    line((6.5, 0), (rel: (-30deg, 1.1)))
+    line((), (rel: (-120deg, 0.1)))
+    line((), (rel: (-30deg, 0.8)))
+    line((), (rel: (60deg, 0.1)))
+    line((), (rel: (-30deg, 1.1)))
+    line((), (rel: (0, -0.5)))
+    line((), (6.5, -2))
+
+    line((6.5, 0), (6.5, 1.1))
+    resistorV((6.5, 1.5))
+    line((6.5, 1.9), (6.5, 3))
+
+    arrow_I((3, -3), (3.6, -3))
+    content((3.4, -2.6), [$dot(I)_W$])
+    arrow_I((3, -2), (3.6, -2))
+    content((3.4, -1.6), [$dot(I)_V$])
+    arrow_I((3, 0), (3.6, 0))
+    content((3.4, 0.4), [$dot(I)_N$])
+    arrow_I((3, 3), (3.6, 3))
+    content((3.4, 2.4), [$dot(I)_U$])
+
+    content((6.1, 2.1), [+])
+    content((6.1, 0.9), [-])
+    content((6, 1.4), [$dot(U)_u$])
+    content((7, 1.4), [$Z_u$])
+
+    content((5.5, -1.2), [$dot(U)_W$])
+    content((4.8, -1.35), [+])
+    content((5.9, -0.6), [-])
+    content((6.5 - 1.6, -0.4), [$Z_w$])
+
+    content((6.5 + 1.6, -0.2), [$dot(U)_v$])
+    content((8.5, -0.65), [+])
+    content((7.5, -0.2), [-])
+    content((7.6, -1.2), [$Z_V$])
+
+    content((6.9, 0.2), [$"N"'$])
+  }),
+  caption: [负载星形电路三相四线制电路],
+) <2.4.1>
+#v(1em)
+显然有$display(dot(I)_U = dot(U)_u/Z_u = dot(U)_U/Z_u)$, $display(dot(I)_V = dot(U)_v/Z_v = dot(U)_V/Z_v)$, $display(dot(I)_W = dot(U)_w/Z_w = dot(U)_W/Z_w)$, $dot(I)_N = - (dot(I)_U + dot(I)_V + dot(I)_W)$。
+
+当各相负载阻抗(模和辐角)完全相等(即对称负载)时, 各相电流大小相等、相位互差120$degree$, 故 $dot(I)_N = 0$。
+#callouts.Tip[
+  对于对称负载星形电路, 由于$dot(I)_N =0$, 说明中性线不影响电路运行, 如三相异步电动机。
+
+  因此三相三线制电路和三相四线制电路等效, 从而把电路简化为三个独立的回路进行求解。
+]
+若负载不对称且中性线存在(如@fig:2.4.1), 由负载相电压=电源相电压, 可逐一计算各相电流。
+
+若负载不对称且中性线不存在, 则根据KCL和KVL列出方程组求解。
+$
+  dot(I)_U + dot(I)_V + dot(I)_W = 0 \
+  dot(U)_U = dot(I)_U #h(4pt) Z_u + dot(U)_(N N') \
+  dot(U)_V = dot(I)_V #h(4pt) Z_v + dot(U)_(N N') \
+  dot(U)_W = dot(I)_W #h(4pt) Z_w + dot(U)_(N N') \
+$
+解得
+$
+  dot(U)_(N N') = (dot(U)_U /Z_u + dot(U)_V /Z_v + dot(U)_W /Z_w) / (1/Z_u + 1/Z_v + 1/Z_w) \
+$
+进而可以求得各相电流。
+
+==== 负载三角形联结
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    import cetz-plot: *
+
+    node((0, 0))
+    line((0, 0), (0, 0.9))
+    inductorV((0, 1.5))
+
+    line((0, 2.1), (0, 3))
+    //circle((0, 3), radius: 0.1)
+    line((rel: (0, 0)), (10, 3))
+
+    line((0, 0), (-30deg, 0.9))
+    arc((-30deg, 0.9), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.2), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.5), radius: 0.15, start: 150deg, stop: 330deg)
+    arc((-30deg, 1.8), radius: 0.15, start: 150deg, stop: 330deg)
+    line((-30deg, 2.1), (-30deg, 3))
+    //line((), (rel: (0, -0.5)))
+    line((), (rel: (0.5, -1.5)), (calc.sqrt(27 / 4) + 10, -3), (rel: (0, 1.5)), (rel: (120deg, 1)))
+
+    arrow_I((), (rel: (-60deg, 0.5)))
+    content((rel: (-0.6, 0)), [$dot(I)_(u v)$])
+
+    line((0, 0), (-150deg, 0.9))
+    arc((-150deg, 0.9), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.2), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.5), radius: 0.15, start: 30deg, stop: 210deg)
+    arc((-150deg, 1.8), radius: 0.15, start: 30deg, stop: 210deg)
+    line((-150deg, 2.1), (-150deg, 3))
+    // circle((-150deg, 3), radius: 0.1)
+    line((rel: (0, 0)), (rel: (0, -1.5)))
+    line((), (calc.sqrt(27 / 4), -3), (rel: (0.5, 1.5)), (9, -1.5))
+
+    content((0.4, 2.1), [+])
+    content((0.4, 0.9), [-])
+    content((0.6, 1.4), [$dot(U)_U$])
+    content((1.1, -1.3), [$dot(U)_V$])
+    content((1.7, -1.35), [+])
+    content((0.6, -0.6), [-])
+    content((-1.6, -0.2), [$dot(U)_W$])
+    content((-2, -0.65), [+])
+    content((-1, -0.2), [-])
+    content((0, -0.4), [N])
+
+    content((3.6, 2.8), text(red)[-])
+    content((3.6, -1.3), text(red)[+])
+    content((3.6, 0.75), text(red)[$dot(U)_(W U)$])
+
+    content((3.6, -1.7), text(blue)[-])
+    content((3.6, -2.8), text(blue)[+])
+    content((3.6, -2.25), text(blue)[$dot(U)_(V W)$])
+
+    content((4.7, 2.8), text(purple)[+])
+    content((4.7, -2.8), text(purple)[-])
+    content((4.7, -0.75), text(purple)[$dot(U)_(U V)$])
+
+    line((10, 3), (rel: (-120deg, calc.sqrt(27 / 4) - 0.4)))
+    line((), (rel: (150deg, 0.1)))
+    line((), (rel: (-120deg, 0.8)))
+    line((), (rel: (-30deg, 0.1)))
+    line((10, 3), (rel: (-120deg, calc.sqrt(27 / 4) - 0.4)))
+    line((), (rel: (-30deg, 0.1)))
+    line((), (rel: (-120deg, 0.8)))
+    line((), (rel: (150deg, 0.1)))
+    line((), (rel: (-120deg, calc.sqrt(27 / 4) - 0.4)))
+
+    line((), (rel: (0deg, calc.sqrt(27 / 4) - 0.4)))
+    resistorH((10, -1.5))
+    line((rel: (0, 0.1)), (rel: (0deg, calc.sqrt(27 / 4) - 0.4)))
+
+    line((), (rel: (120deg, calc.sqrt(27 / 4) - 0.4)))
+    line((), (rel: (-150deg, 0.1)))
+    line((), (rel: (120deg, 0.8)))
+    line((), (rel: (30deg, 0.1)))
+
+    line((10, 3), (rel: (-60deg, calc.sqrt(27 / 4) - 0.4)))
+    line((), (rel: (30deg, 0.1)))
+    line((), (rel: (-60deg, 0.8)))
+    line((), (rel: (-150deg, 0.1)))
+
+    arrow_I((5, 3), (6.5, 3))
+    content((6.4, 3.5), [$dot(I)_U$])
+    arrow_I((5, -1.5), (6.5, -1.5))
+    content((6.4, -1.1), [$dot(I)_W$])
+    arrow_I((5, -3), (6.5, -3))
+    content((6.4, -2.6), [$dot(I)_V$])
+
+    content((8.1, 1), [$dot(U)_(w u)$])
+    content((7.8, 0.4), [+])
+    content((8.4, 1.4), [-])
+    content((9.2, 0.4), [$Z_(w u)$])
+    line((10, 3), (rel: (-120deg, calc.sqrt(27 / 4) - 0.4)))
+    arrow_I((), (rel: (60deg, 1.5)))
+    content((rel: (-0.6, 0)), [$dot(I)_(w u)$])
+
+
+    content((10, -2.1), [$dot(U)_(v w)$])
+    content((9.4, -1.9), [-])
+    content((10.6, -1.9), [+])
+    content((10, -1), [$Z_(v w)$])
+    arrow_I((9, -1.5), (8, -1.5))
+    content((8.4, -2.1), [$dot(I)_(v w)$])
+
+    content((11.9, 1), [$Z_(u v)$])
+    content((10.4, 1), [+])
+    content((11.2, 0), [-])
+    content((10.8, 0.4), [$dot(U)_(u v)$])
+  }),
+  caption: [负载星形电路三相四线制电路],
+)
+// #v(4em)
+对于负载三角形联结的电路, 负载的相电压等于电源的线电压, 由此可知负载相电流, 根据KCL可知线电流大小。
+对称负载时, 各线电流大小等于相电流$sqrt(3)$倍, 相位落后30$degree$。
+=== 三相电路的功率
+三相电路的有功功率等于各相有功功率之和。
+$
+  P = P_U + P_V + P_W = U_U #h(4pt) I_U cos phi_U + U_V #h(4pt) I_V cos phi_V + U_W #h(4pt) I_W cos phi_W \
+  P = P_(U V) + P_(V W) + P_(W U) = U_(U V) #h(4pt) I_(U V) cos phi_(U V) + U_(V W) #h(4pt) I_(V W) cos phi_(V W) + U_(W U) #h(4pt) I_(W U) cos phi_(W U)
+$
+其中$phi$为相电压与相电流的相位差。
+
+特别的, 对称负载时, 有: ($U_L$为线电压, $I_L$为线电流)
+$
+  P = 3 U_P #h(4pt) I_P cos phi = sqrt(3) U_L #h(4pt) I_L cos phi
+$
+同样的, 对称三相电路的无功功率等于各相无功功率之和。
+$
+  Q = 3 U_P #h(4pt) I_P sin phi = sqrt(3) U_L #h(4pt) I_L sin phi
+$
+对称三相电路的视在功率为
+$
+  S = sqrt(P^2 + S^2) = sqrt(3) U_L #h(4pt) I_L
+$
+
+#callouts.Tip[
+  如无特别指明, 三相电路的电压和电流均指线电压和线电流。
+]
+#callouts.Question(title: [2.4.5])[
+  如图所示三相四线制电路, 已知电源相电压$dot(U)_U = 220 ph(0 degree) V$, $dot(U)_V = 220 ph(-120 degree)$, $dot(U)_W = 220 ph(-240 degree)$, 供给两组对称的三相负载和一组单相负载。第一组三相负载为星形联结, 每相阻抗为 $Z_1= 22 Omega$, 经过阻抗 $Z_0= 5 Omega$ 接到中性线。第二组三相负载为三角形联结, 每相阻抗为 $Z_2 = -j 76 Omega$。单相负载 $R = 10 Omega$, 接在U相和中性线之间。求各线电流 $dot(I)_U、dot(I)_V、dot(I)_W$ 和中性线电流 $dot(I)_N$。
+
+  #cetz.canvas({
+    import cetz.draw: *
+    node((0, 0), fill: none)
+    line((0.1, 0), (7, 0))
+    line((0.1, 0), (0.7, 0), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((0.6, 0.4), [$dot(I)_W$])
+
+    node((0, 1.5), fill: none)
+    line((0.1, 1.5), (6, 1.5))
+    line((0.1, 1.5), (0.7, 1.5), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((0.6, 1.9), [$dot(I)_V$])
+
+    node((0, 3), fill: none)
+    line((0.1, 3), (7, 3))
+    line((0.1, 3), (0.7, 3), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((0.6, 3.4), [$dot(I)_U$])
+
+    node((0, -3), fill: none)
+    line((0.1, -3), (3.5, -3))
+    content((0.6, -2.6), [$dot(I)_N$])
+
+    line((3.5, -3), (0.5, -3), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((1.2, 2.4), [$dot(I)_R$])
+    line((1.5, 3), (1.5, -1.95))
+    line((1.5, 3), (1.5, 2.3), mark: (end: ">", fill: black, stroke: 0.1pt))
+    rect((1.4, -1.95), (1.6, -2.55))
+    line((1.5, -2.55), (1.5, -3))
+    content((1.9, -2.2), [R])
+
+    line((2.5, 0), (2.5, -0.45))
+    line((2.5, 0), (2.5, -0.3), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((2, -0.4), [$dot(I)_(1W)$])
+    rect((2.4, -0.45), (2.6, -1.05))
+    content((3, -0.8), [$Z_1$])
+    line((2.5, -1.05), (2.5, -1.5))
+
+    line((3.5, 1.5), (3.5, -0.45))
+    line((3.5, 1.5), (3.5, 0.8), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((3, 0.7), [$dot(I)_(1V)$])
+    rect((3.4, -0.45), (3.6, -1.05))
+    content((4, -0.8), [$Z_1$])
+    line((3.5, -1.05), (3.5, -1.5))
+
+    line((4.5, 3), (4.5, -0.45))
+    line((4.5, 3), (4.5, 2.3), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((4, 2.2), [$dot(I)_(1U)$])
+    rect((4.4, -0.45), (4.6, -1.05))
+    content((5, -0.8), [$Z_1$])
+    line((4.5, -1.05), (4.5, -1.5))
+
+    line((2.5, -1.5), (4.5, -1.5))
+    node((3.5, -1.5))
+    line((3.5, -1.5), (3.5, -1.95))
+    rect((3.4, -1.95), (3.6, -2.55))
+    line((3.5, -2.55), (3.5, -3))
+    content((4, -2.3), [$Z_0$])
+
+    line((6, 3), (6, 2.55))
+    rect((5.9, 2.55), (6.1, 1.95))
+    line((6, 1.95), (6, 1.05))
+    rect((5.9, 1.05), (6.1, 0.45))
+    line((6, 0.45), (6, 0))
+
+    line((7, 3), (7, 1.8))
+    rect((6.9, 1.8), (7.1, 1.2))
+    line((7, 1.2), (7, 0))
+
+    line((0.1, 0), (5.3, 0), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((5.2, 0.4), [$dot(I)_(2W)$])
+
+    line((0.1, 1.5), (5.3, 1.5), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((5.2, 1.9), [$dot(I)_(2V)$])
+
+    line((0.1, 3), (5.3, 3), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((5.2, 3.4), [$dot(I)_(2U)$])
+
+    line((6, 3), (6, 2.7), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((5.5, 2.6), [$dot(I)_(u v)$])
+    content((6.5, 2.2), [$Z_2$])
+
+    line((6, 1.5), (6, 1.2), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((5.5, 1.1), [$dot(I)_(v w)$])
+    content((6.5, 0.7), [$Z_2$])
+
+    line((7, 2.2), (7, 2.9), mark: (end: ">", fill: black, stroke: 0.1pt))
+    content((7.5, 2.5), [$dot(I)_(w u)$])
+    content((7.5, 1.4), [$Z_2$])
+
+    content((-0.6, 3), [L1])
+    content((-0.6, 1.5), [L2])
+    content((-0.6, 0), [L3])
+    content((-0.6, -3), [N])
+  })
+  #v(1em)
+  【解】
+  $
+    dot(I)_N & = dot(I)_R = dot(U)_U / R = 22 ph(0 degree) A \
+    dot(I)_(U) & = dot(I)_R + dot(I)_(1U) + dot(I)_(2U) = dot(I)_R + dot(I)_(1U)+dot(I)_(u v) - dot(I)_(w u) \
+    & = dot(U)_U / R + dot(U)_U / Z_1 + dot(U)_(U V) / Z_2 - dot(U)_(W U) / Z_2 = 22 ph(0 degree) A + 10 ph(0degree) + 5 ph(120 degree) - 5 ph(240 degree) \
+    & = 33.15 ph(15.14 degree)\
+    dot(I)_(V) & = dot(I)_(1V) + dot(I)_(2V) = dot(I)_(1V)+dot(I)_(v w) - dot(I)_(u v)\ & =10 ph(-120 degree) + 5 ph(0 degree) - 5 ph(120 degree)\
+    & = 13.23 ph(-79.11 degree) \
+    dot(I)_(W) & = dot(I)_(1W) + dot(I)_(2W) = dot(I)_(1W)+dot(I)_(w u) - dot(I)_(v w)\ & =10 ph(120 degree) + 5 ph(240 degree) - 5 ph(0 degree) \
+    & = 13.23 ph(160.89 degree)
+  $
+]
+#callouts.Info(title: [相量图一图流])[
+  #grid(
+    columns: (1fr, 1fr),
+    rows: 2,
+    align: center + horizon,
+    gutter: 2em,
+    row-gutter: 2em,
+    [
+      #set text(size: 10pt)
+      #cetz.canvas({
+        import cetz.draw: *
+        import cetz-plot: *
+
+        line((0, 0), (2.2, 0), mark: (end: ">", fill: black, stroke: 1pt))
+        content((2.5, -0.1), [$dot(U)_U$])
+
+        line((0, 0), (rel: (-120deg, 2.2)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-1.25, -1.5), [$dot(U)_V$])
+
+        line((0, 0), (rel: (120deg, 2.2)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-1.25, 1.5), [$dot(U)_W$])
+
+        line((0, 0), (rel: (30deg, 3.8)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((2.25, 1.75), [$dot(U)_(U V)$])
+
+        line((0, 0), (rel: (150deg, 3.8)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-2.75, 1), [$dot(U)_(W U)$])
+        line((0, 0), (rel: (-90deg, 3.8)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-0.5, -3.45), [$dot(U)_(V W)$])
+      })
+
+    ],
+    [
+      #set text(size: 10pt)
+      #cetz.canvas({
+        import cetz.draw: *
+        import cetz-plot: *
+
+        line((0, 0), (3.8, 0), mark: (end: ">", fill: black, stroke: 1pt))
+        content((4.4, -0.1), [$dot(U)_(U V)$])
+
+        line((0, 0), (rel: (-120deg, 3.8)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-2.25, -2.5), [$dot(U)_(V W)$])
+
+        line((0, 0), (rel: (120deg, 3.8)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-2.25, 2.5), [$dot(U)_(W U)$])
+
+        line((0, 0), (50deg, 3.4), mark: (end: ">", fill: black, stroke: 1pt))
+        content((2.4, 2), [$dot(I)_(W)$])
+
+        line((0, 0), (rel: (-70deg, 3.4)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((1.65, -2.8), [$dot(I)_(U)$])
+
+        line((0, 0), (rel: (-190deg, 3.4)), mark: (end: ">", fill: black, stroke: 1pt))
+        content((-2.75, 0.8), [$dot(I)_(V)$])
+
+        line((0, 0), (80deg, 2), mark: (end: ">", fill: black, stroke: 1pt))
+        line((), (50deg, 3.4), stroke: (dash: "dashed"))
+        content((0.4, 2.5), [$dot(I)_(w u)$])
+
+        line((0, 0), (rel: (-40deg, 2)), mark: (end: ">", fill: black, stroke: 1pt))
+        line((), (-70deg, 3.4), stroke: (dash: "dashed"))
+        content((2.05, -1.5), [$dot(I)_(u v)$])
+
+        line((0, 0), (rel: (-160deg, 2)), mark: (end: ">", fill: black, stroke: 1pt))
+        line((), (-190deg, 3.4), stroke: (dash: "dashed"))
+        content((-1.95, -1.2), [$dot(I)_(v w)$])
+
+        arc((50deg, 0.7), start: 50deg, stop: 80deg, radius: 0.7)
+        content((60deg, 1.2), [$30 degree$])
+        arc((-70deg, 0.7), start: -70deg, stop: -40deg, radius: 0.7)
+        content((-54deg, 1.2), [$30 degree$])
+        arc((-190deg, 0.7), start: -190deg, stop: -160deg, radius: 0.7)
+        content((-175deg, 1.2), [$30 degree$])
+
+        arc((80deg, 0.9), start: 80deg, stop: 120deg, radius: 0.9)
+        content((100deg, 1.2), [$phi$])
+        arc((-40deg, 0.9), start: -40deg, stop: 0deg, radius: 0.9)
+        content((-20deg, 1.2), [$phi$])
+        arc((-160deg, 0.9), start: -160deg, stop: -120deg, radius: 0.9)
+        content((-140deg, 1.2), [$phi$])
+      })
+    ],
+
+    [电源相电压线电压], [三角形对称负载线电压, 电流],
+  )
+]
