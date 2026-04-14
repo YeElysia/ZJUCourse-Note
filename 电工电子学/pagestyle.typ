@@ -1,3 +1,5 @@
+#import "@preview/i-figured:0.2.4"
+
 #let _set_paper_page_par(body) = {
   set text(12pt, font: ("Maple Mono NF", "LXGW WenKai Mono Screen"))
   set par(justify: true, leading: 0.8em, first-line-indent: (amount: 2em, all: true))
@@ -232,16 +234,16 @@
   show figure.caption: set text()
   set figure.caption(separator: "　")
 
-  show figure.caption: it => [
-    #it.supplement
-    #context counter(heading).display((..args) => {
-      let nums = args.pos()
-      if nums.len() == 0 { return none } else { return numbering("1.1", nums.at(0)) }
-    })-#context it.counter.display(it.numbering)
-    #it.body
-  ]
-
   set math.equation(supplement: [公式])
+
+  body
+}
+
+// 设置编号 (引用时, 需要使用标签), 注意, 必须在 heading 设置完成后再调用
+#let _set_numbering(body) = {
+  show heading: i-figured.reset-counters.with(level: 2)
+  show figure: i-figured.show-figure.with(numbering: "1.1", level: 2)
+  show math.equation: i-figured.show-equation.with(numbering: "(1-1)", level: 2, only-labeled: true)
 
   body
 }
@@ -252,6 +254,7 @@
 
   show: _set_heading.with()
   show: _set_figure.with()
+  show: _set_numbering.with()
   show: _set_paper_page_size.with()
   show: _set_paper_page_header.with(course_name, author)
   show: _set_paper_page_footer_pre.with()
