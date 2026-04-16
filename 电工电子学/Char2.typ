@@ -350,11 +350,11 @@
     [如图, N为无源线性网络。现已知:
 
 
-      $U_(s 1) = 8V$, $I_(s 2)=12A$时, $U_X = 24V$,
+      $U_(s 1) = 8V$, $I_(s 2)=12A$时,$U_X = 24V$,
 
-      $U_(s 1) = -8V$, $I_(s 2)=4A$时, $U_X = 0V$,
+      $U_(s 1) = -8V$,$I_(s 2)=4A$时, $U_X = 0V$,
 
-      求: $U_(s 1) = 20V$, $I_(s 2)=20A$时, $U_X = ?$
+      求:$U_(s 1) = 20V$,$I_(s 2)=20A$时,$U_X = ?$
     ],
     [
       #v(-2.5em)
@@ -1341,7 +1341,7 @@ $
     align: horizon,
     [#h(2em)由KVL, $dot(U) = dot(U)_L + dot(U)_(a b)$, $dot(U)和 dot(I)$同相, 画出相量图:],
     align(center)[
-      // #set text(8pt)
+      #v(-1.5em)
       #cetz.canvas({
         import cetz.draw: *
         line((0, 0), (rel: (0deg, 5 / 3 * 1.5)), mark: (end: ">"), fill: black)
@@ -1916,11 +1916,12 @@ $
 $
 解得
 $
-  dot(U)_(N N') = (dot(U)_U /Z_u + dot(U)_V /Z_v + dot(U)_W /Z_w) / (1/Z_u + 1/Z_v + 1/Z_w) \
+  dot(U)_(N N') = (display(dot(U)_U /Z_u) + display(dot(U)_V /Z_v) + display(dot(U)_W /Z_w)) / (display(1/Z_u) + display(1/Z_v) + display(1/Z_w)) \
 $
 进而可以求得各相电流。
 
 ==== 负载三角形联结
+#v(-0.5em)
 #figure(
   cetz.canvas({
     import cetz.draw: *
@@ -2039,8 +2040,8 @@ $
 === 三相电路的功率
 三相电路的有功功率等于各相有功功率之和。
 $
-  P = P_U + P_V + P_W = U_U #h(4pt) I_U cos phi_U + U_V #h(4pt) I_V cos phi_V + U_W #h(4pt) I_W cos phi_W \
-  P = P_(U V) + P_(V W) + P_(W U) = U_(U V) #h(4pt) I_(U V) cos phi_(U V) + U_(V W) #h(4pt) I_(V W) cos phi_(V W) + U_(W U) #h(4pt) I_(W U) cos phi_(W U)
+  P &= P_U + P_V + P_W = U_U #h(4pt) I_U cos phi_U + U_V #h(4pt) I_V cos phi_V + U_W #h(4pt) I_W cos phi_W \
+  P &= P_(U V) + P_(V W) + P_(W U) = U_(U V) #h(4pt) I_(U V) cos phi_(U V) + U_(V W) #h(4pt) I_(V W) cos phi_(V W) + U_(W U) #h(4pt) I_(W U) cos phi_(W U)
 $
 其中$phi$为相电压与相电流的相位差。
 
