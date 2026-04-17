@@ -243,7 +243,7 @@
 #let _set_numbering(body) = {
   show heading: i-figured.reset-counters.with(level: 2)
   show figure: i-figured.show-figure.with(numbering: "1.1", level: 2)
-  show math.equation: i-figured.show-equation.with(numbering: "(1-1)", level: 2, only-labeled: true)
+  show math.equation: i-figured.show-equation.with(numbering: "(1.1)", level: 2, only-labeled: true)
 
   body
 }
