@@ -2257,3 +2257,627 @@ $
     [电源相电压线电压], [三角形对称负载线电压, 电流],
   )
 ]
+#pagebreak()
+
+== 非正弦交流电路
+
+电工电子电路中常会遇到非正弦周期电流和电压。例如整流电路中的全波整流波形、数字电路中的方波、扫描电路中的锯齿波。如下图所示:
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  rows: 2,
+  row-gutter: 1em,
+  align: center + horizon,
+  cetz.canvas({
+    import cetz.draw: *
+    import cetz-plot: *
+    plot.plot(
+      size: (4, 2),
+      x-tick-step: none,
+      y-tick-step: none,
+      x-label: [$t$],
+      y-label: [$u$],
+      x-min: 0,
+      x-max: 4,
+      y-min: 0,
+      y-max: 2,
+      axis-style: "school-book",
+      name: "plot",
+      {
+        // let diff = 3.14
+        plot.add(
+          domain: (0, calc.pi),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => 1.5 * calc.abs(calc.sin(2 * x)),
+        )
+        plot.add-vline(calc.pi, 0.5 * calc.pi, min: -0.15, max: 0.1, style: (stroke: (paint: black)))
+        plot.add-hline(1.5, min: 0, max: 0.15, style: (stroke: (paint: black)))
+        plot.add-anchor("pt1", (1.57, -0.6))
+        plot.add-anchor("pt2", (3.14, -0.4))
+        plot.add-anchor("pt3", (-0.4, 1.5))
+      },
+    )
+    content("plot.pt1", [$T/2$])
+    content("plot.pt2", [$T$])
+    content("plot.pt3", [$U_m$])
+  }),
+  cetz.canvas({
+    import cetz.draw: *
+    import cetz-plot: *
+    plot.plot(
+      size: (4, 2),
+      x-tick-step: none,
+      y-tick-step: none,
+      x-label: [$omega t$],
+      y-label: [$u$],
+      x-min: 0,
+      x-max: 4,
+      y-min: 0,
+      y-max: 2,
+      axis-style: "school-book",
+      name: "plot",
+      {
+        // let diff = 3.14
+        plot.add(
+          domain: (0, 1),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => 1.5,
+        )
+        plot.add(
+          domain: (1, 2),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => 0,
+        )
+        plot.add(
+          domain: (2, 3),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => 1.5,
+        )
+        plot.add(
+          domain: (3, 4),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => 0,
+        )
+
+        // 添加关键点标注：U_GS(off)
+        //plot.add-anchor("cutoff", (diff, 0))
+
+        // plot.add(domain: (0, 4 * calc.pi), calc.sin)
+        plot.add-vline(1, 2, min: -0.15, max: 0.15, style: (stroke: (paint: black)))
+        plot.add-hline(1.5, min: -0.15, max: 0.15, style: (stroke: (paint: black)))
+        plot.add-vline(1, 2, 3, min: 0, max: 1.5, style: (stroke: (paint: blue, thickness: 1.5pt)))
+        // plot.add-hline(1, min: 2, max: 8.28, style: (stroke: (paint: black)))
+        plot.add-anchor("pt1", (1, -0.6))
+        plot.add-anchor("pt2", (2, -0.4))
+        plot.add-anchor("pt3", (-0.5, 1.5))
+      },
+    )
+    content("plot.pt1", [$T/2$])
+    content("plot.pt2", [$T$])
+    content("plot.pt3", [$U_m$])
+  }),
+  cetz.canvas({
+    import cetz.draw: *
+    import cetz-plot: *
+    plot.plot(
+      size: (4, 2),
+      x-tick-step: none,
+      y-tick-step: none,
+      x-label: [$omega t$],
+      y-label: [$u$],
+      x-min: 0,
+      x-max: 4,
+      y-min: 0,
+      y-max: 2,
+      axis-style: "school-book",
+      name: "plot",
+      {
+        // let diff = 3.14
+        plot.add(
+          domain: (0, 1.5),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => x,
+        )
+        plot.add(
+          domain: (1.5, 3),
+          style: (stroke: (paint: blue, thickness: 1.5pt)),
+          x => (x - 1.5),
+        )
+
+        // 添加关键点标注：U_GS(off)
+        //plot.add-anchor("cutoff", (diff, 0))
+
+        // plot.add(domain: (0, 4 * calc.pi), calc.sin)
+        plot.add-vline(1.5, 3, min: -0.15, max: 0.15, style: (stroke: (paint: black)))
+        plot.add-hline(1.5, min: -0.15, max: 0.15, style: (stroke: (paint: black)))
+        plot.add-vline(1.5, 3, min: 0, max: 1.5, style: (stroke: (paint: blue, thickness: 1.5pt)))
+        // plot.add-hline(1, min: 2, max: 8.28, style: (stroke: (paint: black)))
+        plot.add-anchor("pt1", (1.5, -0.6))
+        plot.add-anchor("pt2", (3, -0.4))
+        plot.add-anchor("pt3", (-0.5, 1.5))
+      },
+    )
+    content("plot.pt1", [$T/2$])
+    content("plot.pt2", [$T$])
+    content("plot.pt3", [$U_m$])
+  }),
+
+  [全波整流], [方波], [锯齿波],
+)
+对于非正弦线性电路, 通常是#Red[将非正弦周期信号进行分解, 然后利用叠加定理进行分析计算。]
+=== 非正弦周期信号的分解
+设周期为$T$的非正弦函数$f(t)$满足狄里赫利条件(即在一个周期内含有有限个第一类不连续点及有限个极大值和极小值), 则 $f(t)$ 可展开成傅里叶级数。
+$
+  f(t) = a_0 + sum_(k=1)^infinity a_(k m)sin (k omega t + phi_k)
+$
+其中$a_0$为信号的直流分量或恒定分量, $a_(1 m) sin (omega t + phi_1)$称为信号的基波, $a_(k m) sin (k omega t + phi_k)$ ($k > 1$)称为信号的k次谐波或高次谐波。
+
+非正弦周期信号的有效值等于其各次谐波的有效值的平方和的平方根。
+#callouts.Info[
+  1. 全波整流的傅里叶级数展开为
+  $
+    u(t) = (4 U_m )/ pi (1/2 - 1/3 cos(2 omega t) - 1/15 cos(4 omega t)- 1/35 cos(6 omega t) - dots.c)
+  $
+  2. 方波的傅里叶级数展开为
+  $
+    u(t) = U_m/2 + (2 U_m )/ pi (sin(omega t) + 1/3 sin(3 omega t) + 1/5 sin(5 omega t)+ dots.c)
+  $
+  3. 锯齿波的傅里叶级数展开为
+  $
+    u(t) = U_m/2 - (U_m )/ pi (sin(omega t) + 1/2 sin(2 omega t) + 1/3 sin(3 omega t)+ dots.c)
+  $
+]
+=== 非正弦周期信号作用下线性电路的计算
+1. 将给定的非正弦电压或电流分解为直流分量和一系列频率不同的正弦量之和。
+2. 让直流分量和各正弦分量单独作用，求出相应的电流或电压。
+3. 将各个电流或电压分量的瞬时值表达式叠加。注意不能将各次谐波电流或电压相量相加。
+
+#callouts.Question(title: [2.5.2])[
+  在图示电路中, R=2000$Omega$,L=1mH,C=1000pF,w=$10^6$rad/s,$u_i$=(7.85+10$sin omega t$ + 3.33$sin 3 omega t$)V, 求$u_o$
+  #grid(
+    columns: 2,
+    gutter: 2em,
+    cetz.canvas({
+      import cetz.draw: *
+      node((0, 0), fill: none)
+      node((0, 2.5), fill: none)
+      line((0.1, 0), (2, 0))
+      line((2, 0), (2, 0.2))
+      capacitorV((2, 0.6))
+      inductorV((2, 1.6))
+      line((2, 2.2), (2, 2.5), (1.4, 2.5))
+      resistorH((1, 2.5))
+      line((0.1, 2.5), (0.6, 2.5))
+
+      content((0, 0.4), [-])
+      content((0, 2.1), [+])
+      content((0, 1.3), [$u_i$])
+      content((1, 2.9), [R])
+      content((1.6, 1.6), [L])
+      content((1.4, 0.6), [C])
+      content((2.6, 0.1), [-])
+      content((2.6, 2.4), [+])
+      content((2.7, 1.3), [$u_o$])
+    }),
+    [
+      直流分量$U_(o 0) = U_(i 0) = 7.85 V$
+
+      一次谐波分量, $X_(L 1) = omega L = 1000 Omega$, $X_(C 1) = 1/(omega C) = 1000 Omega$, $U_(o 1) = (j (X_(L 1)- X_(C 1)))/(R + j (X_(L 1)- X_(C 1))) U_(i 1) = 0 V$
+
+      三次谐波分量, $X_(L 3) = 3 omega L = 3000 Omega$, $X_(C 3) = 1/(3 omega C) = 333.3 Omega$, $U_(o 3) = (j (X_(L 3)- X_(C 3)))/(R + j (X_(L 3)- X_(C 3))) U_(i 3) = 2.66/sqrt(2) ph(36.87 degree) V$
+    ],
+  )
+  所以
+  $
+    u_o & = U_(o 0) + U_(o 1) sin (omega t + phi_1) + U_(o 3) sin (3 omega t + phi_3) \
+        & = [ 7.85 + 2.66 sin (3 omega t + 36.87 degree) ]V
+  $
+]
+
+== 一阶电路的瞬态分析
+
+=== 换路定理
+#block(inset: 8pt, radius: 4pt, stroke: black + 1pt)[
+  #Red[换路]#h(1em)电路中电源接通、断开，电路参数、结构瞬间改变，规定$t= 0^-$换路前,$t=0^+$换路后
+]
+#block(inset: 8pt, radius: 4pt, stroke: black + 1pt, width: 100%)[
+  #Red[换路定律]#h(1em)换路前后 ①电容电压不能突变 ②电感电流不能突变
+]
+#grid(
+  columns: (1fr, 1fr),
+  align: horizon + center,
+  $u_C(0^-)= u_C(0^+)$, $i_L(0^-) = i_L(0^+)$,
+)
+#callouts.Question(title: [例2.6.1])[
+  图示电路, $t lt 0$时电路处于稳态, 开关S在$t=0$时从位置1换接到位置2, 求$u_C (0^+)、u_R (0^+)、i(0^+)$。
+
+  #grid(
+    columns: 2,
+
+    [#h(20em)],
+    [#v(-1.3em)
+      #cetz.canvas({
+        import cetz.draw: *
+        line((0, 0), (0, 1.6))
+        constSourceV((0, 2))
+        line((0, 2.4), (0, 4))
+
+        line((2, 0), (2, 1.1))
+        constSourceH((2, 1.5))
+        line((2, 1.9), (2, 3), (3, 3))
+
+        line((3, 0), (3, 1.1))
+        resistorV((3, 1.5))
+        line((3, 1.9), (3, 3.5), (3.3, 3.5))
+
+        line((0, 4), (3, 4))
+        line((3.1, 3.4), (3.5, 4), (4.1, 4))
+        resistorH((4.5, 4))
+        line((4.9, 4), (5.5, 4), (5.5, 2.4))
+        capacitorV((5.5, 2))
+        line((5.5, 1.6), (5.5, 0), (0, 0))
+
+        content((-0.5, 2.4), [+])
+        content((-0.5, 1.6), [-])
+        content((-1, 2.4), [$U_S$])
+        content((-1, 1.8), [10V])
+        content((1, 1.5), [0.6A])
+        arrow_I((2, 1.9), (2, 2.5))
+        content((1.6, 2.5), [$I_S$])
+        content((2.6, 3.5), [1])
+        content((2.8, 4.4), [2])
+        content((3.4, 4.3), [S])
+        arc((3.5, 3.6), start: 270deg, stop: 180deg, radius: 0.4, mark: (end: ">", fill: black, stroke: 0.01pt))
+        content((3.5, 3.2), [t=0])
+        content((4.5, 3.6), [R])
+        content((4.7, 3.2), [100$Omega$])
+        content((4.5, 4.4), [$u_R$])
+        content((4, 4.3), [+])
+        content((5, 4.3), [-])
+        content((3.4, 1.8), [$R_1$])
+        content((3.5, 1.2), [$10 Omega$])
+        content((5, 2), [C])
+        content((5, 1.5), [$1 mu F$])
+        arrow_I((5.5, 4), (5.5, 3))
+        content((6, 3.2), [i])
+        content((6.2, 1.9), [$u_C$])
+        content((6.1, 2.4), [+])
+        content((6.1, 1.6), [-])
+      })],
+  )
+
+  #h(-2em)【解】
+  易知$u_C (0^-)=R_1 I_S=6V$, 由换路定律, $u_C (0^+) = u_C (0^-)=6V$, 则
+  $
+    u_R(0^+) & =U_S - u_C (0^+)=4V \
+      i(0^+) & =(u_R (0^+))/R = 0.04A
+  $
+]
+=== RC电路的瞬态分析
+#block(inset: 8pt, radius: 4pt, stroke: gray + 1pt, width: 100%)[
+  #text(gray)[这个常微分我没学过, 不知道为啥这样做, 所以我直接给出了(。Savia的意见是只考一阶, 瞬态分析背就行了。]
+]
+#callouts.Example()[
+  一阶电路是指可以等效为一个电阻和一个电容串联的电路, 电容电压$u_C$可通过三要素法获得:
+
+  ① 求出换路前的稳态电路, 得到初始值$u_C (0^-)$, 再由换路定律得到 $u_C (0^+)$;
+
+  ② 求出换路后的稳态电路, 得到稳态值$u_C (infinity)$;
+
+  ③ 将换路后的电路等效为下图所示电路，得到时间常数$tau = R C$。
+
+  #align(center)[#cetz.canvas({
+    import cetz.draw: *
+    line((4, 1.1), (4, 0), (0, 0), (0, 1.1))
+    constSourceV((0, 1.5))
+    line((0, 1.9), (0, 3), (0.8, 3))
+    line((0.8, 3.3), (1.6, 3), (2.4, 3))
+    resistorH((2.8, 3))
+    line((3.2, 3), (4, 3), (4, 1.9))
+    capacitorV((4, 1.5))
+
+    content((0.5, 2), [+])
+    content((0.5, 1), [-])
+    content((0.8, 1.4), [$U_S$])
+    content((1.2, 2.6), [S])
+    content((2.8, 2.6), [R])
+    content((3.4, 1.5), [C])
+    content((4.5, 2), [+])
+    content((4.5, 1), [-])
+    content((4.7, 1.5), [$u_C$])
+  })]
+
+  ④ 代入下式，得到$u_C$关于时间的变化规律(一般t=0时换路取$t_0=0$,以此类推)
+  $ u_C (t) = u_C (infinity) + [ u_C (0^+) - u_C (infinity)]e^(- (t-t_0)/tau) $<式2.6.1>
+]
+显然在理论上,$t arrow infinity$时瞬变才结束, 但是工程通常认为经过$(3~5)tau$瞬变基本结束。
+
+#block(inset: 12pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb(251, 242, 235))[
+  一阶电路求解通常会结合 555 电路组成的多谐振荡器等进行考查
+]
+#callouts.Question(title: [例2.6.3])[
+  电路及参数如图。S原在位置3, 电路稳定且电容无初始储能, t=0时S切换到3, 经过一个 $tau$ 后再切到2。求$u_C (t)$及其波形图,并求过零时刻。
+  #align(center)[#cetz.canvas({
+    import cetz.draw: *
+    line((0, 0), (0, 5), (2.7, 5))
+    line((1.5, 0), (1.5, 0.8))
+    constSourceV((1.5, 1.2))
+    line((1.5, 1.6), (1.5, 2.4))
+    resistorV((1.5, 2.8))
+    line((1.5, 3.2), (1.5, 4.5), (2.7, 4.5))
+    content((1.2, 0.5), [-])
+    content((1.2, 1.9), [+])
+    content((0.5, 1.5), [$U_(S 1)$])
+    content((0.5, 0.9), [$10 V$])
+    content((1, 3), [$R_(1)$])
+    content((0.7, 2.5), [$0.5 k Omega$])
+
+    line((3, 0), (3, 0.8))
+    constSourceV((3, 1.2))
+    line((3, 1.6), (3, 2.4))
+    resistorV((3, 2.8))
+    line((3, 3.2), (3, 4.3))
+    content((3.3, 0.5), [+])
+    content((3.3, 1.9), [-])
+    content((4, 1.5), [$U_(S 2)$])
+    content((4, 0.9), [$5V$])
+    content((3.5, 3), [$R_2$])
+    content((3.7, 2.5), [$1 k Omega$])
+
+    content((2.6, 5.3), [3])
+    content((2.6, 4.2), [1])
+    content((3.2, 4.1), [2])
+    line((2.7, 4.8), (3.4, 4.5), (4.8, 4.5))
+    arc((3.4, 5), radius: 0.5, start: 90deg, stop: 190deg, mark: (end: ">", fill: black, stroke: 0.01pt))
+    content((3.4, 5.3), [t=0])
+    content((3.8, 4.2), [S])
+    resistorH((5.2, 4.5))
+    content((5.2, 4.9), [$R_3$])
+    content((5.2, 4.1), [$0.5 k Omega$])
+    line((5.6, 4.5), (6.4, 4.5), (6.4, 2.4))
+    capacitorV((6.4, 2))
+    content((5.8, 2), [$C$])
+    content((5.6, 1.5), [$0.1 mu F$])
+    content((7.5, 2), [$u_C (t)$])
+    content((7.4, 2.5), [+])
+    content((7.4, 1.5), [-])
+    line((6.4, 1.6), (6.4, 0), (0, 0))
+  })]
+
+  【解】显然$u_C (0^-) = 0"V"$,
+
+  开关S接到位置1时,
+  $
+         u_C (0^+) & = u_C (0^-) = 0 \
+    u_C (infinity) & = U_(S 1) = 10 "V" \
+             tau_1 & = (R_1 + R_3) C = 0.1 "ms"
+  $
+  由三要素法:
+  $
+    u_C (t) & = u_C (infinity) + [ u_C (0^+) - u_C (infinity)]e^(- t/tau) \
+            & =10 (1- e^(- t/0.1))"   " (0 lt.eq t lt.eq 0.1 "ms")
+  $
+  经过$tau_1$后, 开关S接到位置2,
+  $
+     u_C (tau_1^+) & = u_C (tau_1^-) = 10 (1- e^(tau/0.1)) = 6.32 "V" \
+    u_C (infinity) & = U_(S 2) = -5 V \
+             tau_2 & = (R_2 +R_3) C = 0.15 "ms"
+  $
+  由三要素法:
+  $
+    u_C (t) & = u_C (infinity) + [ u_C (0^+) - u_C (infinity)]e^(- t/tau) \
+            & =-5 + 11.32 e^(-(t-0.1)/0.15)"   " (t gt.eq 0.1 "ms")
+  $
+  因此电容电压过零时, $t_1 = 0.1 - 0.15 ln(5/11.32) = 0.22 "ms"$
+
+  可画出$u_C (t)$波形如下图:
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      import cetz-plot: *
+
+      plot.plot(
+        size: (8, 6),
+        x-tick-step: none,
+        y-tick-step: none,
+        x-label: [$t \/ "ms"$],
+        y-label: [$u_C (t) \/ "V"$],
+        x-min: 0,
+        x-max: 1,
+        y-min: -0.6,
+        y-max: 0.7,
+        axis-style: "school-book",
+        name: "plot",
+        {
+          // let diff = 3.14
+          plot.add(
+            domain: (0, 0.1),
+            style: (stroke: (paint: blue, thickness: 1.5pt)),
+            x => 1 * (1 - calc.pow(calc.e, -10 * x)),
+          )
+
+          plot.add(
+            domain: (0.1, 1),
+            style: (stroke: (paint: blue, thickness: 1.5pt)),
+            x => 0.1 * (-5 + 11.32 * calc.pow(calc.e, -(x - 0.1) / 0.15)),
+          )
+
+          // 添加关键点标注：U_GS(off)
+          //plot.add-anchor("cutoff", (diff, 0))
+
+          // plot.add(domain: (0, 4 * calc.pi), calc.sin)
+          // plot.add-vline(0, calc.pi, 2 * calc.pi, min: 0, max: 0.15, style: (stroke: (paint: black)))
+          plot.add-hline(0.632, min: 0, max: 0.1, style: (stroke: (paint: black, dash: "dashed")))
+          plot.add-vline(0.1, min: 0, max: 0.632, style: (stroke: (paint: black, dash: "dashed")))
+          plot.add-hline(-0.5, min: 0, max: 1, style: (stroke: (paint: black, dash: "dashed")))
+          plot.add-anchor("pt1", (-0.08, 0.632))
+          plot.add-anchor("pt2", (0.06, -0.08))
+          plot.add-anchor("pt3", (0.18, -0.08))
+          plot.add-anchor("pt4", (-0.05, -0.5))
+        },
+      )
+      set-style(stroke: (font: 4pt))
+      content("plot.pt1", text(size: 10pt)[6.32])
+      content("plot.pt2", text(size: 10pt)[0.1])
+      content("plot.pt3", text(size: 10pt)[0.22])
+      content("plot.pt4", text(size: 10pt)[-5])
+    })
+  ]
+]
+
+若要求 $i_C (t)$, 易知有
+$
+  i_C (t) = C display(("d"u_C (t))/("d"t))
+$
+
+#callouts.Question(title: [例2.6.5])[
+
+  #grid(
+    columns: 2,
+    gutter: 2em,
+    [
+      电路如图, $u_i$为矩形波, 幅度$U_m$, 脉宽$t_W = 20 mu s$, 周期$T = 40 mu s$,求:
+
+      (1) 当$R = 1 k Omega$, $C= 1000"pF"$, 输出电压$u_O$
+
+      (2) 当$R = 1 k Omega$, $C= 100 mu F$, 输出电压$u_O$波形
+    ],
+    [#v(-1.2em)
+      #cetz.canvas({
+        import cetz.draw: *
+        node((0, 0), fill: none)
+        line((0.1, 0), (3.9, 0))
+        node((4, 0), fill: none)
+        line((0.1, 2), (1.5, 2))
+        node((0, 2), fill: none)
+        node((4, 2), fill: none)
+        capacitorH((1.9, 2))
+        line((2.3, 2), (3.9, 2))
+        line((3, 0), (3, 0.6))
+        resistorV((3, 1))
+        line((3, 1.4), (3, 2))
+        content((1.9, 1.4), [C])
+        content((1.4, 2.4), [+])
+        content((2.4, 2.4), [-])
+        content((1.9, 2.6), [$u_C$])
+        content((0, 1.6), [+])
+        content((0, 0.4), [-])
+        content((4, 1.6), [+])
+        content((4, 0.4), [-])
+        content((0, 1), [$u_I$])
+        content((4, 1), [$u_O$])
+        content((2.6, 1.3), [$R$])
+        content((2.4, 0.7), [$1k Omega$])
+      })],
+  )
+  【解】
+
+  (1) $tau_1 = R C = 1 mu s lt.double t_W$, 所以$t = 5 tau$时, $u_C approx U_m$, 一个周期内, 有:
+  #grid(
+    columns: 2,
+    gutter: 1em,
+    align: horizon,
+    [$
+      u_C = cases(
+        U_m (1 - e^(-t)) #h(1em) & (0 lt.eq t lt.eq t_W, "单位"mu s),
+        U_m e^(-(t -20)) #h(1em) & (t_W lt.eq t lt.eq T, "单位"mu s),
+      ) \
+      u_C = cases(
+        U_m e^(-t) #h(1em) & (0 lt.eq t lt.eq t_W, "单位"mu s),
+        - U_m e^(-(t -20)) #h(1em) & (t_W lt.eq t lt.eq T, "单位"mu s),
+      )
+    $],
+    align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        import cetz-plot: *
+
+        plot.plot(
+          size: (6, 4),
+          x-tick-step: none,
+          y-tick-step: none,
+          x-label: [$t$],
+          y-label: [$u_O$],
+          x-min: 0,
+          x-max: 80,
+          y-min: -10,
+          y-max: 10,
+          axis-style: "school-book",
+          name: "plot",
+          {
+            let um = 10
+            plot.add(
+              domain: (0, 20),
+              style: (stroke: (paint: blue, thickness: 1.5pt)),
+              x => um * calc.pow(calc.e, -x),
+            )
+
+            plot.add(
+              domain: (20, 40),
+              style: (stroke: (paint: blue, thickness: 1.5pt)),
+              x => -um * calc.pow(calc.e, -x + 20),
+            )
+            plot.add(
+              domain: (40, 60),
+              style: (stroke: (paint: blue, thickness: 1.5pt)),
+              x => um * calc.pow(calc.e, -x + 40),
+            )
+
+            plot.add(
+              domain: (60, 80),
+              style: (stroke: (paint: blue, thickness: 1.5pt)),
+              x => -um * calc.pow(calc.e, -x + 60),
+            )
+            plot.add-vline(20, 60, min: -10, max: 0, style: (stroke: (paint: blue, thickness: 1.5pt)))
+            plot.add-vline(40, min: 0, max: 10, style: (stroke: (paint: blue, thickness: 1.5pt)))
+          },
+        )
+      })
+    ],
+  )
+  由图可见, 由于$tau << t_W$,C的充放电迅速完成,$u_O$的波形为正、负尖脉冲,因$u_R = R i = R C display(("d"u_C (t))/("d"t)) approx display(("d"u_I (t))/("d"t))$,输出电压与输入电压近似成微分关系,故这种电路称为#Red[微分电路]。
+
+  (2) $tau_2 = R C = 0.1 s >> t_W$, 因此电压只上升很短的一段, 经若干个周期后C每次充、放电的起始值和终止值达到稳定:
+  #grid(
+    columns: (1fr, 1fr),
+    align: horizon,
+    image("assets/RC_uc.png"), image("assets/RC_uo.png"),
+  )
+  若$tau$足够大(本质上$omega C 足 够 大$), $u_C$的波形图会近似为一条直线, 其值为$u_I$傅里叶级数展开的直流分量。剩下的交流分量即位输出电压$u_O$。这种电路称#Red[RC耦合电路], 常应用在交流放大电路中。
+]
+=== RL电路的瞬态分析
+#grid(
+  columns: 2,
+  gutter: 2em,
+  align: horizon,
+  [
+    $ i_L (t) = i_L (infinity) + [ i_L (0^+) - i_L (infinity)]e^(- (t-t_0)/tau) $<式2.6.2>
+    $
+      u_L (t) = L ("d"i_L (t))/("d"t)
+    $
+  ],
+  [
+    #v(-1em)
+    #cetz.canvas({
+      import cetz.draw: *
+      line((4, 0.9), (4, 0), (0, 0), (0, 1.1))
+      constSourceH((0, 1.5))
+      line((0, 1.9), (0, 3), (2, 3))
+      line((1.5, 3), (1.5, 1.9))
+      resistorV((1.5, 1.5))
+      line((1.5, 1.1), (1.5, 0))
+      line((2, 3.3), (2.8, 3), (4, 3))
+      line((3.2, 3), (4, 3), (4, 2.1))
+      inductorV((4, 1.5))
+
+      arrow_I((0, 1.9), (0, 2.6))
+      content((-0.4, 2.5), [$I_S$])
+      content((2.8, 2.6), [S])
+      content((3.6, 1.5), [L])
+      content((4.5, 2), [+])
+      content((4.5, 1), [-])
+      content((4.7, 1.5), [$u_L$])
+      content((1.1, 1.5), [R])
+      arrow_I((2.8, 3), (3.6, 3))
+      content((3.4, 3.4), [$i_L$])
+    })],
+)#pagebreak()
