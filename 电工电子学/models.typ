@@ -107,3 +107,44 @@
   arc((points.at(0), points.at(1)), radius: 0.15, start: -90deg, stop: 90deg)
   arc((points.at(0), points.at(1) + 0.3), radius: 0.15, start: -90deg, stop: 90deg)
 }
+
+// 二极管
+#let diode(point1, point2, mark) = {
+  if mark == "r" {
+    line(point1, point2)
+    line(
+      (point1.at(0) + 0.1, point1.at(1) + 0.3),
+      (point1.at(0) + 0.1, point1.at(1) - 0.3),
+      (point2.at(0) - 0.1, point2.at(1)),
+      close: true,
+    )
+    line((point2.at(0) - 0.1, point2.at(1) + 0.3), (point2.at(0) - 0.1, point2.at(1) - 0.3))
+  } else if mark == "u" {
+    line(point1, point2)
+    line(
+      (point1.at(0) + 0.3, point1.at(1) + 0.1),
+      (point1.at(0) - 0.3, point1.at(1) + 0.1),
+      (point2.at(0), point2.at(1) - 0.1),
+      close: true,
+    )
+    line((point2.at(0) + 0.3, point2.at(1) - 0.1), (point2.at(0) - 0.3, point2.at(1) - 0.1))
+  } else if mark == "d" {
+    line(point1, point2)
+    line(
+      (point1.at(0) + 0.3, point1.at(1) - 0.1),
+      (point1.at(0) - 0.3, point1.at(1) - 0.1),
+      (point2.at(0), point2.at(1) + 0.1),
+      close: true,
+    )
+    line((point2.at(0) + 0.3, point2.at(1) + 0.1), (point2.at(0) - 0.3, point2.at(1) + 0.1))
+  } else if mark == "l" {
+    line(point1, point2)
+    line(
+      (point1.at(0) - 0.1, point1.at(1) + 0.3),
+      (point1.at(0) - 0.1, point1.at(1) - 0.3),
+      (point2.at(0) + 0.1, point2.at(1)),
+      close: true,
+    )
+    line((point2.at(0) + 0.1, point2.at(1) + 0.3), (point2.at(0) + 0.1, point2.at(1) - 0.3))
+  }
+}
