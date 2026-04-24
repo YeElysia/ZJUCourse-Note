@@ -1,0 +1,150 @@
+#import "@preview/cetz:0.4.2"
+
+#set text(12pt, font: ("Maple Mono NF", "LXGW WenKai Mono Screen"))
+#set par(justify: true, leading: 1em, first-line-indent: (amount: 2em, all: true))
+#set par(spacing: 1.24em)
+
+#set page(
+  paper: "a4",
+  margin: (
+    top: 2.5cm,
+    bottom: 2.5cm,
+    left: 2cm,
+    right: 2cm,
+  ),
+  header: {
+    set text(10pt, baseline: 8pt, spacing: 3pt)
+    grid(
+      columns: (auto, 1fr),
+      align(left, "工程流体力学和热工基础"), align(right, ""),
+    )
+
+    line(length: 100%, stroke: 0.7pt)
+  },
+  footer: context {
+    set align(center)
+
+    grid(
+      columns: (1fr, 1fr, 1fr),
+      line(length: 100%, stroke: 0.7pt),
+      context {
+        text(10pt, baseline: -3pt, counter(page).display(" 1 "))
+      },
+      line(length: 100%, stroke: 0.7pt),
+    )
+  },
+)
+// 设置前缀
+#show figure.where(kind: image): set figure(supplement: [图])
+
+#show figure.where(kind: table): set figure(supplement: [表])
+#show figure.where(kind: table): set figure.caption(position: top)
+
+// 使用正确的编号与图表标题字体及分隔符
+#show figure.caption: set text()
+#set figure.caption(separator: "　")
+
+// show figure.caption: it => [
+//   #it.supplement
+//   #context counter(heading).display((..args) => {
+//     let nums = args.pos()
+//     if nums.len() == 0 { return none } else { return numbering("1.1", ..nums) }
+//   })-#context it.counter.display(it.numbering)
+//   #it.body
+// ]
+#set math.equation(supplement: [公式])
+#set heading(numbering: "一、")
+#set enum(numbering: "1.A.")
+#show heading.where(level: 1): it => {
+  set text(weight: "bold", size: 14pt)
+  set block(spacing: 1.5em)
+  it
+}
+#let kong = {
+  box(width: 5em, stroke: (bottom: 1pt), inset: (bottom: 20%, left: -10%, right: -10%))
+}
+
+// 设置背景水印
+
+#let _set_watermark(body) = {
+  set page(
+    background: [
+      #rotate(24deg, text(50pt, fill: rgb(128, 128, 128, 40))[
+        *My CC98 My Home* $"         "$
+      ])
+      #v(5cm)
+      #rotate(24deg, text(50pt, fill: rgb(128, 128, 128, 40))[
+        $"         "$ *My CC98 My Home*
+      ])
+      #v(5cm)
+      #rotate(24deg, text(50pt, fill: rgb(128, 128, 128, 40))[
+        *My CC98 My Home* $"         "$
+      ])],
+  )
+
+  body
+}
+#show: _set_watermark
+
+#align(center)[
+  #text(size: 20pt, weight: "regular")[25 春夏 回忆卷]
+  #v(0em)
+  // #text(size: 14pt, weight: "regular")[《军事理论》期末回忆卷]
+]
+
+1. 论述流体和固体在力学性能上的区别。(5)
+#block(inset: 10pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb(251, 242, 235))[
+  (书本第3页)
+
+  第一点是流体不能承受拉⼒, 因⽽流体内部永远不存在抵抗拉伸变形的拉应⼒。
+
+  第⼆点是流体在宏观平衡状态下不能承受剪切⼒, 任何微⼩的剪切⼒都会导致流体连续变形、平衡破坏、产⽣流动。
+
+  固体显然没有这两个特点。它能承受拉⼒、压⼒和剪切⼒，内部相应产⽣拉应⼒、压应⼒和切应⼒以抵抗变形, 外⼒或应⼒不⼤到⼀定数值, 固体形状不会被破坏。
+
+  流体的这两个特点简称为流体的易流动性易流动性既是流体命名的由来, 也是流体区别于固体的根本标志。
+]
+
+2. 试述液体的粘性与温度的关系, 并阐述应用。(5)
+
+#block(inset: 10pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb(251, 242, 235))[
+  (书本第24页)
+
+  液体粘度的⼤⼩取决于分⼦间距和分⼦引⼒, 当温度升⾼或压强降低时(液体膨胀、分⼦ 间距增⼤、分⼦引⼒减⼩, 故粘度降低。反之温度降低或压强升⾼时, 液体粘度增⼤。这种粘度变化规律可⽤指数形式表达:
+  $
+    mu = mu_0 e^(alpha p - lambda(t - t_0))
+  $
+  只考虑温度的影响:
+  $
+    mu = mu_0 e^(- lambda(t - t_0))
+  $
+  (25页)
+
+  影响⾮等温流动(例如液压传动及远程⽯油输送等)性能的一个重要因素
+
+]
+
+1. 有一不可压缩流体, x方向速度分量 $u = a x^2 + b y$, z方面为0, 设y方向为v, 且y=0时, v=0, 求y方向分量, a为常数。(5)
+#block(inset: 10pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb(251, 242, 235))[
+
+  根据不可压缩流体的连续性方程, 可得:
+  $
+    (partial u)/(partial x) + (partial v)/(partial y) + (partial w)/(partial z) = 0 \
+    2 a x + (partial v)/(partial y) = 0 \
+  $
+  偏积分得
+  $
+    v = - a x^2 y + C(x, z)
+  $
+  根据边界条件y=0时v=0, 可得$C(x, z) = 0$, 故y方向分量为
+  $
+    v = - a x^2 y
+  $
+]
+
+2. 如图小坝, 求作用在单位宽度坝面上的合力$F$及其与垂线的夹角, 已知$tan theta = 4$
+#cetz.canvas({
+  import cetz.draw: *
+  line((0, 0), (0.3, 1.2), (0.3, 2.4), (0.7, 2.4), (0.7, 0), (0, 0))
+})
+
