@@ -177,3 +177,30 @@
           & = 5393.675 "kN" \
     alpha & = arctan(F_z / F_y) = arctan(5393.675/29811.6) approx 15 degree
   $]
+3. $rho = 900 "kg/m"^3$的油从$d = 2"cm"$的孔射出, 孔口前表压$P=45000"Pa"$, 射流对挡板的冲击力$F=20"N"$, 出流流量$q_v = 2.29 "L/s"$, 试求孔口的出流系数$C_v、C_d、C_c$
+#v(-1em)
+#image("assets/image.png", width: 30%)
+#v(-1em)
+#block(inset: 10pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb(251, 242, 235))[
+  此处为6-3原题
+
+  由书本329页式(6-15), 流量系数
+  $
+    C_d & = q_v / (A sqrt((2 Delta P) / rho)) = q_v / ((pi d^2)/4 sqrt((2 P) / rho)) = 0.00229 /((pi times 0.02^2 / 4 times sqrt(2 times 45000 / 900))) = 0.729 \
+  $
+  由冲击力 $F = rho q_v v = rho q_v (C_v sqrt(2 ( P) / rho))$（前一个等号可以由动量定理得到）, 可得
+
+  流速系数
+  $
+    C_v & = F / (rho q_v sqrt((2 P) / rho)) = 20 / (900 times 0.00229 times sqrt(2 times 45000 / 900)) = 0.970 \
+  $
+  收缩系数
+  $
+    C_c & = C_d / C_v = 0.729 / 0.970 = 0.752 \
+  $
+]
+
+4. 小泵抽水, 流量$q_v = 0.0628 "m"^3\/"s"$。水的运动粘度$nu = 1.519 "m"^2\/"s"$, 管径$d= 200"mm"$, $h_1 =3"m"$, $h_2 =17"m"$, $h_3 =15"m"$, $L_2 = 12"m"$, $lambda = 0.0242$, $xi_1 =3$, $xi_2 =0.204$, $xi_3 =0.073$,$xi_4 =1$, $theta = 30 degree$ 求:
+#image("assets/image-1.png", width: 30%)
+(1) 泵的扬程$H$;
+(2) 泵的有效功率$P$;
