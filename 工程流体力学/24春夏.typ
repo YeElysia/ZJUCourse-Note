@@ -145,6 +145,35 @@
 2. 如图小坝, 求作用在单位宽度坝面上的合力$F$及其与垂线的夹角, 已知$tan theta = 4$
 #cetz.canvas({
   import cetz.draw: *
-  line((0, 0), (0.3, 1.2), (0.3, 2.4), (0.7, 2.4), (0.7, 0), (0, 0))
-})
+  line((0, 0), (0.3, 1.2), (0.3, 2.4), (0.9, 2.4), (00.9, 0), (0, 0))
+  arc((0.3, 0), radius: 0.3, start: 0deg, stop: 72deg)
+  line((0.9, 0), (0.2, 0.7), stroke: gray)
+  line((0.9, 0.3), (0.24, 0.96), stroke: gray)
+  line((0.9, 0.6), (0.3, 1.2), stroke: gray)
+  line((0.9, 0.9), (0.3, 1.5), stroke: gray)
+  line((0.9, 1.2), (0.3, 1.8), stroke: gray)
+  line((0.9, 1.5), (0.3, 2.1), stroke: gray)
+  line((0.9, 1.8), (0.3, 2.4), stroke: gray)
+  line((0.9, 2.1), (0.6, 2.4), stroke: gray)
 
+  line((0.3, 1.2), (-0.5, 1.2), stroke: (dash: "dashed"))
+  line((0.3, 0), (-1.4, 0), stroke: (dash: "dashed"))
+  line((0.3, 2.4), (-1.4, 2.4), stroke: (dash: "dashed"))
+  line((-0.8, 2.3), (-0.4, 2.3))
+  line((-0.75, 2.25), (-0.45, 2.25))
+  line((-0.7, 2.2), (-0.5, 2.2))
+  line((-0.2, 1.2), (-0.2, 0), mark: (start: ">", end: ">", fill: black))
+  line((-1.2, 2.4), (-1.2, 0), mark: (start: ">", end: ">", fill: black))
+  content((-0.7, 0.6), [37m])
+  content((-1.7, 1.2), [78m])
+  content((0.5, 0.2), [$theta$])
+})
+#block(inset: 10pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb(251, 242, 235))[
+  参考78页例特例2
+  $
+      F_y & = rho g h_c A_y = 1000 times 9.8 times 78/2 times (78 times 1) \
+          & =29811.6 "kN" \
+      F_z & = rho g V_F = 1000 times 9.8 times [1/2 (78 + 41) times 37/4 times 1] \
+          & = 5393.675 "kN" \
+    alpha & = arctan(F_z / F_y) = arctan(5393.675/29811.6) approx 15 degree
+  $]
