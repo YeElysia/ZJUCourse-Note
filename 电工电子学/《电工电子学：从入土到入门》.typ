@@ -31,6 +31,7 @@
     - 《电工电子学》（第5版）
     - #link("https://www.cc98.org/topic/6089073")[【学习天地】2024-2025秋冬学期 电工电子学复习提纲（一到九章）]
     - #link("https://savia7582.github.io/Exterior/Engineering/EE/")[Savia的《电工电子学及实验》通关攻略]
+    - 孙晖老师的课件
     #text(blue)[= 【成绩计算】]
 
     - （课外）SPOC课程+课堂外作业【中国大学MOOC】+【学在浙大】#Red("20%")
