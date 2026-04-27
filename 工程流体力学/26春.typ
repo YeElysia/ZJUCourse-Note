@@ -17,7 +17,7 @@
     set text(10pt, baseline: 8pt, spacing: 3pt)
     grid(
       columns: (auto, 1fr),
-      align(left, "理论力学"), align(right, "猫娘小蛋糕烘焙组"),
+      align(left, "工程流体力学"), align(right, ""),
     )
 
     line(length: 100%, stroke: 0.7pt)
@@ -92,7 +92,7 @@
 ]
 #grid(
   columns: (1fr, 1fr),
-  align(left)[课程号： #kong(width: 12em)[AA2002F]], align(left)[开课学院： #kong(width: 12em)[航空航天学院]],
+  align(left)[课程号： #kong(width: 12em)[ME2005M]], align(left)[开课学院： #kong(width: 12em)[机械工程学院]],
 )
 // 考试试卷：√A卷、B卷（请在选定项上打√）
 #grid(
@@ -101,7 +101,7 @@
 )
 #grid(
   columns: (1fr, 1fr),
-  align(left)[考试日期：#kong(width: 3em)[2026]年 #kong(width: 1.5em)[1] 月 #kong(width: 1.5em)[11] 日],
+  align(left)[考试日期：#kong(width: 3em)[2026]年 #kong(width: 1.5em)[4] 月 #kong(width: 1.5em)[25] 日],
   align(left)[考试时间：  #kong(width: 4em)[120] 分钟],
 )
 #grid(
