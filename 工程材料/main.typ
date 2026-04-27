@@ -1,4 +1,4 @@
-#import "@local/Typwork-some:0.1.1": styles
+#import "@local/Typwork-some:0.1.2": styles
 #import "@preview/i-figured:0.2.4"
 #import "@preview/codelst:2.0.2": sourcecode
 #import "@preview/cetz:0.4.2"
