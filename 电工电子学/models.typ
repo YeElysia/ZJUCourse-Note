@@ -148,3 +148,38 @@
     line((point2.at(0) + 0.1, point2.at(1) + 0.3), (point2.at(0) + 0.1, point2.at(1) - 0.3))
   }
 }
+
+// 与门
+#let andGate(points) = {
+  rect((points.at(0) - 0.3, points.at(1) - 0.4), (points.at(0) + 0.3, points.at(1) + 0.4))
+  content(points, [&])
+}
+// 或门
+#let orGate(points) = {
+  rect((points.at(0) - 0.3, points.at(1) - 0.4), (points.at(0) + 0.3, points.at(1) + 0.4))
+  content(points, text(size: 8pt)[>=1])
+}
+// 非门
+#let notGate(points) = {
+  rect((points.at(0) - 0.3, points.at(1) - 0.4), (points.at(0) + 0.3, points.at(1) + 0.4))
+  content(points, text(size: 8pt)[1])
+  node((points.at(0) + 0.4, points.at(1)), fill: none)
+}
+
+// 与非门
+#let nandGate(points) = {
+  rect((points.at(0) - 0.3, points.at(1) - 0.4), (points.at(0) + 0.3, points.at(1) + 0.4))
+  content(points, [&])
+  node((points.at(0) + 0.4, points.at(1)), fill: none)
+}
+// 或非门
+#let norGate(points) = {
+  rect((points.at(0) - 0.3, points.at(1) - 0.4), (points.at(0) + 0.3, points.at(1) + 0.4))
+  content(points, text(size: 8pt)[>=1])
+  node((points.at(0) + 0.4, points.at(1)), fill: none)
+}
+// 异或门
+#let xorGate(points) = {
+  rect((points.at(0) - 0.3, points.at(1) - 0.4), (points.at(0) + 0.3, points.at(1) + 0.4))
+  content(points, text(size: 8pt)[=1])
+}

@@ -67,3 +67,4 @@
 #include "Char1.typ"
 #include "Char2.typ"
 #include "Char3.typ"
+#include "Char4.typ"
