@@ -224,6 +224,7 @@
 }
 // 设置图表
 #let _set_figure(body) = {
+  show figure: set block(breakable: true)
   // 设置前缀
   show figure.where(kind: image): set figure(supplement: [图])
 

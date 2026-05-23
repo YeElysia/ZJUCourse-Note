@@ -674,7 +674,7 @@ $overline(R)_d$和$overline(S)_d$是异步输入端, 其输入信号不受时钟
 
 边沿触发使得触发器的次态仅由时钟脉冲的上升沿或下降沿来到时的输入信号决定，在此以前或以后输入信号的变化不会影响触发器的状态。
 #grid(
-  columns: (1fr, 1fr),
+  columns: (1fr, 0.7fr),
   align: center + horizon,
   [#figure(
       cetz.canvas({
@@ -777,7 +777,8 @@ $overline(R)_d$和$overline(S)_d$是异步输入端, 其输入信号不受时钟
 === 负边沿触发的JK触发器
 
 #grid(
-  columns: (1fr, 1fr),
+  columns: (2fr, 1.4fr),
+  gutter: 2em,
   align: horizon,
   figure(
     table(
@@ -828,81 +829,447 @@ $overline(R)_d$和$overline(S)_d$是异步输入端, 其输入信号不受时钟
       content((1, 3), [Q])
       content((3, 3), [#overline(offset: -1em)[Q]])
     }),
-    caption: [负边沿JK触发器图形符号],
+    caption: [负边沿JK触发器],
   ),
 )
-特性方程:
-$
-  Q^(n+1) = J overline(Q^n) + overline(K)Q^n
-$
+
 #grid(
-  columns: (2fr, 0.8fr),
-  figure(
-    cetz.canvas({
-      import cetz.draw: *
-      let x(num) = 0.8 * num
-      let y = 1
-      for i in range(2, 13, step: 2) {
-        line((x(i), 3.7), (x(i), -1), stroke: (dash: "dashed", paint: gray))
-      }
-      for i in range(2, 13, step: 2) {
-        rect((x(i), -1), (x(i) + x(1), 3), fill: rgb(99, 211, 226, 70), stroke: none)
-      }
-      for i in range(6) {
+  columns: (2fr, 1.4fr),
+  gutter: 2em,
+  [特性方程:
+    $
+      Q^(n+1) = J overline(Q^n) + overline(K)Q^n
+    $
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+        let x(num) = 0.6 * num
+        let y = 1
+        for i in range(2, 13, step: 2) {
+          line((x(i), 3.7), (x(i), -1), stroke: (dash: "dashed", paint: gray))
+        }
+        for i in range(2, 13, step: 2) {
+          rect((x(i), -1), (x(i) + x(1), 3), fill: rgb(99, 211, 226, 70), stroke: none)
+        }
+        for i in range(6) {
+          line(
+            (0 + i * 2 * x(1), 3),
+            (x(1) + i * 2 * x(1), 3),
+            (x(1) + i * 2 * x(1), 3.7),
+            (2 * x(1) + i * 2 * x(1), 3.7),
+            (2 * x(1) + i * 2 * x(1), 3),
+            (3 * x(1) + i * 2 * x(1), 3),
+          )
+        }
+        line((0, 2), (x(0.5), 2), (x(0.5), 2.7), (x(3.5), 2.7), (x(3.5), 2), (x(6.5), 2), (x(6.5), 2.7), (x(13), 2.7))
+
+        line((0, 1), (x(2.5), 1), (x(2.5), 1.7), (x(5.5), 1.7), (x(5.5), 1), (x(7), 1), (x(7), 1.7), (x(13), 1.7))
+
         line(
-          (0 + i * 2 * x(1), 3),
-          (x(1) + i * 2 * x(1), 3),
-          (x(1) + i * 2 * x(1), 3.7),
-          (2 * x(1) + i * 2 * x(1), 3.7),
-          (2 * x(1) + i * 2 * x(1), 3),
-          (3 * x(1) + i * 2 * x(1), 3),
+          (0, 0),
+          (x(2), 0),
+          (x(2), 0.7),
+          (x(4), 0.7),
+          (x(4), 0),
+          (x(8), 0),
+          (x(8), 0.7),
+          (x(10), 0.7),
+          (x(10), 0),
+          (x(12), 0),
+          (x(12), 0.7),
+          (x(13), 0.7),
         )
-      }
-      line((0, 2), (x(0.5), 2), (x(0.5), 2.7), (x(3.5), 2.7), (x(3.5), 2), (x(6.5), 2), (x(6.5), 2.7), (x(13), 2.7))
-
-      line((0, 1), (x(2.5), 1), (x(2.5), 1.7), (x(5.5), 1.7), (x(5.5), 1), (x(7), 1), (x(7), 1.7), (x(13), 1.7))
-
-      line(
-        (0, 0),
-        (x(2), 0),
-        (x(2), 0.7),
-        (x(4), 0.7),
-        (x(4), 0),
-        (x(8), 0),
-        (x(8), 0.7),
-        (x(10), 0.7),
-        (x(10), 0),
-        (x(12), 0),
-        (x(12), 0.7),
-        (x(13), 0.7),
-      )
-      line(
-        (0, -0.3),
-        (x(2), -0.3),
-        (x(2), -1),
-        (x(4), -1),
-        (x(4), -0.3),
-        (x(8), -0.3),
-        (x(8), -1),
-        (x(10), -1),
-        (x(10), -0.3),
-        (x(12), -0.3),
-        (x(12), -1),
-        (x(13), -1),
-      )
-      content((-0.5, 3.3), [CP])
-      content((-0.5, 2.3), [J])
-      content((-0.5, 1.3), [K])
-      content((-0.5, 0.3), [Q])
-      content((-0.5, -0.7), [#overline(offset: -1em)[Q]])
-    }),
-    caption: [负边沿触发JK触发器波形图],
-  ),
+        line(
+          (0, -0.3),
+          (x(2), -0.3),
+          (x(2), -1),
+          (x(4), -1),
+          (x(4), -0.3),
+          (x(8), -0.3),
+          (x(8), -1),
+          (x(10), -1),
+          (x(10), -0.3),
+          (x(12), -0.3),
+          (x(12), -1),
+          (x(13), -1),
+        )
+        content((-0.5, 3.3), [CP])
+        content((-0.5, 2.3), [J])
+        content((-0.5, 1.3), [K])
+        content((-0.5, 0.3), [Q])
+        content((-0.5, -0.7), [#overline(offset: -1em)[Q]])
+      }),
+      caption: [负边沿触发JK触发器波形图],
+    )],
   callouts.Tip[
     注意正边沿触发和负边沿触发在符号上的区别。
   ],
 )
-#block(inset: 12pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb("#fbf2eb"))[
-  #Red[时序逻辑必考一道大题]
+// #block(inset: 12pt, radius: 4pt, stroke: gray + 0pt, width: 100%, fill: rgb("#fbf2eb"))[
+//   #Red[时序逻辑必考一道大题]
+// ]
+=== T触发器
+#grid(
+  columns: (2fr, 1.4fr),
+  gutter: 2em,
+  [特性方程(分频,$2^n$次):
+    $
+      Q^(n+1) = T overline(Q^n) + overline(T)Q^n
+    $
+  ],
+  [
+    #v(-10em)
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+        rect((0, 0), (4, 2))
+        node((0.4, -0.1), fill: none)
+        node((3.6, -0.1), fill: none)
+        node((2, -0.1), fill: none, color: red)
+
+        line((0.4, -1), (0.4, -0.2))
+        line((1.2, -1), (1.2, 0))
+        line((2, -1), (2, -0.2))
+        line((1.2, -0.6), (2.8, -0.6), (2.8, 0))
+        line((3.6, -1), (3.6, -0.2))
+
+        line((1, 2), (1, 2.7))
+        line((3, 2.2), (3, 2.7))
+        node((3, 2.1), fill: none)
+        content((0.4, 0.5), [S])
+        content((2, 0.5), [C1])
+        line((1.85, 0), (2, 0.2), (2.15, 0), stroke: (paint: red))
+        content((1.2, 0.5), [1J])
+        content((2.8, 0.5), [1K])
+        content((3.6, 0.5), [R])
+        content((0.4, -1.3), [$overline(S)_d$])
+        content((1.2, -1.3), [T])
+        content((2, -1.3), [CP])
+        content((3.6, -1.3), [$overline(R)_d$])
+        content((1, 3), [Q])
+        content((3, 3), [#overline(offset: -1em)[Q]])
+      }),
+      caption: [T触发器图形符号],
+    )],
+)
+== 时序逻辑电路
+=== 时序逻辑电路的分析方法
+1. 写出特性方程
+2. 写出驱动方程  (触发器输入端表达式)
+3. 把驱动方程代入特性方程, 得到状态方程
+4. 列出状态转换表、波形图，判断时序逻辑电路的基本功能
+#callouts.Question(title: [例 4.6.1])[
+  分析下图所示时序逻辑电路的功能。
+  #image("assets/例4.6.1.png", width: 80%)
+
+  1. D触发器的特性方程为$Q^(n+1) = D$。
+  2. 驱动方程
+    #grid(
+      columns: (1fr, 1fr),
+      $
+        D_A = M D_R + overline(M) Q_B^n \
+        D_B = M Q_A^n + overline(M) Q_C^n
+      $,
+      $
+        D_C = M Q_B^n + overline(M) Q_D^n \
+        D_D = M Q_C^n + overline(M) D_L
+      $,
+    )
+  3. 状态方程
+    #grid(
+      columns: (1fr, 1fr),
+      $
+        Q_A^(n+1) = M D_R + overline(M) Q_B^n \
+        Q_B^(n+1) = M Q_A^n + overline(M) Q_C^n
+      $,
+      $
+        Q_C^(n+1) = M Q_B^n + overline(M) Q_D^n \
+        Q_D^(n+1) = M Q_C^n + overline(M) D_L
+      $,
+    )
+  4. 分析发现, M=1时, 数码右移; M=0时, 数码左移。#Red[双向移位寄存器]
+  // #image("assets/image.png", width: 80%)
+  #grid(
+    columns: (1fr, 1fr),
+    gutter: 1em,
+    figure(
+      table(
+        columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+        fill: rgb("EAF2F5"),
+        align: horizon + center,
+        stroke: (x, y) => (
+          left: if (x == 1 or x == 5) { 1pt } else if (x > 1 and y > 0) { 1pt } else { 0pt },
+          right: 0pt,
+          top: if (y == 0 or y == 2 or (y == 1 and x != 0)) { 1pt } else { 0pt },
+          bottom: if y == 5 { 1pt } else { 0pt },
+        ),
+        // column-gutter: 1em,
+        inset: 0.6em,
+        // column-gutter: 1em,
+        table.header(move(dy: 1em)[$D_R$], [], [现], [态], [], [], [次], [态], []),
+        [],
+        text(0.7em)[$Q_A^(n)$],
+        text(0.7em)[$Q_B^(n)$],
+        text(0.7em)[$Q_C^(n)$],
+        text(0.7em)[$Q_D^(n)$],
+        text(0.7em)[$Q_A^(n+1)$],
+        text(0.7em)[$Q_B^(n+1)$],
+        text(0.7em)[$Q_C^(n+1)$],
+        text(0.7em)[$Q_D^(n+1)$],
+
+        [$D_0$], [1], [0], [1], [0], [$D_0$], [1], [0], [1],
+        [$D_1$], [$D_0$], [1], [0], [1], [$D_1$], [$D_0$], [1], [0],
+        [$D_2$], [$D_1$], [$D_0$], [1], [0], [$D_2$], [$D_1$], [$D_0$], [1],
+        [$D_3$], [$D_2$], [$D_1$], [$D_0$], [1], [$D_3$], [$D_2$], [$D_1$], [$D_0$],
+      ),
+      caption: [M=1],
+    ),
+    figure(
+      table(
+        columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+        fill: rgb("EAF2F5"),
+        align: horizon + center,
+        stroke: (x, y) => (
+          left: if (x == 1 or x == 5) { 1pt } else if (x > 1 and y > 0) { 1pt } else { 0pt },
+          right: 0pt,
+          top: if (y == 0 or y == 2 or (y == 1 and x != 0)) { 1pt } else { 0pt },
+          bottom: if y == 5 { 1pt } else { 0pt },
+        ),
+        // column-gutter: 1em,
+        inset: 0.6em,
+        // column-gutter: 1em,
+        table.header(move(dy: 1em)[$D_L$], [], [现], [态], [], [], [次], [态], []),
+        [],
+        text(0.7em)[$Q_A^(n)$],
+        text(0.7em)[$Q_B^(n)$],
+        text(0.7em)[$Q_C^(n)$],
+        text(0.7em)[$Q_D^(n)$],
+        text(0.7em)[$Q_A^(n+1)$],
+        text(0.7em)[$Q_B^(n+1)$],
+        text(0.7em)[$Q_C^(n+1)$],
+        text(0.7em)[$Q_D^(n+1)$],
+
+        [$D_0$], [1], [0], [1], [0], [0], [1], [0], [$D_0$],
+        [$D_1$], [0], [1], [0], [$D_0$], [1], [0], [$D_0$], [$D_1$],
+        [$D_2$], [1], [0], [$D_0$], [$D_1$], [0], [$D_0$], [$D_1$], [$D_2$],
+        [$D_3$], [0], [$D_0$], [$D_1$], [$D_2$], [$D_0$], [$D_1$], [$D_2$], [$D_3$],
+      ),
+      caption: [M=0],
+    ),
+  )
+]<例4.6.1>
+
+#callouts.Question(title: [例4.6.2])[
+  #image("assets/例4.6.2.png")
+  1. JK触发器的特性方程为$Q^(n+1) = J overline(Q^n) + overline(K)Q^n$。
+  2. 驱动方程
+    #grid(
+      columns: (1fr, 1fr),
+      $
+        J_A & = 1 \
+        J_B & = Q_A^n overline(Q)_D^n \
+        J_C & = Q_A^n Q_B^n \
+        J_D & = Q_A^n Q_B^n Q_C^n \
+      $,
+      $
+        K_A & = 1 \
+        K_B & = Q_A^n \
+        K_C & = Q_A^n Q_B^n \
+        K_D & = Q_A^n \
+      $,
+    )
+  3. 状态方程
+    $
+      Q_A^(n+1) & = overline(Q_A^n) \
+      Q_B^(n+1) & = Q_A^n overline(Q)_D^n overline(Q)_B^n + overline(Q_A^n) Q_B^n \
+      Q_C^(n+1) & = Q_A^n Q_B^n overline(Q)_C^n + overline(Q_A^n Q_B^n) Q_C^n \
+      Q_D^(n+1) & = Q_A^n Q_B^n Q_C^n overline(Q_D^n) + overline(Q_A^n) Q_D^n \
+    $
+  4. 状态转换表
+  #figure(
+    table(
+      columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, auto),
+      fill: rgb("EAF2F5"),
+      align: horizon + center,
+      stroke: (x, y) => (
+        left: if (x == 1 or x == 5 or x == 9) { 1pt } else { 0pt },
+        right: 0pt,
+        top: if (y == 0 or y == 2 or y == 12 or (y == 1 and x != 0)) { 1pt } else { 0pt },
+        bottom: if (y == 1 or y == 17) { 1pt } else { 0pt },
+      ),
+      // column-gutter: 1em,
+      inset: 0.5em,
+      // column-gutter: 1em,
+      table.header(
+        move(dy: 1em)[序号], [], [现], [态], [], [], [次], [态], [], [进位],
+        [],
+        text(0.7em)[$Q_A^(n)$],
+        text(0.7em)[$Q_B^(n)$],
+        text(0.7em)[$Q_C^(n)$],
+        text(0.7em)[$Q_D^(n)$],
+        text(0.7em)[$Q_A^(n+1)$],
+        text(0.7em)[$Q_B^(n+1)$],
+        text(0.7em)[$Q_C^(n+1)$],
+        text(0.7em)[$Q_D^(n+1)$],
+        [$C$],
+      ),
+
+      [0], [0], [0], [0], [0], [0], [0], [0], [1], [0],
+      [1], [0], [0], [0], [1], [0], [0], [1], [0], [0],
+      [2], [0], [0], [1], [0], [0], [0], [1], [0], [0],
+      [3], [0], [0], [1], [1], [0], [1], [0], [1], [0],
+      [4], [0], [1], [0], [0], [0], [1], [1], [1], [0],
+      [5], [0], [1], [0], [1], [0], [1], [1], [1], [0],
+      [6], [0], [1], [1], [0], [0], [1], [1], [1], [0],
+      [7], [0], [1], [1], [1], [1], [0], [0], [0], [0],
+      [8], [1], [0], [0], [0], [1], [0], [0], [1], [0],
+      [9], [1], [0], [0], [1], [0], [0], [0], [0], [1],
+      [10], [1], [0], [1], [0], [1], [0], [1], [1], [0],
+      [11], [1], [0], [1], [1], [0], [1], [0], [0], [1],
+      [12], [1], [1], [0], [0], [1], [1], [0], [1], [0],
+      [13], [1], [1], [0], [1], [0], [1], [0], [0], [1],
+      [14], [1], [1], [1], [0], [1], [1], [1], [1], [0],
+      [15], [1], [1], [1], [1], [0], [0], [0], [0], [1],
+    ),
+    caption: [逻辑状态转换表],
+  )
+
+  5. 状态转换图
+  #figure(
+    cetz.canvas(length: 27pt, {
+      import cetz.draw: *
+      for x in range(5) {
+        for y in (0, 4) {
+          circle((x * 2, y), radius: 0.6)
+        }
+      }
+      for x in (0, 6, 8) {
+        circle((x, 2), radius: 0.6)
+      }
+      for x in (0, 2, 8) {
+        circle((x, 6), radius: 0.6)
+      }
+      content((0, 0), [1000])
+      arrow_I((0, 0.6), (0, 1.4))
+      content((0, 2), [1001])
+      arrow_I((0, 2.6), (0, 3.4))
+      content((0, 4), [0000])
+      content((2, 4), [0001])
+      content((4, 4), [0010])
+      content((6, 4), [0011])
+      content((6, 2), [0100])
+      content((6, 0), [0101])
+      content((4, 0), [0110])
+      content((2, 0), [0111])
+      for x in (0.6, 2.6, 4.6) {
+        arrow_I((x, 4), (x + 0.8, 4))
+      }
+      for x in (0.6, 2.6, 4.6) {
+        arrow_I((x + 0.8, 0), (x, 0))
+      }
+      arrow_I((6, 3.4), (6, 2.6))
+      arrow_I((6, 1.4), (6, 0.6))
+      content((0, 6), [1111])
+      arrow_I((0, 5.4), (0, 4.6))
+      content((2, 6), [1110])
+      arrow_I((1.4, 6), (0.6, 6))
+      content((8, 6), [1010])
+      arrow_I((8, 5.4), (8, 4.6))
+      content((8, 4), [1011])
+      arrow_I((rel: (-120deg, 0.6)), (rel: (-135deg, 1.7)))
+      content((8, 2), [1101])
+      arrow_I((7.4, 2), (6.6, 2))
+      content((8, 0), [1100])
+      arrow_I((8, 0.6), (8, 1.4))
+    }),
+    caption: [],
+  )<例4.6.2>
+  6. 波形图
+  #figure(cetz.canvas({
+    import cetz.draw: *
+    let x(num) = 0.6 * num
+    let y = 1
+    for i in range(2, 22, step: 2) { line((x(i), 3.7), (x(i), -2), stroke: (dash: "dashed", paint: gray)) }
+    for i in range(2, 22, step: 2) { rect((x(i), -2), (x(i) + x(1), 3), fill: rgb(99, 211, 226, 70), stroke: none) }
+    for i in range(10) {
+      line(
+        (0 + i * 2 * x(1), 3),
+        (x(1) + i * 2 * x(1), 3),
+        (x(1) + i * 2 * x(1), 3.7),
+        (2 * x(1) + i * 2 * x(1), 3.7),
+        (2 * x(1) + i * 2 * x(1), 3),
+        (3 * x(1) + i * 2 * x(1), 3),
+      )
+    }
+    for i in range(5) {
+      line(
+        (0 + i * 4 * x(1), 2),
+        (x(2) + i * 4 * x(1), 2),
+        (x(2) + i * 4 * x(1), 2.7),
+        (x(4) + i * 4 * x(1), 2.7),
+        (x(4) + i * 4 * x(1), 2),
+        //(x(6) + i * 4 * x(1), 2),
+      )
+    }
+    line((), (x(21), 2))
+
+    for i in range(2) {
+      line(
+        (0 + i * x(8), 1),
+        (x(4) + i * x(8), 1),
+        (x(4) + i * x(8), 1.7),
+        (x(8) + i * x(8), 1.7),
+        (x(8) + i * x(8), 1),
+        //(x(6) + i * 4 * x(1), 1),
+      )
+    }
+    line((), (x(21), 1))
+
+    line((0, 0), (x(8), 0), (x(8), 0.7), (x(16), 0.7), (x(16), 0), (x(21), 0))
+
+    line(
+      (0, -1),
+      (x(16), -1),
+      (x(16), -0.3),
+      (x(20), -0.3),
+      (x(20), -1),
+      (x(21), -1),
+    )
+    line(
+      (0, -2),
+      (x(18), -2),
+      (x(18), -1.3),
+      (x(20), -1.3),
+      (x(20), -2),
+      (x(21), -2),
+    )
+    content((-0.5, 3.3), [CP])
+    content((-0.5, 2.3), [$Q_A$])
+    content((-0.5, 1.3), [$Q_B$])
+    content((-0.5, 0.3), [$Q_C$])
+    content((-0.5, -0.7), [$Q_D$])
+    content((-0.5, -1.7), [C])
+  }))
+  显然这是一个同步十进制加法计数器
 ]
-==
+=== 寄存器
+
+由N个触发器组成, 用于存储N位二进制信息。
+
+==== 数码寄存器
+所有触发器由相同 CP 控制，触发器状态允许翻转时，输入端的N位数据进入输出端
+==== 移位寄存器
+移位脉冲作用下，寄存器内的 1 和 0 向特定方向移位（移位方向有单向/双向）。如#link(<例4.6.1>)[例 4.6.1] 所示。
+
+- 串行：数据按照位次依次从一个端输入或输出
+- 并行：数据从多个端同时输入或输出
+
+=== 计数器
+- 通过N个输出的组合表示对脉冲个数进行计数
+
+- M进制计数器需要N个触发器，其中 M < 2N
+
+- 设计时序电路使得电路在M个状态(有效状态)间循环, 其它状态(无效状态)不在循环内。如果从任意一个状态启动, 最后都能进入有效状态循环, 则称计数器是可以#Red[自启动]的。如@fig:例4.6.2 所示的计数器就是一个自启动的十进制计数器。
+
+- 或改造 N 位二进制计数器, 使得电路出现无效状态时通过外电路瞬间切换回第1个状态。
+#pagebreak()
