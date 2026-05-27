@@ -145,7 +145,7 @@
   let unary(..args) = {
     let nums = args.pos()
     let level = nums.len()
-    if level <= 2 {
+    if level == 2 {
       return numbering("1.1", ..nums)
     } else if level == 3 {
       return numbering("1.1.1 ", ..nums)
@@ -153,6 +153,10 @@
       return numbering("（1）", nums.at(3))
     } else if level == 5 {
       return numbering(" 1）", nums.at(4))
+    } else if level == 1 {
+      return numbering("第1章", nums.at(0))
+    } else {
+      return none
     }
   }
   set heading(numbering: unary)
@@ -174,7 +178,7 @@
   show heading.where(level: 1): it => {
     set text(weight: "bold", size: 18pt, blue)
     set block(spacing: 1.5em)
-    it
+    align(center)[#it]
   }
   show heading.where(level: 2): it => {
     set text(weight: "bold", size: 14pt, blue)

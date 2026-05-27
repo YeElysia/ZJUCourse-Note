@@ -68,3 +68,4 @@
 #include "Char2.typ"
 #include "Char3.typ"
 #include "Char4.typ"
+#include "Char5.typ"
