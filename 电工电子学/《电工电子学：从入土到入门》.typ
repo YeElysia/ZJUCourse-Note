@@ -8,7 +8,7 @@
 
 #let course_name = "电工电子学从入土到入门"
 #let author = "试鸢"
-#let date = (2026, 3, 16)
+#let date = (2026, 6, 23)
 
 // 第一页
 #align(center)[
@@ -69,3 +69,6 @@
 #include "Char3.typ"
 #include "Char4.typ"
 #include "Char5.typ"
+#include "Char6.typ"
+#include "Char7.typ"
+#include "char8.typ"
