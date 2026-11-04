@@ -1,6 +1,7 @@
 #import "utils.typ": Red, zebra
 #import "Callouts.typ" as callouts
 #import "models.typ": two_mass
+#import "@preview/cetz:0.5.3"
 
 #show table: set par(justify: false)
 
@@ -33,6 +34,89 @@
   先看每个质量块连着什么：$m_1$ 只连 $m_2$，$m_2$ 还经阻尼器连墙。按 @sec-twomass 写成 $A X_1 - B X_o = F$、$-B X_1 + C X_o = 0$，答案就是 $B \/ (A C - B^2)$。
 ]
 
+解:
+(1) 设 $m_1$ 的位移为 $x_1$，$m_2$ 的位移为 $x_o$，正方向向右。对两个质量块写牛顿第二定律：
+$
+  m_1 dot.double(x)_1 & = f_i - k(x_1 - x_o) - mu(dot(x)_1 - dot(x)_o) \
+  m_2 dot.double(x)_o & = k(x_1 - x_o) + mu(dot(x)_1 - dot(x)_o) - mu dot(x)_o
+$
+
+(2).  方块图的基本思路是, 输入量经过传递函数$G(x)$得到输出量。
+
+以$X_o$、$X_1$为例, 对(1)式做拉普拉斯变换, 得到
+$
+  (m_1 s^2 + mu s + k) X_1 - (mu s + k) X_o = F_i \
+  -(mu s + k) X_1 + (m_2 s^2 + 2 mu s + k) X_o = 0
+$
+
+得到 $X_o = display((mu s + k )/(m_2 s^2 + 2 mu s+ k)) X_1$ , 即
+#align(center)[#cetz.canvas({
+  import cetz.draw: *
+
+  line((-1, 0.6), (0, 0.6), stroke: 0.7pt, mark: (end: ">", fill: black, stroke: 1.2pt))
+  content((-0.5, 1), [$X_1$])
+
+  rect((0, 0), (4, 1.2), stroke: 0.7pt, fill: rgb("EAF2F5"))
+  content((2, 0.6))[$display((mu s + k )/(m_2 s^2 + 2 mu s+ k))$]
+
+  line((4, 0.6), (5, 0.6), stroke: 0.7pt, mark: (end: ">", fill: black, stroke: 1.2pt))
+  content((4.5, 1), [$X_o$])
+})]
+同理, 由$X_1 = display(1/(m_1 s^2 + mu s + k)) (F_i + (mu s + k)X_o)$ , 给上图加入反馈输入
+#align(center)[#cetz.canvas({
+  import cetz.draw: *
+
+  line((-1, 0.6), (0, 0.6), stroke: 0.7pt, mark: (end: ">", fill: black, stroke: 1.2pt))
+  content((-0.5, 1), [$X_1$])
+
+  rect((0, 0), (4, 1.2), stroke: 0.7pt, fill: rgb("EAF2F5"))
+  content((2, 0.6))[$display((mu s + k )/(m_2 s^2 + 2 mu s+ k))$]
+
+  line((4, 0.6), (5, 0.6), stroke: 0.7pt, mark: (end: ">", fill: black, stroke: 1.2pt))
+  content((4.5, 1), [$X_o$])
+
+  rect((-5, 0), (-1, 1.2), stroke: 0.7pt, fill: rgb("EAF2F5"))
+  content((-3, 0.6))[$display((1)/(m_1 s^2 + mu s+ k))$]
+
+  line((-6, 0.6), (-5, 0.6), stroke: 0.7pt, mark: (end: ">", fill: black, stroke: 1.2pt))
+
+  circle((-6.3, 0.6), radius: 0.3)
+  line((-6.3, 0.6), (rel: (45deg, 0.3)))
+  line((-6.3, 0.6), (rel: (135deg, 0.3)))
+  line((-6.3, 0.6), (rel: (-45deg, 0.3)))
+  line((-6.3, 0.6), (rel: (-135deg, 0.3)))
+
+  line((-7.6, 0.6), (-6.6, 0.6), stroke: 0.7pt, mark: (end: ">", fill: black, stroke: 1.2pt))
+  content((-7.1, 1), [$F_i$])
+
+  rect((-2.5, -1.5), (-0.5, -0.3), fill: rgb("EAF2F5"))
+  content((-1.5, -0.9), [$mu s+ k$])
+  line((4.5, 0.6), (4.5, -0.9), (-0.5, -0.9))
+  line((-2.5, -0.9), (-6.3, -0.9), (-6.3, 0.3), mark: (end: ">", fill: black, stroke: 1.2pt))
+})]
+
+#Red[当然这是纯代数解法, 实际上呢, 双方块图我们有通用解法🤓👆, 诶嘿, 参考 @sec-twomass 可以写出]
+
+#figure(
+  two_mass($ (1)/(m_1s^2) $, $mu s + k$, $ 1/(m_2 s^2 + mu s) $, $F_i$, $X_1$, $X_o$),
+  caption: [25-26 秋第一题方块图],
+)
+
+可以发现他们是等价的。具体解释可以看后面。
+
+(3)
+$
+  X_o / F_i = display((mu s +k)/((m_2 s^2 + 2 mu s + k)(m_2 s^2 + mu s + k)))/(1 - display((mu s + k)/((m_2 s^2 + 2 mu s + k)(m_2 s^2 + mu s + k))) (mu s + k))
+$
+或者
+$
+  X_o / F_i = display(1/(m_1 s^2) (mu s +k)/(1 + (mu s + k)/(m_2 s^2 + mu s)) 1/(m_2 s^2 + mu s))/(1 + (display(1/(m_1 s^2) (mu s +k)/(1 + (mu s + k)/(m_2 s^2 + mu s)) 1/(m_2 s^2 + mu s))) (m_2 s^2 + mu s))
+$
+或者
+$
+  X_o / F_i = B/(A C - B^2) = (mu s + k)/(s [m_1 m_2 s^3 + mu(2 m_1 + m_2) s^2 + ((m_1 + m_2) k + mu^2) s + mu k])
+$
+
 #callouts.Question(title: [24-25 秋第一题])[
   如图，$k_1$、$k_2$ 为弹簧刚度，$mu$ 为阻尼系数。
   (1) 列出运动微分方程；(2) 画出方块图；(3) 求 $Y_1(s) \/ F_i (s)$。
@@ -41,6 +125,27 @@
 #callouts.Tip(title: [思路提示])[
   方法同上，注意 $k_1$ 把 $M_1$ 接到墙上。题目要的是 $Y_1$，分子是 $C$。
 ]
+
+解:
+(1)
+$
+  M_1 dot.double(y)_1 & = f_i - k_1 y_1 - mu(dot(y)_1 - dot(y)_2) - k_2 (y_1 - y_2) \
+  M_2 dot.double(y)_2 & = mu(dot(y)_1 - dot(y)_2) + k_2 (y_1 - y_2) - mu dot(y_2)
+$
+(2)
+$
+  M_1 s^2 y_1 & = f_i - k_1 y_1 - (mu s + k)(y_1 - y_2) \
+          f_i & = (M_1 s^2 + mu +2k) y_1 - (mu s + k) y_2 \
+  M_2 s^2 y_2 & = (mu s + k_2)(y_1 - y_2) - mu s y_2 \
+            0 & =
+$
+
+$A =$
+#figure(
+  two_mass($ 1/(M_1 s^2 + k_1) $, $mu s + k_2$, $ 1/(M_2 s^2 + mu s) $, $F_i$, $Y_1$, $Y_2$),
+  caption: [24-25 秋第一题方块图],
+)
+
 
 #callouts.Question(title: [23-24 秋、22-23 秋第一题（仅考点）])[
   23-24：类似课本习题 2-19，写微分方程、方块图、传递函数。\
@@ -136,7 +241,7 @@ $ Y_1/F = (1/A' (1 + B/C'))/(1 + B/A' + B/C') = C/(A C - B^2) $
 
 == 解题模板
 1. 设各质量块的位移，标出正方向。
-2. 对每个质量块写牛顿第二定律：$M dot.double(x) = $ 外力 $-$ 弹簧力 $-$ 阻尼力。弹簧力、阻尼力取决于两端的#Red[位移差]。
+2. 对每个质量块写牛顿第二定律：$M dot.double(x) =$ 外力 $-$ 弹簧力 $-$ 阻尼力。弹簧力、阻尼力取决于两端的#Red[位移差]。
 3. 零初始条件下取 Laplace 变换，整理成 $A$、$B$、$C$ 的形式。
 4. 方块图：每个质量块画一个接地单元，中间的耦合环节 $B$ 把位移差变成力，分别负反馈到两个质量块。
 5. 用 Cramer 法则或梅森公式求传递函数，分母按 $s$ 降幂展开。
@@ -152,10 +257,12 @@ $ Y_1/F = (1/A' (1 + B/C'))/(1 + B/A' + B/C') = C/(A C - B^2) $
 == 真题解答
 === 25-26 秋 <a1-2526>
 *(1)* 设 $m_1$ 的位移为 $x_1$。
-$ cases(
-  m_1 dot.double(x)_1 = f_i - k(x_1 - x_o) - mu(dot(x)_1 - dot(x)_o),
-  m_2 dot.double(x)_o = k(x_1 - x_o) + mu(dot(x)_1 - dot(x)_o) - mu dot(x)_o
-) $
+$
+  cases(
+    m_1 dot.double(x)_1 = f_i - k(x_1 - x_o) - mu(dot(x)_1 - dot(x)_o),
+    m_2 dot.double(x)_o = k(x_1 - x_o) + mu(dot(x)_1 - dot(x)_o) - mu dot(x)_o
+  )
+$
 
 *(2)* $m_1$ 不接地，单元为 $1\/(m_1 s^2)$；$m_2$ 经阻尼器接地，单元为 $1\/(m_2 s^2 + mu s)$；耦合环节为 $mu s + k$。
 
@@ -173,10 +280,12 @@ $ X_o/F_i = B/(A C - B^2) = (mu s + k)/(s [m_1 m_2 s^3 + mu(2 m_1 + m_2) s^2 + (
 $k_1$ 接墙和 $M_1$；$k_2$、$mu$ 接在 $M_1$ 与 $M_2$ 之间；另一个 $mu$ 接 $M_2$ 和墙。
 
 *(1)*
-$ cases(
-  M_1 dot.double(y)_1 = f_i - k_1 y_1 - k_2(y_1 - y_2) - mu(dot(y)_1 - dot(y)_2),
-  M_2 dot.double(y)_2 = k_2(y_1 - y_2) + mu(dot(y)_1 - dot(y)_2) - mu dot(y)_2
-) $
+$
+  cases(
+    M_1 dot.double(y)_1 = f_i - k_1 y_1 - k_2(y_1 - y_2) - mu(dot(y)_1 - dot(y)_2),
+    M_2 dot.double(y)_2 = k_2(y_1 - y_2) + mu(dot(y)_1 - dot(y)_2) - mu dot(y)_2
+  )
+$
 
 *(2)*
 #figure(
@@ -187,4 +296,6 @@ $ cases(
 *(3)* $A = M_1 s^2 + mu s + k_1 + k_2$，$B = mu s + k_2$，$C = M_2 s^2 + 2 mu s + k_2$，
 $ Y_1/F_i = C/(A C - B^2) = (M_2 s^2 + 2 mu s + k_2)/(Delta(s)) $
 其中
-$ Delta(s) = M_1 M_2 s^4 + mu(2 M_1 + M_2) s^3 + (M_1 k_2 + M_2 k_1 + M_2 k_2 + mu^2) s^2 + mu(2 k_1 + k_2) s + k_1 k_2 $
+$
+  Delta(s) = M_1 M_2 s^4 + mu(2 M_1 + M_2) s^3 + (M_1 k_2 + M_2 k_1 + M_2 k_2 + mu^2) s^2 + mu(2 k_1 + k_2) s + k_1 k_2
+$
